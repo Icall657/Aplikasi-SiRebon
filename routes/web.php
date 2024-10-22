@@ -17,5 +17,3 @@ use App\Http\Controllers\LoginController;
 Route::get('/', function () {
     return view('welcome');
 });
-
-route::get('/login', [LoginController::class, 'halamanlogin'])->name('login');
