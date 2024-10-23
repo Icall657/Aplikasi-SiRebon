@@ -20,3 +20,5 @@ Route::get('/', function () {
 });
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/login', [LoginController::class, 'halamanlogin'])->name('login');
+route::post('/postlogin', [LoginController::class, 'postlogin'])->name('postlogin');

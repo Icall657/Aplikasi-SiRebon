@@ -44,9 +44,16 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="#">
                     <i class="fa fa-home"></i>
                     <span>Beranda</span></a>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">
+                    <i class="fa fa-user"></i>
+                    <span>Profil</span></a>
             </li>
 
             <!-- Divider -->
