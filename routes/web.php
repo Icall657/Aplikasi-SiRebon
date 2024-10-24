@@ -18,7 +18,9 @@ use App\Http\Controllers\LoginController;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/login', [LoginController::class, 'halamanlogin'])->name('login');
 route::post('/postlogin', [LoginController::class, 'postlogin'])->name('postlogin');
+
+Route::group(['middleware' => ['auth', 'ceklevel:admin,user']], function () {
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+});
