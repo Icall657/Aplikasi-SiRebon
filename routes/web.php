@@ -20,7 +20,8 @@ Route::get('/', function () {
 });
 Route::get('/login', [LoginController::class, 'halamanlogin'])->name('login');
 route::post('/postlogin', [LoginController::class, 'postlogin'])->name('postlogin');
+route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::group(['middleware' => ['auth', 'ceklevel:admin,user']], function () {
+Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 });
