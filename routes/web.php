@@ -24,4 +24,6 @@ route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/laporan', [HomeController::class, 'laporan'])->name('laporan');
+    Route::get('/rekening-pembayaran', [HomeController::class, 'rekening'])->name('rekening-pembayaran');
 });

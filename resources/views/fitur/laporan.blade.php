@@ -45,7 +45,7 @@
             <!-- Nav Item - Dashboard -->
             @if (auth()->user()->level == "admin")
             <hr class="sidebar-divider my-0">
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="{{ route('home') }}">
                     <i class="fa fa-home"></i>
                     <span>beranda</span></a>
@@ -112,8 +112,8 @@
             </li>
 
             <hr class="sidebar-divider">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route ('laporan') }}">
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ route('laporan') }}">
                     <i class="fa fa-clipboard"></i>
                     <span>Laporan</span></a>
             </li>
@@ -325,60 +325,7 @@
                     <!-- Content Row -->
                     <div class="row">
 
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-primary shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Jumlah Sudah Bayar</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-user fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Pending Requests Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-warning shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Jumlah Belum Bayar</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-user fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Jumlah Pemasukan</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. 0</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-credit-card fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
+                        
                     </div>
 
                     <!-- Content Row -->
