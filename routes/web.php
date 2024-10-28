@@ -36,4 +36,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/pembayaran-retribusi', [PembayaranController::class, 'pembayaran'])->name('pembayaran-retribusi');
     Route::get('/kategori-retribusi', [KategoriController::class, 'kategori'])->name('kategori-retribusi');
     Route::get('/kapal-wajib-retribusi', [KapalwajibController::class, 'kapal'])->name('kapal-wajib-retribusi');
+    Route::get('/kapalku', [KapalkuController::class, 'kapalku'])->name('kapalku');
+    Route::get('/konfimasipembayaran', [KonfimasiController::class, 'konfirmasi'])->name('konfirmasi');
 });
