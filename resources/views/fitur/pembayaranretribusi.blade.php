@@ -84,14 +84,14 @@
 
             <hr class="sidebar-divider">
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('kapalku') }}">
                     <i class="fa fa-male"></i>
                     <span>Kapalku</span></a>
             </li>
 
             <hr class="sidebar-divider">
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('konfirmasi') }}">
                     <i class="fa fa-check-circle"></i>
                     <span>Konfirmasi Pembayaran Retribusi</span></a>
             </li>

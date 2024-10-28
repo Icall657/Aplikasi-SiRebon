@@ -4,11 +4,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\WajibController;
+use App\Http\Controllers\KapalkuController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\RekeningController;
 use App\Http\Controllers\KapalwajibController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\KonfirmasiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,5 +39,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/kategori-retribusi', [KategoriController::class, 'kategori'])->name('kategori-retribusi');
     Route::get('/kapal-wajib-retribusi', [KapalwajibController::class, 'kapal'])->name('kapal-wajib-retribusi');
     Route::get('/kapalku', [KapalkuController::class, 'kapalku'])->name('kapalku');
-    Route::get('/konfimasipembayaran', [KonfimasiController::class, 'konfirmasi'])->name('konfirmasi');
+    Route::get('/konfimasipembayaran', [KonfirmasiController::class, 'konfirmasi'])->name('konfirmasi');
 });
