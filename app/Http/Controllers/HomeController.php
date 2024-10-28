@@ -17,4 +17,17 @@ class HomeController extends Controller
     public function rekening(){
         return view('fitur.rekeningpembayaran');
     }
+    public function retribusi(){
+        return view('fitur.wajibretribusi');
+    }
+    public function pembayaran(){
+        return view('fitur.pembayaranretribusi');
+    }
+    public function kategori(){
+        return view('fitur.kategoriretribusi');
+    }
+    public function kapal(){
+        return view('fitur.kapalwajibretribusi');
+    }
+    
 }

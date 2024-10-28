@@ -26,4 +26,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/laporan', [HomeController::class, 'laporan'])->name('laporan');
     Route::get('/rekening-pembayaran', [HomeController::class, 'rekening'])->name('rekening-pembayaran');
+    Route::get('/wajib-retribusi', [HomeController::class, 'retribusi'])->name('wajib-retribusi');
+    Route::get('/pembayaran-retribusi', [HomeController::class, 'pembayaran'])->name('pembayaran-retribusi');
+    Route::get('/kategori-retribusi', [HomeController::class, 'kategori'])->name('ketegori-retribusi');
+    Route::get('/kapal-wajibretribusi', [HomeController::class, 'kapal'])->name('kapal-wajibretribusi');
 });
