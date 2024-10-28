@@ -53,21 +53,21 @@
 
             <hr class="sidebar-divider my-0">
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('rekening-pembayaran') }}">
                     <i class="fa fa-credit-card"></i>
                     <span>Rekening Pembayaran Retribusi</span></a>
             </li>
 
             <hr class="sidebar-divider my-0">
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('wajib-retribusi') }}">
                     <i class="fa fa-anchor"></i>
                     <span>Wajib Retribusi</span></a>
             </li>
 
             <hr class="sidebar-divider my-0">
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('pembayaran-retribusi') }}">
                     <i class="fa fa-dollar-sign"></i>
                     <span>Pembayaran Retribusi</span></a>
             </li>
@@ -76,7 +76,7 @@
             <!-- Divider -->
             @if (auth()->user()->level == "user")
             <hr class="sidebar-divider my-0">
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="#">
                     <i class="fa fa-user"></i>
                     <span>Profil</span></a>
@@ -99,14 +99,14 @@
             @endif
             <hr class="sidebar-divider">
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('kategori-retribusi') }}">
                     <i class="fa fa-bars"></i>
                     <span>Kategori Retribusi</span></a>
             </li>
 
             <hr class="sidebar-divider">
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('kapal-wajib-retribusi') }}">
                     <i class="fa fa-exclamation-circle"></i>
                     <span>Kapal Wajib Retribusi</span></a>
             </li>

@@ -3,6 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\WajibController;
+use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\RekeningController;
+use App\Http\Controllers\KapalwajibController;
+use App\Http\Controllers\PembayaranController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,10 +30,10 @@ route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
-    Route::get('/laporan', [HomeController::class, 'laporan'])->name('laporan');
-    Route::get('/rekening-pembayaran', [HomeController::class, 'rekening'])->name('rekening-pembayaran');
-    Route::get('/wajib-retribusi', [HomeController::class, 'retribusi'])->name('wajib-retribusi');
-    Route::get('/pembayaran-retribusi', [HomeController::class, 'pembayaran'])->name('pembayaran-retribusi');
-    Route::get('/kategori-retribusi', [HomeController::class, 'kategori'])->name('ketegori-retribusi');
-    Route::get('/kapal-wajibretribusi', [HomeController::class, 'kapal'])->name('kapal-wajibretribusi');
+    Route::get('/laporan', [LaporanController::class, 'laporan'])->name('laporan');
+    Route::get('/rekening-pembayaran', [RekeningController::class, 'rekening'])->name('rekening-pembayaran');
+    Route::get('/wajib-retribusi', [WajibController::class, 'retribusi'])->name('wajib-retribusi');
+    Route::get('/pembayaran-retribusi', [PembayaranController::class, 'pembayaran'])->name('pembayaran-retribusi');
+    Route::get('/kategori-retribusi', [KategoriController::class, 'kategori'])->name('kategori-retribusi');
+    Route::get('/kapal-wajib-retribusi', [KapalwajibController::class, 'kapal'])->name('kapal-wajib-retribusi');
 });
