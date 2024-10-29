@@ -20,7 +20,7 @@
                 <form action="{{ route('postlogin') }} " method="post">
                     {{ csrf_field() }}
                     <div class="brand-icon">
-                        <i class="fa fa-ship fa-3x"></i>
+                        <i class="fa fa-anchor fa-3x"></i>
                     </div>
                     <br>
                     <h3 class="mb-5"><strong>LOGIN SIREBON</strong></h3>

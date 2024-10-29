@@ -34,9 +34,8 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon">
-                    <i class="fa fa-ship"></i>
+                    <img src="sirebon.png" alt="" style="width: 85px; height: 85px;">
                 </div>
-                <div class="sidebar-brand-text mx-3">SiRebon<sup></sup></div>
             </a>
 
             <!-- Divider -->
@@ -77,7 +76,7 @@
             @if (auth()->user()->level == "user")
             <hr class="sidebar-divider my-0">
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('profil') }}">
                     <i class="fa fa-user"></i>
                     <span>Profil</span></a>
             </li>
