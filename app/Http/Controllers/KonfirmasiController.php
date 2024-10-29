@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class KonfirmasiController extends Controller
 {
-    public function kategori(){
+    public function konfirmasi(){
         return view('fitur.konfirmasipembayaran');
     }
 }

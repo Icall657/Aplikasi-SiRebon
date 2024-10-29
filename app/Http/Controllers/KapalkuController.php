@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class KapalkuController extends Controller
 {
-    public function kategori(){
+    public function kapalku(){
         return view('fitur.kapalku');
     }
 }
