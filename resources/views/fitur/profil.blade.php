@@ -231,55 +231,6 @@
                             </div>
                         </li>
 
-                        <!-- Nav Item - Messages -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-envelope fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="messagesDropdown">
-                                <h6 class="dropdown-header">
-                                    Message Center
-                                </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
-                                            alt="...">
-                                        <div class="status-indicator bg-success"></div>
-                                    </div>
-                                    <div class="font-weight-bold">
-                                        <div class="text-truncate">Bukri</div>
-                                        <div class="small text-gray-500">gasskan · 58m</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_2.svg"
-                                            alt="...">
-                                        <div class="status-indicator"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">Supriadi</div>
-                                        <div class="small text-gray-500">besok aja bos · 1d</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_3.svg"
-                                            alt="...">
-                                        <div class="status-indicator bg-warning"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">Mamah</div>
-                                        <div class="small text-gray-500">pulang udah malem · 2d</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
-                            </div>
-                        </li>
-
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
@@ -329,7 +280,47 @@
 
                     <!-- Content Row -->
 
-                    <!-- ISI KONTEN -->
+                    <div class="container mt-5">
+                        <h2>Ganti Password</h2>
+                
+                        @if (session('error'))
+                            <script>
+                                Swal.fire('Error', "{{ session('error') }}", 'error');
+                            </script>
+                        @endif
+                
+                        @if (session('success'))
+                            <script>
+                                Swal.fire('Berhasil', "{{ session('success') }}", 'success');
+                            </script>
+                        @endif
+                
+                        <form action="{{ route('ganti-password') }}" method="POST">
+                            @csrf
+                            <div class="form-group">
+                                <label>Password Lama</label>
+                                <input type="password" name="current_password" class="form-control" required>
+                                @error('current_password')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                
+                            <div class="form-group">
+                                <label>Password Baru</label>
+                                <input type="password" name="new_password" class="form-control" required>
+                                @error('new_password')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                
+                            <div class="form-group">
+                                <label>Konfirmasi Password Baru</label>
+                                <input type="password" name="new_password_confirmation" class="form-control" required>
+                            </div>
+                
+                            <button type="submit" class="btn btn-primary mt-3">Ganti Password</button>
+                        </form>
+                    </div>
 
                     <!-- Content Row -->
 
@@ -362,24 +353,25 @@
 
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="{{ route ('logout') }}">Logout</a>
-                </div>
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Anda Yakin?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Klik "Logout" Jika Anda Yakin Ingin Keluar</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="{{ route ('logout') }}">Logout</a>
             </div>
         </div>
     </div>
+</div>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

@@ -43,3 +43,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/konfimasipembayaran', [KonfirmasiController::class, 'konfirmasi'])->name('konfirmasi');
     Route::get('/profil', [ProfilController::class, 'profil'])->name('profil');
 });
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/ganti-password', [ProfilController::class, 'changePasswordForm'])->name('ganti-password.form');
+    Route::post('/ganti-password', [ProfilController::class, 'changePassword'])->name('ganti-password');
+});

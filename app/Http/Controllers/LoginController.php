@@ -11,11 +11,20 @@ class LoginController extends Controller
         return view('login.login');
     }
 
-    public function postlogin(Request $request){
+    public function postlogin(Request $request)
+    {
         if (Auth::attempt($request->only('email', 'password'))) {
-            return redirect('/home');
+            // Cek level user untuk menentukan redirect
+            $user = Auth::user();
+
+            if ($user->level === 'admin') {
+                return redirect()->route('home')->with('success', 'Selamat datang, Admin!');
+            } elseif ($user->level === 'user') {
+                return redirect()->route('profil')->with('success', 'Selamat datang di halaman profil Anda!');
+            }
         }
-        return redirect('/login')->with('error', 'Username atau password salah!');
+
+        return redirect()->back()->with('error', 'Username atau password salah!');
     }
 
     public function logout(){
