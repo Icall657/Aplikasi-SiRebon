@@ -34,7 +34,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon">
-                    <img src="sirebon.png" alt="" style="width: 85px; height: 85px;">
+                    <img src="sirebon.png" alt="" style="width: 77px; height: 77px;">
                 </div>
             </a>
 
