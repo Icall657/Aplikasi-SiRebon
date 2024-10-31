@@ -44,7 +44,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/profil', [ProfilController::class, 'profil'])->name('profil');
 });
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/ganti-password', [ProfilController::class, 'changePasswordForm'])->name('ganti-password.form');
-    Route::post('/ganti-password', [ProfilController::class, 'changePassword'])->name('ganti-password');
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/ganti-password', [ProfilController::class, 'gantiPassword'])->name('gantiPassword');
+    Route::post('/ganti-password', [ProfilController::class, 'prosesGantiPassword'])->name('prosesGantiPassword');
 });

@@ -282,55 +282,36 @@
 
                     <div class="container mt-5">
                         <h2>Ganti Password</h2>
-                
-                        @if (session('error'))
-                            <script>
-                                Swal.fire('Error', "{{ session('error') }}", 'error');
-                            </script>
-                        @endif
-                
-                        @if (session('success'))
-                            <script>
-                                Swal.fire('Berhasil', "{{ session('success') }}", 'success');
-                            </script>
-                        @endif
-                
-                        <form action="{{ route('ganti-password') }}" method="POST">
+                        
+                        <!-- Form untuk mengganti password -->
+                        <form action="{{ route('gantiPassword') }}" method="post" autocomplete="off">
                             @csrf
+                            @if (session('status'))
+                                <div class="alert alert-success">{{ session('status') }}</div>
+                            @elseif (session('error'))
+                                <div class="alert alert-danger">{{ session('error') }}</div>    
+                            @endif
+
                             <div class="form-group">
                                 <label>Password Lama</label>
-                                <input type="password" name="current_password" class="form-control" required>
-                                @error('current_password')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
+                                <input type="password" name="old_password" class="form-control" required>
                             </div>
-                
+                    
                             <div class="form-group">
                                 <label>Password Baru</label>
                                 <input type="password" name="new_password" class="form-control" required>
-                                @error('new_password')
-                                    <small class="text-danger">{{ $message }}</small>
-                                @enderror
+                                <small id="passwordHelp" class="form-text text-muted">Password harus memiliki minimal 5 karakter, termasuk huruf besar, huruf kecil, dan angka.</small>
                             </div>
-                
+                    
                             <div class="form-group">
                                 <label>Konfirmasi Password Baru</label>
-                                <input type="password" name="new_password_confirmation" class="form-control" required>
+                                <input type="password" name="password_confirmation" class="form-control" required>
                             </div>
-                  <button type="submit" class="btn btn-primary mt-3">Ganti Password</button>
+                            
+                            <button type="submit" class="btn btn-primary mt-3">Ganti Password</button>
                         </form>
                     </div>
-                    @if (session('success'))
-                        <script>
-                      Swal.fire({
-                position: "top-end",
-                 icon: "success",
-                 title: "Password berhasil di update",
-                showConfirmButton: false,
-               timer: 1500
-                 });
-                   </script>
-                      @endif
+                    
                 </div>
                 <!-- /.container-fluid -->
 
@@ -378,7 +359,7 @@
     </div>
 </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

@@ -12,30 +12,25 @@ class ProfilController extends Controller
         return view('fitur.profil');
     } 
 
-    public function changePasswordForm()
-    {
-        return view('fitur.profil'); // Sesuaikan dengan nama view yang Anda gunakan
-    }
+    public function gantiPassword(){
+        return view('fitur.profil');
+    } 
 
-    // Proses ganti password
-    public function changePassword(Request $request)
-    {
-        // Validasi input
-        $request->validate([
-            'current_password' => 'required',
-            'new_password' => 'required|min:5|confirmed', // Pastikan konfirmasi password sama
-        ]);
-
-        // Cek apakah password lama benar
-        if (!Hash::check($request->current_password, Auth::user()->password)) {
-            return back()->with('error', 'Password lama salah.');
+    public function prosesGantiPassword(Request $request){
+        //cek password lama
+        if(!Hash::check($request->old_password, auth()->user()->password)){
+            return back()->with('error', 'password lama salah');
         }
 
-        // Ganti password
-        Auth::user()->update([
-            'password' => Hash::make($request->new_password),
+        //cek password baru dan konfirmasi password
+        if($request->new_password != $request->password_confirmation){
+            return back()->with('error', 'password baru dan konfirmasi password tidak sama');
+        }
+
+        auth()->user()->update([
+            'password' => Hash::make($request->new_password)
         ]);
 
-        return back()->with('success', 'Password berhasil diganti.');
-    }
+        return back()->with('status', 'ganti password berhasil');
+    } 
 }
