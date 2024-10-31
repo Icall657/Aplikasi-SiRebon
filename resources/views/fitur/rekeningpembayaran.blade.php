@@ -281,7 +281,40 @@
                     <!-- Content Row -->
 
                     <!-- ISI KONTEN -->
+                    <div class="table-container">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <button class="btn btn-primary btn-add">Tambah Data</button>
+                                    <div class="input-group" style="width: 200px;">
+                                        <span class="input-group-text">Search:</span>
+                                        <input type="text" class="form-control" placeholder="Search">
+                                    </div>
+                                </div>
 
+                                <table class="table table-bordered mt-3">
+                                    <thead class="table-light">
+                                        <tr>
+                                        <th style="width: 50px;">No.</th>
+                                            <th>Jenis Bank</th>
+                                            <th>Nama Pemilik</th>
+                                            <th>Nomor Rekening</th>
+                                            <th style="width: 150px;">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Bank BNI</td>
+                                            <td>Nama Pemilik</td>
+                                            <td>1234567890</td>
+                                            <td>
+                                                <button class="btn btn-primary btn-sm">Ubah</button>
+                                                <button class="btn btn-danger btn-sm">Hapus</button>
+                                            </td>
+                                        </tr>
+                                        <!-- Repeat rows as needed -->
+                                    </tbody>
+                                </table>
+                            </div>
                     <!-- Content Row -->
 
                 </div>
