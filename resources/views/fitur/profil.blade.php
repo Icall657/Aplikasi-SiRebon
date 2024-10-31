@@ -317,13 +317,20 @@
                                 <label>Konfirmasi Password Baru</label>
                                 <input type="password" name="new_password_confirmation" class="form-control" required>
                             </div>
-                
-                            <button type="submit" class="btn btn-primary mt-3">Ganti Password</button>
+                  <button type="submit" class="btn btn-primary mt-3">Ganti Password</button>
                         </form>
                     </div>
-
-                    <!-- Content Row -->
-
+                    @if (session('success'))
+                        <script>
+                      Swal.fire({
+                position: "top-end",
+                 icon: "success",
+                 title: "Password berhasil di update",
+                showConfirmButton: false,
+               timer: 1500
+                 });
+                   </script>
+                      @endif
                 </div>
                 <!-- /.container-fluid -->
 
@@ -388,6 +395,9 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
+    <!-- update password -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 </body>
 
