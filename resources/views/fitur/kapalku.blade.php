@@ -281,6 +281,14 @@
                     <!-- Content Row -->
 
                     <!-- ISI KONTEN -->
+                    <div class="table-container">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <button class="btn btn-primary btn-add">Tambah Data</button>
+                                    <div class="input-group" style="width: 200px;">
+                                        <span class="input-group-text">Search:</span>
+                                        <input type="text" class="form-control" placeholder="Search">
+                                    </div>
+                                </div>
 
                     <!-- Content Row -->
 

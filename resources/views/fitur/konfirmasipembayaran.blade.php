@@ -279,9 +279,73 @@
                     </div>
 
                     <!-- Content Row -->
+                    <h1>Konfirmasi Pembayaran Retribusi</h1>
+                    <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f0f0f0;
+    }
 
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    form  
+ {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border:  
+ 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;  
+
+    }
+  </style>
+  <form>
+    <label for="bank">Jenis Bank:</label>
+    <select id="bank">
+      <option value="">Pilih</option>
+      <option value="BCA">BCA</option>
+      <option value="Mandiri">Mandiri</option>
+      </select>
+    <br>
+    <label for="amount">Nominal Transfer:</label>
+    <input type="text" id="amount" value="Rp. 1.000.000" readonly>
+    <br>
+    <label for="account">Nomor Rekening:</label>
+    <input type="text" id="account">
+    <br>
+    <label for="file">Bukti Pembayaran:</label>
+    <input type="file" id="file">
+    <br>
+    <button type="submit">Kirim</button>
+  </form>
                     <!-- ISI KONTEN -->
-
+                        
                     <!-- Content Row -->
 
                 </div>
