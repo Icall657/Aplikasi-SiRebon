@@ -45,7 +45,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/konfimasipembayaran', [KonfirmasiController::class, 'konfirmasi'])->name('konfirmasi');
     Route::get('/profil', [ProfilController::class, 'profil'])->name('profil');
     Route::get('/retribusi', [RetribusiController::class, 'retribusi'])->name('retribusi');Route::get('/retribusi', [RetribusiController::class, 'retribusi'])->name('retribusi');
-    Route::get('/belumretribusi', [BelumRetribusiController::class, 'belumretribusi'])->name('belumretribusi');
+    Route::get('/belumretribusi', [BelumRetribusiController::class, 'belumretribusi'])->name('belum-retribusi');
 });
 
 Route::group(['middleware' => ['auth']], function () {

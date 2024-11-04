@@ -37,7 +37,7 @@
                                   </div>
                                   <div style="position: relative;" size="30">
                                       <i class="fa fa-user" style="position: absolute; left: 10px; top: 10px; color: #888;"></i>
-                                      <input type="email" name="email" class="form-control form-control-lg" placeholder="Masukkan email" size="30" style="padding-left: 30px; height: 40px;" />
+                                      <input type="email" name="email" autocomplete="off" class="form-control form-control-lg" placeholder="Masukkan email" size="30" style="padding-left: 30px; height: 40px;" />
                                   </div>
                               </div>
           
@@ -47,14 +47,14 @@
                                   </div>
                                   <div style="position: relative;" size="30">
                                       <i class="fa fa-lock" style="position: absolute; left: 10px; top: 10px; color: #888;"></i>
-                                      <input type="password" name="password" class="form-control form-control-lg" placeholder="Masukkan password" size="30" style="padding-left: 30px; height: 40px;" />
+                                      <input type="password" name="password" autocomplete="off" class="form-control form-control-lg" placeholder="Masukkan password" size="30" style="padding-left: 30px; height: 40px;" />
                                   </div>
                               </div>
 
                                 <!-- Checkbox -->
                                 <div class="form-check d-flex justify-content-start mb-4">
-                                    <input class="form-check-input" type="checkbox" id="rememberMe">
-                                    <label class="form-check-label" for="rememberMe">Ingatkan saya</label>
+                                    <input class="form-check-input" name="remember" type="checkbox" id="remember">
+                                    <label class="form-check-label" for="remember">Ingatkan saya</label>
                                 </div>
 
                                 <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
