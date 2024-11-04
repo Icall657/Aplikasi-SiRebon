@@ -77,14 +77,14 @@
             <hr class="sidebar-divider my-0">
             <li class="nav-item  active">
                 <a class="nav-link" href="{{ route('profil') }}">
-                    <i class="fa fa-user"></i>
+                    <i class="fa fa-address-card"></i>
                     <span>Profil</span></a>
             </li>
 
             <hr class="sidebar-divider">
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('kapalku') }}">
-                    <i class="fa fa-male"></i>
+                    <i class="fa fa-ship"></i>
                     <span>Kapalku</span></a>
             </li>
 
@@ -111,10 +111,19 @@
             </li>
 
             <hr class="sidebar-divider">
+            <div class="sidebar-heading">
+                Laporan
+            </div>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('laporan') }}">
-                    <i class="fa fa-clipboard"></i>
-                    <span>Laporan</span></a>
+                <a class="nav-link" href="#">
+                    <i class="fa fa-user"></i>
+                    <span>Retribusi</span></a>
+            </li>
+            <hr class="sidebar-divider">
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fa fa-user-times"></i>
+                    <span>Belum Membayar Retribusi</span></a>
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -279,9 +288,8 @@
                     </div>
 
                     <!-- Content Row -->
-
+                    <h2>Ganti Password</h2>
                     <div class="container mt-5">
-                        <h2>Ganti Password</h2>
                         
                         <!-- Form untuk mengganti password -->
                         <form action="{{ route('gantiPassword') }}" method="post" autocomplete="off">

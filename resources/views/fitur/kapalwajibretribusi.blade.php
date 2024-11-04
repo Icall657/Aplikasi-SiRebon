@@ -77,14 +77,14 @@
             <hr class="sidebar-divider my-0">
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('profil') }}">
-                    <i class="fa fa-user"></i>
+                    <i class="fa fa-address-card"></i>
                     <span>Profil</span></a>
             </li>
 
             <hr class="sidebar-divider">
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('kapalku') }}">
-                    <i class="fa fa-male"></i>
+                    <i class="fa fa-ship"></i>
                     <span>Kapalku</span></a>
             </li>
 
@@ -111,10 +111,19 @@
             </li>
 
             <hr class="sidebar-divider">
+            <div class="sidebar-heading">
+                Laporan
+            </div>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('laporan') }}">
-                    <i class="fa fa-clipboard"></i>
-                    <span>Laporan</span></a>
+                <a class="nav-link" href="#">
+                    <i class="fa fa-user"></i>
+                    <span>Retribusi</span></a>
+            </li>
+            <hr class="sidebar-divider">
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fa fa-user-times"></i>
+                    <span>Belum Membayar Retribusi</span></a>
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -284,10 +293,6 @@
                     <div class="table-container">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <button class="btn btn-primary btn-add">Tambah Data</button>
-                                    <div class="input-group" style="width: 200px;">
-                                        <span class="input-group-text">Search:</span>
-                                        <input type="text" class="form-control" placeholder="Search">
-                                    </div>
                                 </div>
 
                                 <table class="table table-bordered mt-3">
@@ -297,7 +302,9 @@
                                             <th>nama Pemilik</th>
                                             <th>Nama kapal</th>
                                             <th>jenis kapal</th>
+                                            @if (auth()->user()->level == "admin")
                                             <th style="width: 150px;">Aksi</th>
+                                            @endif
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -306,10 +313,12 @@
                                             <td>ikbal</td>
                                             <td>kapalan</td>
                                             <td>12345</td>
+                                            @if (auth()->user()->level == "admin")
                                             <td>
                                                 <button class="btn btn-primary btn-sm">Ubah</button>
                                                 <button class="btn btn-danger btn-sm">Hapus</button>
                                             </td>
+                                            @endif
                                         </tr>
                                         <!-- Repeat rows as needed -->
                                     </tbody>
