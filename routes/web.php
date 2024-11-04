@@ -12,6 +12,8 @@ use App\Http\Controllers\KapalwajibController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\KonfirmasiController;
 use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\RetribusiController;
+use App\Http\Controllers\BelumRetribusiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +44,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/kapalku', [KapalkuController::class, 'kapalku'])->name('kapalku');
     Route::get('/konfimasipembayaran', [KonfirmasiController::class, 'konfirmasi'])->name('konfirmasi');
     Route::get('/profil', [ProfilController::class, 'profil'])->name('profil');
+    Route::get('/retribusi', [RetribusiController::class, 'retribusi'])->name('retribusi');Route::get('/retribusi', [RetribusiController::class, 'retribusi'])->name('retribusi');
+    Route::get('/belumretribusi', [BelumRetribusiController::class, 'belumretribusi'])->name('belumretribusi');
 });
 
 Route::group(['middleware' => ['auth']], function () {
