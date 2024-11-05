@@ -279,10 +279,6 @@
                     <div class="container">
                         <div class="d-flex justify-content-between mb-3">
                             <button class="btn btn-primary">Tambah Data</button>
-                            <div class="input-group" style="max-width: 200px;">
-                                <span class="input-group-text">Search:</span>
-                                <input type="text" class="form-control" placeholder="Search...">
-                            </div>
                         </div>
                     
                         <table class="table table-bordered text-center">
