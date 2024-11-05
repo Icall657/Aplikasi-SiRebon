@@ -12,9 +12,32 @@ class ProfilController extends Controller
         return view('fitur.profil');
     } 
 
+    public function update(Request $request){
+    // Validasi input
+    $request->validate([
+        'username' => 'required|string|max:255',
+    ]);
+
+    // Ambil user yang sedang login
+    $user = Auth::user();
+    
+    // Gunakan nilai dari input 'username' untuk mengupdate kolom 'name' di database
+    $user->name = $request->input('username');
+
+    // Simpan perubahan ke database
+    $user->save();
+
+    // Redirect kembali dengan pesan sukses
+    return redirect()->route('profil')->with('success', 'Username berhasil diperbarui!');
+    }
+
     public function gantiPassword(){
         return view('fitur.profil');
     } 
+
+    // Fungsi untuk mengupdate profil pengguna
+
+
 
     public function prosesGantiPassword(Request $request){
         //cek password lama

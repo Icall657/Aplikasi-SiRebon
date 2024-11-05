@@ -275,43 +275,48 @@
                         
                     </div>
                             <div class="form-container">
-                                <form>
+                                <form method="POST" action="{{ route('profil.update') }}">
+                                @csrf
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label for="username">Username</label>
-                                            <input type="text" class="form-control" id="username" value="text">
+                                            <input type="text" class="form-control" id="username" name="username" value="{{ auth()->user()->name }}">
                                         </div>
-                                        <div clas="form-group col-md-6">
-                                            <label for="hakAkses">Hak Akses</label>
-                                            <input type="text" class="form-control" id="hakAkses" value="Administrator">
-                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="hakakses">Hak Akses</label>
+                                            <input type="text" class="form-control" id="hakakses" value="{{ auth()->user()->level }}" readonly>
+                                        </div>                                        
                                     </div>
 
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label for="nik">NIK</label>
-                                            <input type="text" class="form-control" id="nik" value="3674938217278893">
+                                            <input type="text" class="form-control" id="nik" value="3674938217278893" readonly>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="namaLengkap">Nama Lengkap</label>
-                                            <input type="text" class="form-control" id="namaLengkap" value="namaku">
+                                            <input type="text" class="form-control" id="namaLengkap" value="namaku" readonly>
                                         </div>
                                     </div>
 
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label for="telepon">Telepon</label>
-                                            <input type="text" class="form-control" id="telepon" value="081234567890">
+                                            <input type="text" class="form-control" id="telepon" value="081234567890" readonly>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="alamat">Alamat</label>
-                                            <input type="text" class="form-control" id="alamat" value="Ds. cikaso">
+                                            <input type="text" class="form-control" id="alamat" value="Ds. cikaso" readonly>
                                         </div>
+                                        
+                                        <button type="submit" name="save" class="btn btn-primary mt-1">Simpan</button>
                                     </div>
+                                </form>
+                            </div>
+                            <br>
+
 
                     <!-- Content Row -->
-                    <h2>Ganti Password</h2>
-                    <div class="container mt-5">
                         
                         <!-- Form untuk mengganti password -->
                         <form action="{{ route('gantiPassword') }}" method="post" autocomplete="off">
@@ -338,14 +343,13 @@
                                 <input type="password" name="password_confirmation" class="form-control" required>
                             </div>
                             
-                            <button type="submit" class="btn btn-primary mt-3">Ganti Password</button>
+                            <button type="submit" name="gantipassword" class="btn btn-primary mt-3">Ganti Password</button>
                         </form>
-                    </div>
                     
                 </div>
+                <br>
                 <!-- /.container-fluid -->
 
-            </div>
             <!-- End of Main Content -->
 
             <!-- Footer -->

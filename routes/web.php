@@ -52,3 +52,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/ganti-password', [ProfilController::class, 'gantiPassword'])->name('gantiPassword');
     Route::post('/ganti-password', [ProfilController::class, 'prosesGantiPassword'])->name('prosesGantiPassword');
 });
+
+Route::prefix('profil')->group(function () {
+    Route::post('/update', [ProfilController::class, 'update'])->name('profil.update');
+});

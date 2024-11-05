@@ -279,10 +279,11 @@
                       
                     <!-- ISI KONTEN -->
                     <div class="table-container">
+                        @if (auth()->user()->level == "admin")
                                 <div class="d-flex justify-content-between align-items-center">
                                     <button class="btn btn-primary btn-add">Tambah Data</button>
                                 </div>
-
+                        @endif
                                 <table class="table table-bordered mt-3">
                                     <thead class="table-light">
                                         <tr>
