@@ -34,25 +34,21 @@ route::post('/postlogin', [LoginController::class, 'postlogin'])->name('postlogi
 route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
-    Route::get('/laporan', [LaporanController::class, 'laporan'])->name('laporan');
+    Route::resource('home', HomeController::class);
+    Route::resource('laporan', LaporanController::class);
     Route::resource('rekening', RekeningController::class);
-    Route::get('/wajib-retribusi', [WajibController::class, 'retribusi'])->name('wajib-retribusi');
-    Route::get('/pembayaran-retribusi', [PembayaranController::class, 'pembayaran'])->name('pembayaran-retribusi');
-    Route::get('/kategori-retribusi', [KategoriController::class, 'kategori'])->name('kategori-retribusi');
-    Route::get('/kapal-wajib-retribusi', [KapalwajibController::class, 'kapal'])->name('kapal-wajib-retribusi');
-    Route::get('/kapalku', [KapalkuController::class, 'kapalku'])->name('kapalku');
-    Route::get('/konfimasipembayaran', [KonfirmasiController::class, 'konfirmasi'])->name('konfirmasi');
-    Route::get('/profil', [ProfilController::class, 'profil'])->name('profil');
-    Route::get('/retribusi', [RetribusiController::class, 'retribusi'])->name('retribusi');Route::get('/retribusi', [RetribusiController::class, 'retribusi'])->name('retribusi');
-    Route::get('/belumretribusi', [BelumRetribusiController::class, 'belumretribusi'])->name('belum-retribusi');
+    Route::resource('wajib-retribusi', WajibController::class);
+    Route::resource('pembayaran-retribusi', PembayaranController::class);
+    Route::resource('kategori-retribusi', KategoriController::class);
+    Route::resource('kapal-wajib-retribusi', KapalwajibController::class);
+    Route::resource('kapalku', KapalkuController::class);
+    Route::resource('konfirmasi', KonfirmasiController::class);
+    Route::resource('profil', ProfilController::class);
+    Route::resource('retribusi', RetribusiController::class);
+    Route::resource('belum-retribusi', BelumRetribusiController::class);
 });
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/ganti-password', [ProfilController::class, 'gantiPassword'])->name('gantiPassword');
     Route::post('/ganti-password', [ProfilController::class, 'prosesGantiPassword'])->name('prosesGantiPassword');
-});
-
-Route::prefix('profil')->group(function () {
-    Route::post('/update', [ProfilController::class, 'update'])->name('profil.update');
 });

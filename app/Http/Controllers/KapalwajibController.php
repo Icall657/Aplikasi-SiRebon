@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class KapalwajibController extends Controller
 {
-    public function kapal(){
+    public function index(){
         return view('fitur.kapalwajibretribusi');
     }
     

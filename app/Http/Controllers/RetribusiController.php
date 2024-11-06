@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class RetribusiController extends Controller
 {
-    public function retribusi(){
+    public function index(){
         return view('fitur.retribusi');
     }
 }

@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <section class="vh-100" style="background-color: #508bfc;">
+    <section class="vh-100" style="background-color: #4E73DF;">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -33,11 +33,11 @@
 
                                 <div class="form-outline mb-4">
                                   <div style="text-align: left;">
-                                      <label class="form-label">Email</label>
+                                      <label class="form-label">Username</label>
                                   </div>
                                   <div style="position: relative;" size="30">
                                       <i class="fa fa-user" style="position: absolute; left: 10px; top: 10px; color: #888;"></i>
-                                      <input type="email" name="email" autocomplete="off" class="form-control form-control-lg" placeholder="Masukkan email" size="30" style="padding-left: 30px; height: 40px;" />
+                                      <input type="username" name="username" autocomplete="off" class="form-control form-control-lg" placeholder="Masukkan username" size="30" style="padding-left: 30px; height: 40px;" />
                                   </div>
                               </div>
           
@@ -50,16 +50,9 @@
                                       <input type="password" name="password" autocomplete="off" class="form-control form-control-lg" placeholder="Masukkan password" size="30" style="padding-left: 30px; height: 40px;" />
                                   </div>
                               </div>
-
-                                <!-- Checkbox -->
-                                <div class="form-check d-flex justify-content-start mb-4">
-                                    <input class="form-check-input" name="remember" type="checkbox" id="remember">
-                                    <label class="form-check-label" for="remember">Ingatkan saya</label>
-                                </div>
-
                                 <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
                             </form>
-
+                        
                         </div>
                     </div>
                 </div>

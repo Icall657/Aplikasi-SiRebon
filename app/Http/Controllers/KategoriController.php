@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class KategoriController extends Controller
 {
-    public function kategori(){
+    public function index(){
         return view('fitur.kategoriretribusi');
     }
 }

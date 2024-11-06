@@ -42,10 +42,10 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            @if (auth()->user()->level == "admin")
+            @if (auth()->user()->level == "Admin Aplikasi")
             <hr class="sidebar-divider my-0">
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('home') }}">
+                <a class="nav-link" href="{{ route('home.index') }}">
                     <i class="fa fa-home"></i>
                     <span>beranda</span></a>
             </li>
@@ -59,38 +59,38 @@
 
             <hr class="sidebar-divider my-0">
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('wajib-retribusi') }}">
+                <a class="nav-link" href="{{ route('wajib-retribusi.index') }}">
                     <i class="fa fa-anchor"></i>
                     <span>Wajib Retribusi</span></a>
             </li>
 
             <hr class="sidebar-divider my-0">
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('pembayaran-retribusi') }}">
+                <a class="nav-link" href="{{ route('pembayaran-retribusi.index') }}">
                     <i class="fa fa-dollar-sign"></i>
                     <span>Pembayaran Retribusi</span></a>
             </li>
             @endif
 
             <!-- Divider -->
-            @if (auth()->user()->level == "user")
+            @if (auth()->user()->level == "Wajib Retribusi")
             <hr class="sidebar-divider my-0">
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('profil') }}">
+                <a class="nav-link" href="{{ route('profil.index') }}">
                     <i class="fa fa-user"></i>
                     <span>Profil</span></a>
             </li>
 
             <hr class="sidebar-divider">
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('kapalku') }}">
+                <a class="nav-link" href="{{ route('kapalku.index') }}">
                     <i class="fa fa-male"></i>
                     <span>Kapalku</span></a>
             </li>
 
             <hr class="sidebar-divider">
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('konfirmasi') }}">
+                <a class="nav-link" href="{{ route('konfirmasi.index') }}">
                     <i class="fa fa-check-circle"></i>
                     <span>Konfirmasi Pembayaran Retribusi</span></a>
             </li>
@@ -98,21 +98,21 @@
             @endif
             <hr class="sidebar-divider">
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('kategori-retribusi') }}">
+                <a class="nav-link" href="{{ route('kategori-retribusi.index') }}">
                     <i class="fa fa-bars"></i>
                     <span>Kategori Retribusi</span></a>
             </li>
 
             <hr class="sidebar-divider">
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('kapal-wajib-retribusi') }}">
+                <a class="nav-link" href="{{ route('kapal-wajib-retribusi.index') }}">
                     <i class="fa fa-exclamation-circle"></i>
                     <span>Kapal Wajib Retribusi</span></a>
             </li>
 
             <hr class="sidebar-divider">
             <li class="nav-item active">
-                <a class="nav-link" href="{{ route('laporan') }}">
+                <a class="nav-link" href="{{ route('laporan.index') }}">
                     <i class="fa fa-clipboard"></i>
                     <span>Laporan</span></a>
             </li>
@@ -181,63 +181,14 @@
                                 </form>
                             </div>
                         </li>
-
-                        <!-- Nav Item - Alerts -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-bell fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Alerts -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="alertsDropdown">
-                                <h6 class="dropdown-header">
-                                    Alerts Center
-                                </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-primary">
-                                            <i class="fas fa-file-alt text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 12, 2019</div>
-                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-success">
-                                            <i class="fas fa-donate text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 7, 2019</div>
-                                        $290.29 has been deposited into your account!
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-warning">
-                                            <i class="fas fa-exclamation-triangle text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 2, 2019</div>
-                                        Spending Alert: We've noticed unusually high spending for your account.
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-                            </div>
-                        </li>
-
+                        
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->username }}</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->level }}</span>
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
                             </a>
@@ -294,7 +245,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>2024 &copy; SiRebon. All Right Deserves.</span>
+                        <span>2024 &copy; SiRebon. Dinas Komunikasi, Informatika & Statistik.</span>
                     </div>
                 </div>
             </footer>

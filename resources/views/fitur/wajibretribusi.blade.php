@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,70 +41,69 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            @if (auth()->user()->level == "admin")
-            <hr class="sidebar-divider my-0">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('home') }}">
-                    <i class="fa fa-home"></i>
-                    <span>beranda</span></a>
-            </li>
+            @if (auth()->user()->level == 'Admin Aplikasi')
+                <hr class="sidebar-divider my-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('home.index') }}">
+                        <i class="fa fa-home"></i>
+                        <span>beranda</span></a>
+                </li>
 
-            <hr class="sidebar-divider my-0">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('rekening.index') }}">
-                    <i class="fa fa-credit-card"></i>
-                    <span>Rekening Pembayaran Retribusi</span></a>
-            </li>
+                <hr class="sidebar-divider my-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('rekening.index') }}">
+                        <i class="fa fa-credit-card"></i>
+                        <span>Rekening Pembayaran Retribusi</span></a>
+                </li>
 
-            <hr class="sidebar-divider my-0">
-            <li class="nav-item active">
-                <a class="nav-link" href="{{ route('wajib-retribusi') }}">
-                    <i class="fa fa-anchor"></i>
-                    <span>Wajib Retribusi</span></a>
-            </li>
+                <hr class="sidebar-divider my-0">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ route('wajib-retribusi.index') }}">
+                        <i class="fa fa-anchor"></i>
+                        <span>Wajib Retribusi</span></a>
+                </li>
 
-            <hr class="sidebar-divider my-0">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('pembayaran-retribusi') }}">
-                    <i class="fa fa-dollar-sign"></i>
-                    <span>Pembayaran Retribusi</span></a>
-            </li>
+                <hr class="sidebar-divider my-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('pembayaran-retribusi.index') }}">
+                        <i class="fa fa-dollar-sign"></i>
+                        <span>Pembayaran Retribusi</span></a>
+                </li>
             @endif
 
             <!-- Divider -->
-            @if (auth()->user()->level == "user")
-            <hr class="sidebar-divider my-0">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('profil') }}">
-                    <i class="fa fa-address-card"></i>
-                    <span>Profil</span></a>
-            </li>
+            @if (auth()->user()->level == 'Wajib Retribusi')
+                <hr class="sidebar-divider my-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('profil.index') }}">
+                        <i class="fa fa-address-card"></i>
+                        <span>Profil</span></a>
+                </li>
 
-            <hr class="sidebar-divider">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('kapalku') }}">
-                    <i class="fa fa-ship"></i>
-                    <span>Kapalku</span></a>
-            </li>
+                <hr class="sidebar-divider">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('kapalku.index') }}">
+                        <i class="fa fa-ship"></i>
+                        <span>Kapalku</span></a>
+                </li>
 
-            <hr class="sidebar-divider">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('konfirmasi') }}">
-                    <i class="fa fa-check-circle"></i>
-                    <span>Konfirmasi Pembayaran Retribusi</span></a>
-            </li>
-
+                <hr class="sidebar-divider">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('konfirmasi.index') }}">
+                        <i class="fa fa-check-circle"></i>
+                        <span>Konfirmasi Pembayaran Retribusi</span></a>
+                </li>
             @endif
             <hr class="sidebar-divider">
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('kategori-retribusi') }}">
+                <a class="nav-link" href="{{ route('kategori-retribusi.index') }}">
                     <i class="fa fa-bars"></i>
                     <span>Kategori Retribusi</span></a>
             </li>
 
             <hr class="sidebar-divider">
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('kapal-wajib-retribusi') }}">
+                <a class="nav-link" href="{{ route('kapal-wajib-retribusi.index') }}">
                     <i class="fa fa-exclamation-circle"></i>
                     <span>Kapal Wajib Retribusi</span></a>
             </li>
@@ -115,13 +113,13 @@
                 Laporan
             </div>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('retribusi') }}">
+                <a class="nav-link" href="{{ route('retribusi.index') }}">
                     <i class="fa fa-user"></i>
                     <span>Retribusi</span></a>
             </li>
             <hr class="sidebar-divider">
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('belum-retribusi') }}">
+                <a class="nav-link" href="{{ route('belum-retribusi.index') }}">
                     <i class="fa fa-user-times"></i>
                     <span>Belum Membayar Retribusi</span></a>
             </li>
@@ -154,8 +152,8 @@
                     <form
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
+                            <input type="text" class="form-control bg-light border-0 small"
+                                placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="button">
                                     <i class="fas fa-search fa-sm"></i>
@@ -191,70 +189,22 @@
                             </div>
                         </li>
 
-                        <!-- Nav Item - Alerts -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-bell fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Alerts -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="alertsDropdown">
-                                <h6 class="dropdown-header">
-                                    Alerts Center
-                                </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-primary">
-                                            <i class="fas fa-file-alt text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 12, 2019</div>
-                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-success">
-                                            <i class="fas fa-donate text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 7, 2019</div>
-                                        $290.29 has been deposited into your account!
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-warning">
-                                            <i class="fas fa-exclamation-triangle text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 2, 2019</div>
-                                        Spending Alert: We've noticed unusually high spending for your account.
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-                            </div>
-                        </li>
-
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expandfed="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->username }}</span>
-                                <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                <span
+                                    class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->level }}</span>
+                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
                                 <!--- <div class="dropdown-divider"></div> -->
-                                <a class="dropdown-item" href="" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="" data-toggle="modal"
+                                    data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -272,44 +222,46 @@
                     <!-- Content Row -->
                     <div class="row">
 
-                        
+
                     </div>
 
                     <!-- Content Row -->
                     <div class="table-container">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <button class="btn btn-primary btn-add">Tambah Data</button>
-                                </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <button class="btn btn-primary btn-add">Tambah Data</button>
+                        </div>
 
-                                <table class="table table-bordered mt-3">
-                                    <thead class="table-light">
-                                        <tr>
-                                        <th style="width: 50px;">No.</th>
-                                            <th>Nama lengkap</th>
-                                            <th>telpon</th>
-                                            <th>nik</th>
-                                            <th>alamat</th>
-                                            <th>kelurahan</th>
-                                            <th style="width: 150px;">Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>namaku dis</td>
-                                            <td>0812345678910</td>
-                                            <td>1234567890</td>
-                                            <td>ngawi</td>
-                                            <td>pancalang</td>
-                                            <td>
-                                                <button class="btn btn-primary btn-sm">Ubah</button>
-                                                <button class="btn btn-danger btn-sm">Hapus</button>
-                                            </td>
-                                        </tr>
-                                        <!-- Repeat rows as needed -->
-                                    </tbody>
-                                </table>
-                            </div>
+                        <table class="table table-bordered mt-3">
+                            <thead class="table-light">
+                                <tr>
+                                    <th style="width: 50px;">No.</th>
+                                    <th>Nama lengkap</th>
+                                    <th>telpon</th>
+                                    <th>nik</th>
+                                    <th>alamat</th>
+                                    <th>kelurahan</th>
+                                    <th style="width: 150px;">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    @foreach (auth()->user()->wajibRetribusi as $wajib)
+                                        <td>{{ $wajib->id }}</td>
+                                        <td>{{ $wajib->nama }}</td>
+                                        <td>{{ $wajib->no_hp }}</td>
+                                        <td>{{ $wajib->nik }}</td>
+                                        <td>{{ $wajib->alamat }}</td>
+                                        <td>pancalang</td>
+                                        <td>
+                                            <button class="btn btn-primary btn-sm">Ubah</button>
+                                            <button class="btn btn-danger btn-sm">Hapus</button>
+                                        </td>
+                                    @endforeach
+                                </tr>
+                                <!-- Repeat rows as needed -->
+                            </tbody>
+                        </table>
+                    </div>
                     <!-- ISI KONTEN -->
 
                     <!-- Content Row -->
@@ -324,7 +276,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>2024 &copy; SiRebon. All Right Deserves.</span>
+                        <span>2024 &copy; SiRebon. Dinas Komunikasi, Informatika & Statistik.</span>
                     </div>
                 </div>
             </footer>
@@ -355,7 +307,7 @@
                 <div class="modal-body">Klik "Logout" Jika Anda Yakin Ingin Keluar</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="{{ route ('logout') }}">Logout</a>
+                    <a class="btn btn-primary" href="{{ route('logout') }}">Logout</a>
                 </div>
             </div>
         </div>

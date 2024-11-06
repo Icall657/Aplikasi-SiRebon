@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class BelumRetribusiController extends Controller
 {
-    public function belumretribusi(){
+    public function index(){
         return view('fitur.belumretribusi');
     }
 }

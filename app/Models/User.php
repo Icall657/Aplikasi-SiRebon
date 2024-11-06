@@ -43,5 +43,8 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    
+    public function wajibRetribusi()
+    {
+        return $this->hasMany(WajibRetribusi::class, 'id_user');
+    }
 }
