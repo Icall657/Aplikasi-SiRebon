@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,59 +41,58 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            @if (auth()->user()->level == "admin")
-            <hr class="sidebar-divider my-0">
-            <li class="nav-item active">
-                <a class="nav-link" href="{{ route('home') }}">
-                    <i class="fa fa-home"></i>
-                    <span>beranda</span></a>
-            </li>
+            @if (auth()->user()->level == 'admin')
+                <hr class="sidebar-divider my-0">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ route('home') }}">
+                        <i class="fa fa-home"></i>
+                        <span>beranda</span></a>
+                </li>
 
-            <hr class="sidebar-divider my-0">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('rekening-pembayaran') }}">
-                    <i class="fa fa-credit-card"></i>
-                    <span>Rekening Pembayaran Retribusi</span></a>
-            </li>
+                <hr class="sidebar-divider my-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('rekening.index') }}">
+                        <i class="fa fa-credit-card"></i>
+                        <span>Rekening Pembayaran Retribusi</span></a>
+                </li>
 
-            <hr class="sidebar-divider my-0">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('wajib-retribusi') }}">
-                    <i class="fa fa-anchor"></i>
-                    <span>Wajib Retribusi</span></a>
-            </li>
+                <hr class="sidebar-divider my-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('wajib-retribusi') }}">
+                        <i class="fa fa-anchor"></i>
+                        <span>Wajib Retribusi</span></a>
+                </li>
 
-            <hr class="sidebar-divider my-0">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('pembayaran-retribusi') }}">
-                    <i class="fa fa-dollar-sign"></i>
-                    <span>Pembayaran Retribusi</span></a>
-            </li>
+                <hr class="sidebar-divider my-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('pembayaran-retribusi') }}">
+                        <i class="fa fa-dollar-sign"></i>
+                        <span>Pembayaran Retribusi</span></a>
+                </li>
             @endif
 
             <!-- Divider -->
-            @if (auth()->user()->level == "user")
-            <hr class="sidebar-divider my-0">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('profil') }}">
-                    <i class="fa fa-address-card"></i>
-                    <span>Profil</span></a>
-            </li>
+            @if (auth()->user()->level == 'user')
+                <hr class="sidebar-divider my-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('profil') }}">
+                        <i class="fa fa-address-card"></i>
+                        <span>Profil</span></a>
+                </li>
 
-            <hr class="sidebar-divider">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('kapalku') }}">
-                    <i class="fa fa-ship"></i>
-                    <span>Kapalku</span></a>
-            </li>
+                <hr class="sidebar-divider">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('kapalku') }}">
+                        <i class="fa fa-ship"></i>
+                        <span>Kapalku</span></a>
+                </li>
 
-            <hr class="sidebar-divider">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('konfirmasi') }}">
-                    <i class="fa fa-check-circle"></i>
-                    <span>Konfirmasi Pembayaran Retribusi</span></a>
-            </li>
-
+                <hr class="sidebar-divider">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('konfirmasi') }}">
+                        <i class="fa fa-check-circle"></i>
+                        <span>Konfirmasi Pembayaran Retribusi</span></a>
+                </li>
             @endif
             <hr class="sidebar-divider">
             <li class="nav-item">
@@ -154,8 +152,8 @@
                     <form
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
+                            <input type="text" class="form-control bg-light border-0 small"
+                                placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="button">
                                     <i class="fas fa-search fa-sm"></i>
@@ -211,7 +209,8 @@
                                     </div>
                                     <div>
                                         <div class="small text-gray-500">December 12, 2019</div>
-                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                                        <span class="font-weight-bold">A new monthly report is ready to
+                                            download!</span>
                                     </div>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -236,7 +235,8 @@
                                         Spending Alert: We've noticed unusually high spending for your account.
                                     </div>
                                 </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All
+                                    Alerts</a>
                             </div>
                         </li>
 
@@ -246,15 +246,16 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->name }}</span>
-                                <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                <span
+                                    class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->username }}</span>
+                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
                                 <!--- <div class="dropdown-divider"></div> -->
-                                <a class="dropdown-item" href="" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="" data-toggle="modal"
+                                    data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -273,59 +274,59 @@
                     <div class="row">
 
                         <!-- Earnings (Monthly) Card Example -->
-                        @if (auth()->user()->level == "admin")
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-primary shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Jumlah Sudah Bayar</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-user fa-2x text-gray-300"></i>
+                        @if (auth()->user()->level == 'admin')
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card border-left-primary shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    Jumlah Sudah Bayar</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-user fa-2x text-gray-300"></i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- Pending Requests Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-warning shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Jumlah Belum Bayar</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-user fa-2x text-gray-300"></i>
+                            <!-- Pending Requests Card Example -->
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card border-left-warning shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                    Jumlah Belum Bayar</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-user fa-2x text-gray-300"></i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Jumlah Pemasukan</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. 0</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-credit-card fa-2x text-gray-300"></i>
+                            <!-- Earnings (Monthly) Card Example -->
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card border-left-success shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                    Jumlah Pemasukan</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. 0</div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-credit-card fa-2x text-gray-300"></i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         @endif
 
                     </div>
@@ -377,7 +378,7 @@
                 <div class="modal-body">Klik "Logout" Jika Anda Yakin Ingin Keluar</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="{{ route ('logout') }}">Logout</a>
+                    <a class="btn btn-primary" href="{{ route('logout') }}">Logout</a>
                 </div>
             </div>
         </div>

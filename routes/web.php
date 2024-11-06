@@ -36,7 +36,7 @@ route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/laporan', [LaporanController::class, 'laporan'])->name('laporan');
-    Route::get('/rekening-pembayaran', [RekeningController::class, 'rekening'])->name('rekening-pembayaran');
+    Route::resource('rekening', RekeningController::class);
     Route::get('/wajib-retribusi', [WajibController::class, 'retribusi'])->name('wajib-retribusi');
     Route::get('/pembayaran-retribusi', [PembayaranController::class, 'pembayaran'])->name('pembayaran-retribusi');
     Route::get('/kategori-retribusi', [KategoriController::class, 'kategori'])->name('kategori-retribusi');

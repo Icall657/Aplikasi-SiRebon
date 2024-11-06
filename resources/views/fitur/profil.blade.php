@@ -52,7 +52,7 @@
 
             <hr class="sidebar-divider my-0">
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('rekening-pembayaran') }}">
+                <a class="nav-link" href="{{ route('rekening.index') }}">
                     <i class="fa fa-credit-card"></i>
                     <span>Rekening Pembayaran Retribusi</span></a>
             </li>
@@ -246,7 +246,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->name }}</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->username }}</span>
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
                             </a>
@@ -280,7 +280,7 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label for="username">Username</label>
-                                            <input type="text" class="form-control" id="username" name="username" value="{{ auth()->user()->name }}">
+                                            <input type="text" class="form-control" id="username" name="username" value="{{ auth()->user()->username }}">
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label for="hakakses">Hak Akses</label>

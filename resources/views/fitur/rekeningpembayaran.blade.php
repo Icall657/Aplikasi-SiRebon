@@ -52,7 +52,7 @@
 
             <hr class="sidebar-divider my-0">
             <li class="nav-item active">
-                <a class="nav-link" href="{{ route('rekening-pembayaran') }}">
+                <a class="nav-link" href="{{ route('rekening.index') }}">
                     <i class="fa fa-credit-card"></i>
                     <span>Rekening Pembayaran Retribusi</span></a>
             </li>
@@ -246,7 +246,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->name }}</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->username }}</span>
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
                             </a>
@@ -280,7 +280,7 @@
                     <!-- ISI KONTEN -->
                     <div class="table-container">
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <button class="btn btn-primary btn-add">Tambah Data</button>
+                                    <a href="{{ route ('rekening.create') }}" class="btn btn-primary btn-add">Tambah Data</a>
                                 </div>
 
                                 <table class="table table-bordered mt-3">
@@ -294,16 +294,27 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Bank BNI</td>
-                                            <td>Nama Pemilik</td>
-                                            <td>1234567890</td>
-                                            <td>
-                                                <button class="btn btn-primary btn-sm">Ubah</button>
-                                                <button class="btn btn-danger btn-sm">Hapus</button>
-                                            </td>
-                                        </tr>
+                                        @foreach ($rekening as $index => $data)
+                                                <tr>
+                                                    <td scope="col" class="text-center">{{ $index + 1 }}</td>
+                                                    <td scope="col" class="text-center">
+                                                        {{ $data->refBank->nama_bank }}</td>
+                                                    <td scope="col" class="text-center">{{ $data->nama_akun }}</td>
+                                                    <td scope="col" class="text-center">{{ $data->no_rekening }}</td>
+                                                    <td scope="col" class="text-center">
+                                                        <a href="{{ route('rekening.edit', $data->id) }}"
+                                                            class="btn btn-primary btn-sm m-1">Ubah</a>
+
+                                                        <form action="{{ route('rekening.destroy', $data->id) }}"
+                                                            method="POST" style="display:inline;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger btn-sm m-1"
+                                                                onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                         <!-- Repeat rows as needed -->
                                     </tbody>
                                 </table>
