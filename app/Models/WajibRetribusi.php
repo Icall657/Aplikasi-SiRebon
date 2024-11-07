@@ -17,6 +17,7 @@ class WajibRetribusi extends Model
         'no_hp',
         'nik',
         'alamat',
+        'kelurahan',
     ];
 
     // Relasi ke model User

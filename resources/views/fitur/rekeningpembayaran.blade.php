@@ -247,15 +247,13 @@
                                 @foreach ($rekening as $index => $data)
                                     <tr>
                                         <td scope="col" class="text-center">{{ $index + 1 }}</td>
-                                        <td scope="col" class="text-center">
-                                            {{ $data->refBank->nama_bank }}
-                                        </td>
+                                        <td scope="col" class="text-center">{{ $data->refBank->nama_bank }}</td>
                                         <td scope="col" class="text-center">{{ $data->nama_akun }}</td>
                                         <td scope="col" class="text-center">{{ $data->no_rekening }}</td>
                                         <td scope="col" class="text-center">
                                             <a href="{{ route('rekening.edit', $data->id) }}" class="btn btn-primary btn-sm m-1">Ubah</a>
                         
-                                            <form action="{{ route('rekening.destroy', $data->id) }}" method="POST" style="display:inline;">
+                                            <form id="deleteForm{{ $data->id }}" action="{{ route('rekening.destroy', $data->id) }}" method="POST" style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="button" class="btn btn-danger btn-sm m-1" onclick="deleteData({{ $data->id }})">Hapus</button>
@@ -268,7 +266,6 @@
                         
                         <script>
                             function deleteData(id) {
-                                // Menampilkan SweetAlert konfirmasi
                                 Swal.fire({
                                     title: 'Apakah Anda yakin?',
                                     text: 'Data ini akan dihapus secara permanen!',
@@ -280,12 +277,12 @@
                                     cancelButtonText: 'Batal'
                                 }).then((result) => {
                                     if (result.isConfirmed) {
-                                        // Jika user mengkonfirmasi, kirimkan form
                                         document.getElementById('deleteForm' + id).submit();
                                     }
                                 });
                             }
                         </script>
+                        
                         
                     </div>
                     <!-- Content Row -->

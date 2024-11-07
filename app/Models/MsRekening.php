@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class MsRekening extends Model
 {
     use HasFactory;
-    
+
     protected $table = 'ms_rekening';
     protected $fillable = ['id_ref_bank', 'nama_akun', 'no_rekening'];
 

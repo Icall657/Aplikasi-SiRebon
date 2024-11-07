@@ -228,29 +228,28 @@
                     <!-- Content Row -->
                     <div class="table-container">
                         <div class="d-flex justify-content-between align-items-center">
-                            <button class="btn btn-primary btn-add">Tambah Data</button>
+                            <a href="{{ route('wajib-retribusi.create') }}" class="btn btn-primary btn-add">Tambah
+                                Data</a>
                         </div>
 
                         <table class="table table-bordered mt-3">
                             <thead class="table-light">
                                 <tr>
                                     <th style="width: 50px;">No.</th>
-                                    <th>Nama lengkap</th>
-                                    <th>telpon</th>
-                                    <th>nik</th>
-                                    <th>alamat</th>
-                                    <th>kelurahan</th>
+                                    <th>Nama Lengkap</th>
+                                    <th>Telpon</th>
+                                    <th>NIK</th>
+                                    <th>Alamat</th>
+                                    <th>Kelurahan</th>
                                     <th style="width: 150px;">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    @php
-                                        $no = 1;
-                                    @endphp
-                                    @foreach (\App\Models\WajibRetribusi::whereHas('user', function ($query) {
-                                    $query->where('level', 'Wajib Retribusi');
-                                    })->get() as $wajib)
+                                @php
+                                    $no = 1;
+                                @endphp
+                                @foreach ($wajibRetribusi as $wajib)
+                                    <tr>
                                         <td>{{ $no++ }}</td>
                                         <td>{{ $wajib->nama }}</td>
                                         <td>{{ $wajib->no_hp }}</td>
@@ -258,14 +257,49 @@
                                         <td>{{ $wajib->alamat }}</td>
                                         <td>{{ $wajib->kelurahan }}</td>
                                         <td>
-                                            <button class="btn btn-primary btn-sm">Ubah</button>
-                                            <button class="btn btn-danger btn-sm">Hapus</button>
+                                            <!-- Membuat div flex untuk tombol -->
+                                            <div class="d-flex">
+                                                <!-- Tombol Edit yang mengarah ke halaman edit -->
+                                                <a href="{{ route('wajib-retribusi.edit', $wajib->id) }}"
+                                                    class="btn btn-primary btn-sm m-1">Ubah</a>
+
+                                                <!-- Tombol Hapus dengan form -->
+                                                <form id="deleteForm{{ $wajib->id }}"
+                                                    action="{{ route('wajib-retribusi.destroy', $wajib->id) }}"
+                                                    method="POST" style="display:inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="button" class="btn btn-danger btn-sm m-1"
+                                                        onclick="deleteData({{ $wajib->id }})">Hapus</button>
+                                                </form>
+                                            </div>
                                         </td>
-                                    @endforeach
-                                </tr>
-                                <!-- Repeat rows as needed -->
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
+
+                        <!-- Script untuk konfirmasi penghapusan -->
+                        <!-- Script untuk konfirmasi penghapusan menggunakan SweetAlert -->
+                        <script>
+                            function deleteData(id) {
+                                Swal.fire({
+                                    title: 'Apakah Anda yakin?',
+                                    text: 'Data ini akan dihapus secara permanen!',
+                                    icon: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#d33',
+                                    cancelButtonColor: '#3085d6',
+                                    confirmButtonText: 'Ya, hapus!',
+                                    cancelButtonText: 'Batal'
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        document.getElementById('deleteForm' + id).submit();
+                                    }
+                                });
+                            }
+                        </script>
+
                     </div>
                     <!-- ISI KONTEN -->
 
@@ -320,6 +354,7 @@
 
 
     <!-- Bootstrap core JavaScript-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 

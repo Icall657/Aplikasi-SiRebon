@@ -28,57 +28,56 @@
             <div class="col-md-10">
                 <div class="card profile-card">
                     <div class="card-body">
-                        <h5 class="card-title text-center">Ubah Rekening Pembayaran</h5>
+                        <h5 class="card-title text-center">Ubah Wajib Retribusi</h5>
                         <hr>
-                        <form action="{{ route('rekening.update', $data->id) }}" method="POST">
+                        <!-- Form untuk mengupdate Wajib Retribusi -->
+                        <form action="{{ route('wajib-retribusi.update', $wajib->id) }}" method="POST">
                             @csrf
-                            @method('PUT') <!-- Gunakan method PUT untuk update data -->
+                            @method('PUT') <!-- Menggunakan method PUT untuk update data -->
                     
                             <div class="form-group mb-3">
-                                <label for="id_ref_bank">Jenis Bank</label>
-                                <select name="id_ref_bank" id="id_ref_bank" class="form-control">
-                                    @foreach ($refBanks as $bank)
-                                        <option value="{{ $bank->id }}" {{ $data->id_ref_bank == $bank->id ? 'selected' : '' }}>
-                                            {{ $bank->nama_bank }}
-                                        </option>
-                                    @endforeach
-                                </select>
+                                <label for="nama">Nama Lengkap</label>
+                                <input type="text" name="nama" id="nama" class="form-control" value="{{ $wajib->nama }}" required>
                             </div>
                     
                             <div class="form-group mb-3">
-                                <label for="nama_akun">Nama Pemilik</label>
-                                <input type="text" name="nama_akun" id="nama_akun" class="form-control" value="{{ $data->nama_akun }}" required>
+                                <label for="no_hp">Nomor Telepon</label>
+                                <input type="text" name="no_hp" id="no_hp" class="form-control" value="{{ $wajib->no_hp }}" required>
                             </div>
                     
                             <div class="form-group mb-3">
-                                <label for="no_rekening">Nomor Rekening</label>
-                                <input type="text" name="no_rekening" id="no_rekening" class="form-control" value="{{ $data->no_rekening }}" required>
+                                <label for="nik">NIK</label>
+                                <input type="text" name="nik" id="nik" class="form-control" value="{{ $wajib->nik }}" required>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="alamat">Alamat</label>
+                                <textarea name="alamat" id="alamat" class="form-control" required>{{ $wajib->alamat }}</textarea>
+                            </div>
+                    
+                            <div class="form-group mb-3">
+                                <label for="kelurahan">Kelurahan</label>
+                                <input type="text" name="kelurahan" id="kelurahan" class="form-control" value="{{ $wajib->kelurahan }}" required>
                             </div>
                     
                             <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-                            <a href="{{ route('rekening.index') }}" class="btn btn-secondary">Batal</a>
+                            <a href="{{ route('wajib-retribusi.index') }}" class="btn btn-secondary">Batal</a>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
+    <!-- Skrip Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
+    <!-- Skrip plugin dan kustom lainnya -->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
-
-    <!-- Page level plugins -->
     <script src="vendor/chart.js/Chart.min.js"></script>
-
-    <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
 </body>
