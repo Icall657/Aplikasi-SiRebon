@@ -245,13 +245,18 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    @foreach (auth()->user()->wajibRetribusi as $wajib)
-                                        <td>{{ $wajib->id }}</td>
+                                    @php
+                                        $no = 1;
+                                    @endphp
+                                    @foreach (\App\Models\WajibRetribusi::whereHas('user', function ($query) {
+                                    $query->where('level', 'Wajib Retribusi');
+                                    })->get() as $wajib)
+                                        <td>{{ $no++ }}</td>
                                         <td>{{ $wajib->nama }}</td>
                                         <td>{{ $wajib->no_hp }}</td>
                                         <td>{{ $wajib->nik }}</td>
                                         <td>{{ $wajib->alamat }}</td>
-                                        <td>pancalang</td>
+                                        <td>{{ $wajib->kelurahan }}</td>
                                         <td>
                                             <button class="btn btn-primary btn-sm">Ubah</button>
                                             <button class="btn btn-danger btn-sm">Hapus</button>

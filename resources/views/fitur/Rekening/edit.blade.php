@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Tambah Rekening Pembayaran SiRebon</title>
+    <title>Ubah Rekening Pembayaran SiRebon</title>
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -30,39 +30,33 @@
                     <div class="card-body">
                         <h5 class="card-title text-center">Tambah Rekening Pembayaran</h5>
                         <hr>
-                        <form action="{{ route('rekening.store') }}" method="POST">
+                        <form action="{{ route('rekening.update', $data->id) }}" method="POST">
                             @csrf
-                            <!-- Pilih Bank -->
-                            <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label" for="id_ref_bank">Nama Bank</label>
-                                <div class="col-sm-9">
-                                    <select name="id_ref_bank" id="id_ref_bank" class="form-select">
-                                        @foreach ($refBanks as $bank)
-                                            <option value="{{ $bank->id }}">{{ $bank->nama_bank }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                            @method('PUT') <!-- Gunakan method PUT untuk update data -->
+                    
+                            <div class="form-group mb-3">
+                                <label for="id_ref_bank">Jenis Bank</label>
+                                <select name="id_ref_bank" id="id_ref_bank" class="form-control">
+                                    @foreach ($refBanks as $bank)
+                                        <option value="{{ $bank->id }}" {{ $data->id_ref_bank == $bank->id ? 'selected' : '' }}>
+                                            {{ $bank->nama_bank }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
-
-                            <!-- Nama Akun -->
-                            <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label">Nama Akun</label>
-                                <div class="col-sm-9">
-                                    <input type="text" name="nama_akun" class="form-control" required autocomplete="off">
-                                </div>
+                    
+                            <div class="form-group mb-3">
+                                <label for="nama_akun">Nama Pemilik</label>
+                                <input type="text" name="nama_akun" id="nama_akun" class="form-control" value="{{ $data->nama_akun }}" required>
                             </div>
-
-                            <!-- Nomor Rekening -->
-                            <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label">Nomor Rekening</label>
-                                <div class="col-sm-9">
-                                    <input type="text" name="no_rekening" class="form-control" required autocomplete="off">
-                                </div>
+                    
+                            <div class="form-group mb-3">
+                                <label for="no_rekening">Nomor Rekening</label>
+                                <input type="text" name="no_rekening" id="no_rekening" class="form-control" value="{{ $data->no_rekening }}" required>
                             </div>
-
-                            <!-- Tombol Simpan -->
-                            <button type="submit" class="btn btn-primary mt-4">Simpan</button>
-                            <a href="javascript:history.back()" class="btn btn-secondary mt-4">Kembali</a>
+                    
+                            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                            <a href="{{ route('rekening.index') }}" class="btn btn-secondary">Batal</a>
                         </form>
                     </div>
                 </div>

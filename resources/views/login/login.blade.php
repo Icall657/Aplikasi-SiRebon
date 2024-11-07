@@ -42,14 +42,40 @@
                               </div>
           
                               <div class="form-outline mb-4">
-                                  <div style="text-align: left;">
-                                      <label class="form-label">Password</label>
-                                  </div>
-                                  <div style="position: relative;" size="30">
-                                      <i class="fa fa-lock" style="position: absolute; left: 10px; top: 10px; color: #888;"></i>
-                                      <input type="password" name="password" autocomplete="off" class="form-control form-control-lg" placeholder="Masukkan password" size="30" style="padding-left: 30px; height: 40px;" />
-                                  </div>
-                              </div>
+                                <div style="text-align: left;">
+                                    <label class="form-label">Password</label>
+                                </div>
+                                <div style="position: relative;" size="30">
+                                    <!-- Ikon lock dan ikon mata -->
+                                    <i class="fa fa-lock" style="position: absolute; left: 10px; top: 10px; color: #888;"></i>
+                                    
+                                    <!-- Input Password -->
+                                    <input id="password" type="password" name="password" autocomplete="off" class="form-control form-control-lg" placeholder="Masukkan password" size="30" style="padding-left: 30px; height: 40px;" />
+                            
+                                    <!-- Tombol Mata -->
+                                    <i id="togglePassword" class="fa fa-eye" style="position: absolute; right: 10px; top: 10px; cursor: pointer; color: #888;"></i>
+                                </div>
+                            </div>
+                            
+                            <!-- Menambahkan SweetAlert (Optional) -->
+                            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                            
+                            <script>
+                                // JavaScript untuk toggle password visibility
+                                const togglePassword = document.getElementById('togglePassword');
+                                const password = document.getElementById('password');
+                            
+                                togglePassword.addEventListener('click', function (e) {
+                                    // Toggle tipe input password
+                                    const type = password.type === 'password' ? 'text' : 'password';
+                                    password.type = type;
+                            
+                                    // Toggle ikon mata
+                                    this.classList.toggle('fa-eye');
+                                    this.classList.toggle('fa-eye-slash');
+                                });
+                            </script>
+                            
                                 <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
                             </form>
                         

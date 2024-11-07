@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,59 +41,58 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            @if (auth()->user()->level == "Admin Aplikasi")
-            <hr class="sidebar-divider my-0">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('home.index') }}">
-                    <i class="fa fa-home"></i>
-                    <span>beranda</span></a>
-            </li>
+            @if (auth()->user()->level == 'Admin Aplikasi')
+                <hr class="sidebar-divider my-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('home.index') }}">
+                        <i class="fa fa-home"></i>
+                        <span>beranda</span></a>
+                </li>
 
-            <hr class="sidebar-divider my-0">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('rekening.index') }}">
-                    <i class="fa fa-credit-card"></i>
-                    <span>Rekening Pembayaran Retribusi</span></a>
-            </li>
+                <hr class="sidebar-divider my-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('rekening.index') }}">
+                        <i class="fa fa-credit-card"></i>
+                        <span>Rekening Pembayaran Retribusi</span></a>
+                </li>
 
-            <hr class="sidebar-divider my-0">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('wajib-retribusi.index') }}">
-                    <i class="fa fa-anchor"></i>
-                    <span>Wajib Retribusi</span></a>
-            </li>
+                <hr class="sidebar-divider my-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('wajib-retribusi.index') }}">
+                        <i class="fa fa-anchor"></i>
+                        <span>Wajib Retribusi</span></a>
+                </li>
 
-            <hr class="sidebar-divider my-0">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('pembayaran-retribusi.index') }}">
-                    <i class="fa fa-dollar-sign"></i>
-                    <span>Pembayaran Retribusi</span></a>
-            </li>
+                <hr class="sidebar-divider my-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('pembayaran-retribusi.index') }}">
+                        <i class="fa fa-dollar-sign"></i>
+                        <span>Pembayaran Retribusi</span></a>
+                </li>
             @endif
 
             <!-- Divider -->
-            @if (auth()->user()->level == "Wajib Retribusi")
-            <hr class="sidebar-divider my-0">
-            <li class="nav-item  active">
-                <a class="nav-link" href="{{ route('profil.index') }}">
-                    <i class="fa fa-address-card"></i>
-                    <span>Profil</span></a>
-            </li>
+            @if (auth()->user()->level == 'Wajib Retribusi')
+                <hr class="sidebar-divider my-0">
+                <li class="nav-item  active">
+                    <a class="nav-link" href="{{ route('profil.index') }}">
+                        <i class="fa fa-address-card"></i>
+                        <span>Profil</span></a>
+                </li>
 
-            <hr class="sidebar-divider">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('kapalku.index') }}">
-                    <i class="fa fa-ship"></i>
-                    <span>Kapalku</span></a>
-            </li>
+                <hr class="sidebar-divider">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('kapalku.index') }}">
+                        <i class="fa fa-ship"></i>
+                        <span>Kapalku</span></a>
+                </li>
 
-            <hr class="sidebar-divider">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('konfirmasi.index') }}">
-                    <i class="fa fa-check-circle"></i>
-                    <span>Konfirmasi Pembayaran Retribusi</span></a>
-            </li>
-
+                <hr class="sidebar-divider">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('konfirmasi.index') }}">
+                        <i class="fa fa-check-circle"></i>
+                        <span>Konfirmasi Pembayaran Retribusi</span></a>
+                </li>
             @endif
             <hr class="sidebar-divider">
             <li class="nav-item">
@@ -154,8 +152,8 @@
                     <form
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
+                            <input type="text" class="form-control bg-light border-0 small"
+                                placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="button">
                                     <i class="fas fa-search fa-sm"></i>
@@ -191,7 +189,7 @@
                             </div>
                         </li>
 
-                      <!--  ISI NAVBAR SEPERTI NOTIF DLL -->
+                        <!--  ISI NAVBAR SEPERTI NOTIF DLL -->
 
                         <div class="topbar-divider d-none d-sm-block"></div>
 
@@ -199,15 +197,16 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->level }}</span>
-                                <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                <span
+                                    class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->level }}</span>
+                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
                                 <!--- <div class="dropdown-divider"></div> -->
-                                <a class="dropdown-item" href="" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="" data-toggle="modal"
+                                    data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -225,199 +224,243 @@
                     <!-- Content Row -->
                     <div class="row">
 
-                        
+
                     </div>
                     <div class="form-container">
                         <form method="POST" action="{{ route('profil.update', ['profil' => Auth::user()->id]) }}">
                             @csrf
                             @method('PUT') <!-- Mengubah metode POST menjadi PUT -->
-                            
+
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="username">Username</label>
-                                    <input type="text" class="form-control" id="username" name="username" value="{{ auth()->user()->username }}">
+                                    <input type="text" class="form-control" id="username" name="username"
+                                        value="{{ auth()->user()->username }}">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="hakakses">Hak Akses</label>
-                                    <input type="text" class="form-control" id="hakakses" value="{{ auth()->user()->level }}" readonly>
+                                    <input type="text" class="form-control" id="hakakses"
+                                        value="{{ auth()->user()->level }}" readonly>
                                 </div>
                             </div>
-                        
-                            @foreach(auth()->user()->wajibRetribusi as $wajib)
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="nik">NIK</label>
-                                    <input type="text" class="form-control" id="nik" name="nik" value="{{ $wajib->nik }}">
+
+                            @foreach (auth()->user()->wajibRetribusi as $wajib)
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="nik">NIK</label>
+                                        <input type="text" class="form-control" id="nik" name="nik"
+                                            value="{{ $wajib->nik }}">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="namaLengkap">Nama Lengkap</label>
+                                        <input type="text" class="form-control" id="namaLengkap"
+                                            name="namaLengkap" value="{{ $wajib->nama }}">
+                                    </div>
                                 </div>
-                                <div class="form-group col-md-6">
-                                    <label for="namaLengkap">Nama Lengkap</label>
-                                    <input type="text" class="form-control" id="namaLengkap" name="namaLengkap" value="{{ $wajib->nama }}">
+
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="telepon">Telepon</label>
+                                        <input type="text" class="form-control" id="telepon" name="telepon"
+                                            value="{{ $wajib->no_hp }}">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="alamat">Alamat</label>
+                                        <input type="text" class="form-control" id="alamat" name="alamat"
+                                            value="{{ $wajib->alamat }}">
+                                    </div>
                                 </div>
-                            </div>
-                        
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="telepon">Telepon</label>
-                                    <input type="text" class="form-control" id="telepon" name="telepon" value="{{ $wajib->no_hp }}">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="alamat">Alamat</label>
-                                    <input type="text" class="form-control" id="alamat" name="alamat" value="{{ $wajib->alamat }}">
-                                </div>
-                            </div>
                             @endforeach
-                        
+
                             <button type="submit" name="save" class="btn btn-primary mt-1">Simpan</button>
                         </form>
-                        
+
                     </div>
-                    
-                            <br>
+
+                    <br>
 
 
                     <!-- Content Row -->
-                        
-                        <!-- Form untuk mengganti password -->
-                        <form action="{{ route('gantiPassword') }}" method="post" autocomplete="off">
-                            @csrf
-                            @if (session('status'))
-                                <div class="alert alert-success">{{ session('status') }}</div>
-                            @elseif (session('error'))
-                                <div class="alert alert-danger">{{ session('error') }}</div>    
-                            @endif
 
-                            <div class="form-group">
-                                <label>Password Lama</label>
-                                <input type="password" name="old_password" class="form-control" required autocomplete="off">
+                    <!-- form untuk mengganti password -->
+                    <form action="{{ route('gantiPassword') }}" method="post" autocomplete="off">
+                        @csrf
+                        @if (session('status'))
+                            <div class="alert alert-success">{{ session('status') }}</div>
+                        @elseif (session('error'))
+                            <div class="alert alert-danger">{{ session('error') }}</div>
+                        @endif
+
+                        <div class="form-group" style="position: relative;">
+                            <label>Password Lama</label>
+                            <input type="password" name="old_password" class="form-control" id="old_password"
+                                required autocomplete="off">
+                            <i id="toggleOldPassword" class="fa fa-eye"
+                                style="position: absolute; right: 10px; top: 43px; cursor: pointer; color: #888;"></i>
+                        </div>
+
+                        <div class="form-group" style="position: relative;">
+                            <label>Password Baru</label>
+                            <input type="password" name="new_password" class="form-control" id="new_password"
+                                required>
+                            <i id="toggleNewPassword" class="fa fa-eye"
+                                style="position: absolute; right: 10px; top: 43px; cursor: pointer; color: #888;"></i>
+                            <div id="password-warning" class="text-danger" style="display: none;">
+                                <small>Password harus memiliki minimal 8 karakter, termasuk huruf besar, huruf kecil,
+                                    dan angka.</small>
                             </div>
-                            
-                            <div class="form-group">
-                                <label>Password Baru</label>
-                                <input type="password" name="new_password" class="form-control" id="new_password" required>
-                                <div id="password-warning" class="text-danger" style="display: none;">
-                                    <small>Password harus memiliki minimal 8 karakter, termasuk huruf besar, huruf kecil, dan angka.</small>
-                                </div>
+                        </div>
+
+                        <div class="form-group" style="position: relative;">
+                            <label>Konfirmasi Password Baru</label>
+                            <input type="password" name="password_confirmation" class="form-control"
+                                id="password_confirmation" required>
+                            <i id="toggleConfirmPassword" class="fa fa-eye"
+                                style="position: absolute; right: 10px; top: 43px; cursor: pointer; color: #888;"></i>
+                            <div id="confirmation-warning" class="text-danger" style="display: none;">
+                                <small>Password baru dan konfirmasi tidak cocok.</small>
                             </div>
-                            
-                            <div class="form-group">
-                                <label>Konfirmasi Password Baru</label>
-                                <input type="password" name="password_confirmation" class="form-control" id="password_confirmation" required>
-                                <div id="confirmation-warning" class="text-danger" style="display: none;">
-                                    <small>Password baru dan konfirmasi tidak cocok.</small>
-                                </div>
-                            </div>
-                            
-                            <button type="submit" name="gantipassword" class="btn btn-primary mt-3" id="submit-btn" disabled>Ganti Password</button>
-                            
-                            <script>
-                                // ambil elemen input password dan elemen peringatan
-                                const passwordInput = document.getElementById('new_password');
-                                const passwordWarning = document.getElementById('password-warning');
-                                const confirmationInput = document.getElementById('password_confirmation');
-                                const confirmationWarning = document.getElementById('confirmation-warning');
-                                const submitBtn = document.getElementById('submit-btn');
-                            
-                                // fungsi untuk mengecek panjang password
-                                passwordInput.addEventListener('input', function() {
-                                    const passwordLength = passwordInput.value.length;
-                            
-                                    // jika password lebih pendek dari 8 karakter, tampilkan peringatan
-                                    if (passwordLength < 8) {
-                                        passwordWarning.style.display = 'block';
-                                        submitBtn.disabled = true; // mematikan tombol submit
-                                    } else {
-                                        passwordWarning.style.display = 'none'; // menyembunyikan peringatan
-                                        submitBtn.disabled = false; // mengaktifkan tombol submit
-                                    }
-                                    
-                                    // cek jika password dan konfirmasi cocok
-                                    checkPasswordMatch();
-                                });
-                            
-                                // fungsi untuk mengecek apakah password baru dan konfirmasi cocok
-                                confirmationInput.addEventListener('input', checkPasswordMatch);
-                            
-                                function checkPasswordMatch() {
-                                    if (passwordInput.value !== confirmationInput.value) {
-                                        confirmationWarning.style.display = 'block'; // menampilkan peringatan jika tidak cocok
-                                        submitBtn.disabled = true; // menonaktifkan tombol jika tidak cocok
-                                    } else {
-                                        confirmationWarning.style.display = 'none'; // menyembunyikan peringatan jika cocok
-                                        if (passwordInput.value.length >= 8) {
-                                            submitBtn.disabled = false; // mengsktifkan tombol jika password valid
-                                        }
-                                    }
+                        </div>
+
+                        <button type="submit" name="gantipassword" class="btn btn-primary mt-3" id="submit-btn"
+                            disabled>Ganti Password</button>
+                    </form>
+
+                    <script>
+                        // mwnambahkan fungsi toggle password visibility
+                        const toggleOldPassword = document.getElementById('toggleOldPassword');
+                        const oldPasswordInput = document.getElementById('old_password');
+
+                        toggleOldPassword.addEventListener('click', function() {
+                            const type = oldPasswordInput.type === 'password' ? 'text' : 'password';
+                            oldPasswordInput.type = type;
+                            this.classList.toggle('fa-eye');
+                            this.classList.toggle('fa-eye-slash');
+                        });
+
+                        const toggleNewPassword = document.getElementById('toggleNewPassword');
+                        const newPasswordInput = document.getElementById('new_password');
+
+                        toggleNewPassword.addEventListener('click', function() {
+                            const type = newPasswordInput.type === 'password' ? 'text' : 'password';
+                            newPasswordInput.type = type;
+                            this.classList.toggle('fa-eye');
+                            this.classList.toggle('fa-eye-slash');
+                        });
+
+                        const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+                        const confirmPasswordInput = document.getElementById('password_confirmation');
+
+                        toggleConfirmPassword.addEventListener('click', function() {
+                            const type = confirmPasswordInput.type === 'password' ? 'text' : 'password';
+                            confirmPasswordInput.type = type;
+                            this.classList.toggle('fa-eye');
+                            this.classList.toggle('fa-eye-slash');
+                        });
+
+                        //validasi password
+                        const passwordInput = document.getElementById('new_password');
+                        const passwordWarning = document.getElementById('password-warning');
+                        const confirmationInput = document.getElementById('password_confirmation');
+                        const confirmationWarning = document.getElementById('confirmation-warning');
+                        const submitBtn = document.getElementById('submit-btn');
+
+                        passwordInput.addEventListener('input', function() {
+                            const passwordLength = passwordInput.value.length;
+
+                            if (passwordLength < 8) {
+                                passwordWarning.style.display = 'block';
+                                submitBtn.disabled = true; // mematikan tombol submit
+                            } else {
+                                passwordWarning.style.display = 'none';
+                                submitBtn.disabled = false;
+                            }
+
+                            checkPasswordMatch();
+                        });
+
+                        confirmationInput.addEventListener('input', checkPasswordMatch);
+
+                        function checkPasswordMatch() {
+                            if (passwordInput.value !== confirmationInput.value) {
+                                confirmationWarning.style.display = 'block';
+                                submitBtn.disabled = true;
+                            } else {
+                                confirmationWarning.style.display = 'none';
+                                if (passwordInput.value.length >= 8) {
+                                    submitBtn.disabled = false;
                                 }
-                            </script>
-                            
-                        </form>
-                    
+                            }
+                        }
+                    </script>
+
+
                 </div>
                 <br>
                 <!-- /.container-fluid -->
 
-            <!-- End of Main Content -->
+                <!-- End of Main Content -->
 
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>2024 &copy; SiRebon. Dinas Komunikasi, Informatika & Statistik.</span>
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>2024 &copy; SiRebon. Dinas Komunikasi, Informatika & Statistik.</span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- End of Footer -->
+
+            </div>
+            <!-- End of Content Wrapper -->
+
+        </div>
+        <!-- End of Page Wrapper -->
+
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Anda Yakin?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Klik "Logout" Jika Anda Yakin Ingin Keluar</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="{{ route('logout') }}">Logout</a>
                     </div>
                 </div>
-            </footer>
-            <!-- End of Footer -->
-
-        </div>
-        <!-- End of Content Wrapper -->
-
-    </div>
-    <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Anda Yakin?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Klik "Logout" Jika Anda Yakin Ingin Keluar</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="{{ route ('logout') }}">Logout</a>
             </div>
         </div>
-    </div>
-</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!-- Bootstrap core JavaScript-->
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+        <!-- Core plugin JavaScript-->
+        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+        <!-- Custom scripts for all pages-->
+        <script src="js/sb-admin-2.min.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
+        <!-- Page level plugins -->
+        <script src="vendor/chart.js/Chart.min.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
-    <!-- update password -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!-- Page level custom scripts -->
+        <script src="js/demo/chart-area-demo.js"></script>
+        <script src="js/demo/chart-pie-demo.js"></script>
+        <!-- update password -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 </body>
