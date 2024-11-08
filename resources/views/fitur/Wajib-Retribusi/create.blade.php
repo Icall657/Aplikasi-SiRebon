@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ubah Rekening Pembayaran SiRebon</title>
+    <title>Tambah Wajib Retribusi SiRebon</title>
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -30,48 +30,62 @@
                     <div class="card-body">
                         <h5 class="card-title text-center">Tambah Wajib Retribusi</h5>
                         <hr>
-                        <!-- Form untuk menambah data Wajib Retribusi -->
+                        <!-- Form untuk menambah data Wajib Retribusi dan Users -->
                         <form action="{{ route('wajib-retribusi.store') }}" method="POST">
                             @csrf
-                            
+                            <div class="form-group mb-3">
+                                <label for="username">Username</label>
+                                <input type="text" name="username" id="username" class="form-control" value="{{ old('username') }}" placeholder="Masukkan Username" required autocomplete="off">
+                                @error('username') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="email">Email</label>
+                                <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}" placeholder="Masukkan Email" required autocomplete="off">
+                                @error('email') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="password">Password</label>
+                                <input type="password" name="password" id="password" class="form-control" placeholder="Masukkan Password" required autocomplete="off">
+                                @error('password') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
                             <div class="form-group mb-3">
                                 <label for="nama">Nama Lengkap</label>
-                                <input type="text" name="nama" id="nama" class="form-control" value="{{ old('nama') }}" required>
+                                <input type="text" name="nama" id="nama" class="form-control" value="{{ old('nama') }}" placeholder="Masukkan Nama Lengkap" required autocomplete="off">
                                 @error('nama') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
-                    
                             <div class="form-group mb-3">
                                 <label for="no_hp">Nomor Telepon</label>
-                                <input type="text" name="no_hp" id="no_hp" class="form-control" value="{{ old('no_hp') }}" required>
+                                <input type="text" name="no_hp" id="no_hp" class="form-control" value="{{ old('no_hp') }}" placeholder="Masukkan Nomor Telepon" required autocomplete="off">
                                 @error('no_hp') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
-                    
                             <div class="form-group mb-3">
                                 <label for="nik">NIK</label>
-                                <input type="text" name="nik" id="nik" class="form-control" value="{{ old('nik') }}" required>
+                                <input type="text" name="nik" id="nik" class="form-control" value="{{ old('nik') }}" placeholder="Masukkan NIK" required autocomplete="off">
                                 @error('nik') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
-
                             <div class="form-group mb-3">
                                 <label for="alamat">Alamat</label>
-                                <textarea name="alamat" id="alamat" class="form-control" required>{{ old('alamat') }}</textarea>
+                                <textarea name="alamat" id="alamat" class="form-control" placeholder="Masukkan Alamat" required autocomplete="off">{{ old('alamat') }}</textarea>
                                 @error('alamat') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
-                    
                             <div class="form-group mb-3">
                                 <label for="kelurahan">Kelurahan</label>
-                                <input type="text" name="kelurahan" id="kelurahan" class="form-control" value="{{ old('kelurahan') }}" required>
+                                <input type="text" name="kelurahan" id="kelurahan" class="form-control" value="{{ old('kelurahan') }}" placeholder="Masukkan Kelurahan" required autocomplete="off">
                                 @error('kelurahan') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
-                    
+                        
                             <button type="submit" class="btn btn-primary">Simpan Data</button>
                             <a href="{{ route('wajib-retribusi.index') }}" class="btn btn-secondary">Batal</a>
                         </form>
+                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
+    <!-- Skrip Bootstrap dan tambahan lainnya tetap sama seperti di atas -->
+    
 
     <!-- Skrip Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

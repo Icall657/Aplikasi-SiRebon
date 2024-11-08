@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\User;
 use App\Models\WajibRetribusi;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class WajibController extends Controller
 {
@@ -28,13 +32,27 @@ class WajibController extends Controller
         $wajib->update($request->all()); // Menyimpan data yang telah diperbarui
         return redirect()->route('wajib-retribusi.index')->with('success', 'Data berhasil diubah.');
     }
-
+    
     public function destroy($id)
     {
-        $wajib = WajibRetribusi::findOrFail($id);
-        $wajib->delete(); // Menghapus data
-        return response()->json(['message' => 'Data berhasil dihapus']);
+        DB::beginTransaction();
+        try {
+            $wajib = WajibRetribusi::findOrFail($id);
+            $user = $wajib->user;
+            $wajib->delete();
+            if ($user) {
+                $user->delete();
+            }
+
+            DB::commit();
+
+            return redirect()->route('wajib-retribusi.index')->with('success', 'Data berhasil dihapus');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->route('wajib-retribusi.index')->with('error', 'Terjadi kesalahan saat menghapus data');
+        }
     }
+
 
     public function create()
     {
@@ -44,26 +62,47 @@ class WajibController extends Controller
     // Menyimpan data Wajib Retribusi yang baru
     public function store(Request $request)
     {
-        // Validasi data
+        Log::info('Data input:', $request->all());
+
         $request->validate([
+            'username' => 'required|string|max:255|unique:users',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8',
             'nama' => 'required|string|max:255',
             'no_hp' => 'required|string|max:15',
             'nik' => 'required|string|max:16',
-            'alamat' => 'required|string',
+            'alamat' => 'required|string|max:255',
             'kelurahan' => 'required|string|max:255',
         ]);
 
-        // Menyimpan data ke database
-        WajibRetribusi::create([
-            'nama' => $request->nama,
-            'no_hp' => $request->no_hp,
-            'nik' => $request->nik,
-            'alamat' => $request->alamat,
-            'kelurahan' => $request->kelurahan,
-            'id_user' => auth()->user()->id,
-        ]);
+        DB::beginTransaction();
 
-        // Redirect ke halaman index dengan pesan sukses
-        return redirect()->route('wajib-retribusi.index')->with('success', 'Data berhasil ditambahkan.');
+        try {
+            $user = User::create([
+                'username' => $request->username,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'level' => 'Wajib Retribusi',
+            ]);
+
+            WajibRetribusi::create([
+                'id_user' => $user->id,
+                'nama' => $request->nama,
+                'no_hp' => $request->no_hp,
+                'nik' => $request->nik,
+                'alamat' => $request->alamat,
+                'kelurahan' => $request->kelurahan,
+            ]);
+
+            DB::commit();
+
+            Log::info('Data berhasil disimpan.');
+
+            return redirect()->route('wajib-retribusi.index')->with('success', 'Data berhasil ditambahkan.');
+        } catch (\Exception $e) {
+            DB::rollback();
+            Log::error('Error saat menyimpan data:', ['error' => $e->getMessage()]);
+            return redirect()->back()->with('error', 'Terjadi kesalahan saat menambah data.');
+        }
     }
 }
