@@ -9,7 +9,9 @@ class WajibController extends Controller
 {
     public function index()
     {
-        $wajibRetribusi = WajibRetribusi::where('id_user', auth()->user()->id)->get();
+        $wajibRetribusi = WajibRetribusi::whereHas('user', function ($query) {
+            $query->where('level', 'Wajib Retribusi');
+        })->get();
         return view('fitur.wajibretribusi', compact('wajibRetribusi')); // Mengirim data ke view
     }
 
