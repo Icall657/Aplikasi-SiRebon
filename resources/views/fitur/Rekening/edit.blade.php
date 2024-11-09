@@ -32,8 +32,7 @@
                         <hr>
                         <form action="{{ route('rekening.update', $data->id) }}" method="POST">
                             @csrf
-                            @method('PUT') <!-- Gunakan method PUT untuk update data -->
-                    
+                            @method('PUT') <!-- menggunakan method PUT untuk update data -->
                             <div class="form-group mb-3">
                                 <label for="id_ref_bank">Jenis Bank</label>
                                 <select name="id_ref_bank" id="id_ref_bank" class="form-control">

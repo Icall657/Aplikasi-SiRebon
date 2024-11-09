@@ -257,13 +257,9 @@
                                         <td>{{ $wajib->alamat }}</td>
                                         <td>{{ $wajib->kelurahan }}</td>
                                         <td>
-                                            <!-- Membuat div flex untuk tombol -->
                                             <div class="d-flex">
-                                                <!-- Tombol Edit yang mengarah ke halaman edit -->
                                                 <a href="{{ route('wajib-retribusi.edit', $wajib->id) }}"
                                                     class="btn btn-primary btn-sm m-1">Ubah</a>
-
-                                                <!-- Tombol Hapus dengan form -->
                                                 <form id="deleteForm{{ $wajib->id }}"
                                                     action="{{ route('wajib-retribusi.destroy', $wajib->id) }}"
                                                     method="POST" style="display:inline;">
@@ -278,9 +274,6 @@
                                 @endforeach
                             </tbody>
                         </table>
-
-                        <!-- Script untuk konfirmasi penghapusan -->
-                        <!-- Script untuk konfirmasi penghapusan menggunakan SweetAlert -->
                         <script>
                             function deleteData(id) {
                                 Swal.fire({

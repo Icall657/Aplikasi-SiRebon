@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Tambah Rekening Pembayaran SiRebon</title>
+    <title>Tambah Kapal Wajib Retribusi SiRebon</title>
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -28,47 +28,60 @@
             <div class="col-md-10">
                 <div class="card profile-card">
                     <div class="card-body">
-                        <h5 class="card-title text-center">Tambah Rekening Pembayaran</h5>
+                        @if (session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+                        <h5 class="card-title text-center">Tambah Kapal Wajib Retribusi</h5>
                         <hr>
-                        <form action="{{ route('rekening.store') }}" method="POST">
+                        <form action="{{ route('kapal-wajib-retribusi.store') }}" method="POST">
                             @csrf
                             <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label" for="id_ref_bank">Nama Bank</label>
+                                <label class="col-sm-3 col-form-label" for="id_user">Nama Pemilik</label>
                                 <div class="col-sm-9">
-                                    <select name="id_ref_bank" id="id_ref_bank" class="form-select">
-                                        @foreach ($refBanks as $bank)
-                                            <option value="{{ $bank->id }}">{{ $bank->nama_bank }}</option>
+                                    <select name="id_user" id="id_user" class="form-select" required>
+                                        @foreach ($users as $user)
+                                            <option value="{{ $user->id }}">{{ $user->username }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
-
-                            <!-- Nama Akun -->
                             <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label">Nama Akun</label>
+                                <label class="col-sm-3 col-form-label">Nama Kapal</label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="nama_akun" class="form-control" required autocomplete="off">
+                                    <input type="text" name="nama_kapal" class="form-control" required
+                                        autocomplete="off">
                                 </div>
                             </div>
-
-                            <!-- Nomor Rekening -->
                             <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label">Nomor Rekening</label>
+                                <label class="col-sm-3 col-form-label" for="id_jenis_kapal">Jenis Kapal</label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="no_rekening" class="form-control" required autocomplete="off">
+                                    <select name="id_jenis_kapal" id="id_jenis_kapal" class="form-select" required>
+                                        @foreach ($refJenisKapals as $jenisKapal)
+                                            <option value="{{ $jenisKapal->id }}">{{ $jenisKapal->jenis_kapal }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
-
-                            <!-- Tombol Simpan -->
+                            <div class="row mb-3">
+                                <label class="col-sm-3 col-form-label">Ukuran</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="ukuran" class="form-control" required
+                                        autocomplete="off">
+                                </div>
+                            </div>
                             <button type="submit" class="btn btn-primary mt-4">Simpan</button>
-                            <a href="{{ route('rekening.index') }}" class="btn btn-secondary mt-4">Kembali</a>
+                            <a href="{{ route('kapal-wajib-retribusi.index') }}"
+                                class="btn btn-secondary mt-4">Kembali</a>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>

@@ -31,7 +31,6 @@
                     <div class="card-body">
                         <h5 class="card-title text-center">Tambah Wajib Retribusi</h5>
                         <hr>
-                        <!-- Form untuk menambah data Wajib Retribusi dan Users -->
                         <form action="{{ route('wajib-retribusi.store') }}" method="POST">
                             @csrf
                             <div class="form-group mb-3">
@@ -89,8 +88,6 @@
                             }
                         }
                         </script>
-                        
-                        
                     </div>
                 </div>
             </div>

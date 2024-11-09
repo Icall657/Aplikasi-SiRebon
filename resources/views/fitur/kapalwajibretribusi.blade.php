@@ -231,7 +231,8 @@
                     <div class="table-container">
                         @if (auth()->user()->level == 'Admin Aplikasi')
                             <div class="d-flex justify-content-between align-items-center">
-                                <button class="btn btn-primary btn-add">Tambah Data</button>
+                                <a href="{{ route('kapal-wajib-retribusi.create') }}"
+                                    class="btn btn-primary btn-add">Tambah Data</a>
                             </div>
                         @endif
                         <table class="table table-bordered mt-3">
@@ -241,6 +242,7 @@
                                     <th>Nama Pemilik</th>
                                     <th>Nama Kapal</th>
                                     <th>Jenis Kapal</th>
+                                    <th>Ukuran</th>
                                     @if (auth()->user()->level == 'Admin Aplikasi')
                                         <th style="width: 150px;">Aksi</th>
                                     @endif
@@ -253,18 +255,46 @@
                                         <td>{{ $kapal->user->username ?? 'Tidak ada pemilik' }}</td>
                                         <td>{{ $kapal->nama_kapal }}</td>
                                         <td>{{ $kapal->jenisKapal->jenis_kapal ?? 'Jenis kapal tidak ditemukan' }}</td>
+                                        <td>{{ $kapal->ukuran }}</td>
                                         @if (auth()->user()->level == 'Admin Aplikasi')
                                             <td>
                                                 <button class="btn btn-primary btn-sm">Ubah</button>
-                                                <button class="btn btn-danger btn-sm">Hapus</button>
+                                                <form id="deleteForm{{ $kapal->id }}"
+                                                    action="{{ route('kapal-wajib-retribusi.destroy', $kapal->id) }}"
+                                                    method="POST" style="display:inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="button" class="btn btn-danger btn-sm"
+                                                        onclick="deleteData({{ $kapal->id }})">Hapus</button>
+                                                </form>
                                             </td>
                                         @endif
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
+                        <script>
+                            function deleteData(id) {
+                                Swal.fire({
+                                    title: 'Apakah Anda yakin?',
+                                    text: 'Data ini akan dihapus secara permanen!',
+                                    icon: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#d33',
+                                    cancelButtonColor: '#3085d6',
+                                    confirmButtonText: 'Ya, hapus!',
+                                    cancelButtonText: 'Batal'
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        // Submit form jika konfirmasi diterima
+                                        document.getElementById('deleteForm' + id).submit();
+                                    }
+                                });
+                            }
+                        </script>
+
                     </div>
-                    
+
                     <!-- Content Row -->
 
                 </div>
@@ -316,6 +346,8 @@
 
 
     <!-- Bootstrap core JavaScript-->
+    <!-- SweetAlert2 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 

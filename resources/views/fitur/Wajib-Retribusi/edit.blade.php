@@ -30,11 +30,9 @@
                     <div class="card-body">
                         <h5 class="card-title text-center">Ubah Wajib Retribusi</h5>
                         <hr>
-                        <!-- Form untuk mengupdate Wajib Retribusi -->
                         <form action="{{ route('wajib-retribusi.update', $wajib->id) }}" method="POST">
                             @csrf
-                            @method('PUT') <!-- Menggunakan method PUT untuk update data -->
-                    
+                            @method('PUT')
                             <div class="form-group mb-3">
                                 <label for="nama">Nama Lengkap</label>
                                 <input type="text" name="nama" id="nama" class="form-control" value="{{ $wajib->nama }}" required>
