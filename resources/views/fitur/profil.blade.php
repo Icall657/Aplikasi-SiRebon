@@ -325,76 +325,74 @@
                         <button type="submit" name="gantipassword" class="btn btn-primary mt-3" id="submit-btn"
                             disabled>Ganti Password</button>
                     </form>
-
                     <script>
-                        // mwnambahkan fungsi toggle password visibility
-                        const toggleOldPassword = document.getElementById('toggleOldPassword');
-                        const oldPasswordInput = document.getElementById('old_password');
+                        // fungsi buat ngubah tampilan password jadi keliatan atau disembunyiin
+                        function togglePasswordVisibility(id, iconId) {
+                            // ambil elemen input password sesuai id yang dikasih
+                            const passwordField = document.getElementById(id);
+                            // ambil elemen ikon buat mata sesuai id yang dikasih
+                            const toggleIcon = document.getElementById(iconId);
 
-                        toggleOldPassword.addEventListener('click', function() {
-                            const type = oldPasswordInput.type === 'password' ? 'text' : 'password';
-                            oldPasswordInput.type = type;
-                            this.classList.toggle('fa-eye');
-                            this.classList.toggle('fa-eye-slash');
-                        });
+                            // cek tipe input, kalo "password" diubah jadi "text" biar keliatan
+                            if (passwordField.type === 'password') {
+                                // kalo password diubah jadi text
+                                passwordField.type = 'text';
+                                // ubah ikon mata biasa jadi mata ketutup
+                                toggleIcon.classList.replace('fa-eye', 'fa-eye-slash');
+                            } else {
+                                // kalo udah text, balikin lagi jadi password buat disembunyiin
+                                passwordField.type = 'password';
+                                // balikin ikon jadi mata biasa
+                                toggleIcon.classList.replace('fa-eye-slash', 'fa-eye');
+                            }
+                        }
 
-                        const toggleNewPassword = document.getElementById('toggleNewPassword');
+                        // ngasih fungsi toggle buat tiap ikon mata di input password
+                        document.getElementById('toggleOldPassword').onclick = () => togglePasswordVisibility('old_password',
+                            'toggleOldPassword');
+                        document.getElementById('toggleNewPassword').onclick = () => togglePasswordVisibility('new_password',
+                            'toggleNewPassword');
+                        document.getElementById('toggleConfirmPassword').onclick = () => togglePasswordVisibility('password_confirmation',
+                            'toggleConfirmPassword');
+
+                        // ambil elemen-elemen input dan peringatan yang dipake
                         const newPasswordInput = document.getElementById('new_password');
-
-                        toggleNewPassword.addEventListener('click', function() {
-                            const type = newPasswordInput.type === 'password' ? 'text' : 'password';
-                            newPasswordInput.type = type;
-                            this.classList.toggle('fa-eye');
-                            this.classList.toggle('fa-eye-slash');
-                        });
-
-                        const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
-                        const confirmPasswordInput = document.getElementById('password_confirmation');
-
-                        toggleConfirmPassword.addEventListener('click', function() {
-                            const type = confirmPasswordInput.type === 'password' ? 'text' : 'password';
-                            confirmPasswordInput.type = type;
-                            this.classList.toggle('fa-eye');
-                            this.classList.toggle('fa-eye-slash');
-                        });
-
-                        //validasi password
-                        const passwordInput = document.getElementById('new_password');
                         const passwordWarning = document.getElementById('password-warning');
                         const confirmationInput = document.getElementById('password_confirmation');
                         const confirmationWarning = document.getElementById('confirmation-warning');
                         const submitBtn = document.getElementById('submit-btn');
 
-                        passwordInput.addEventListener('input', function() {
-                            const passwordLength = passwordInput.value.length;
-
-                            if (passwordLength < 8) {
-                                passwordWarning.style.display = 'block';
-                                submitBtn.disabled = true; // mematikan tombol submit
-                            } else {
-                                passwordWarning.style.display = 'none';
-                                submitBtn.disabled = false;
-                            }
-
-                            checkPasswordMatch();
-                        });
-
+                        // event listener buat validasi password baru tiap kali user ngetik
+                        newPasswordInput.addEventListener('input', validatePassword);
+                        // event listener buat cek kecocokan password tiap kali user ngetik di konfirmasi password
                         confirmationInput.addEventListener('input', checkPasswordMatch);
 
+                        // fungsi buat ngecek password baru sesuai syarat minimal (8 karakter, ada huruf besar, kecil, dan angka)
+                        function validatePassword() {
+                            const password = newPasswordInput.value;
+
+                            // cek password pake regex, harus ada huruf besar, kecil, angka, dan minimal 8 karakter
+                            const isValidPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(password);
+
+                            // kalo password bener, warning disembunyiin, kalo salah ditampilin
+                            passwordWarning.style.display = isValidPassword ? 'none' : 'block';
+
+                            // panggil fungsi buat cek apakah password sama dengan konfirmasi
+                            checkPasswordMatch();
+                        }
+
+                        // fungsi buat ngecek password baru sama konfirmasi password cocok atau nggak
                         function checkPasswordMatch() {
-                            if (passwordInput.value !== confirmationInput.value) {
-                                confirmationWarning.style.display = 'block';
-                                submitBtn.disabled = true;
-                            } else {
-                                confirmationWarning.style.display = 'none';
-                                if (passwordInput.value.length >= 8) {
-                                    submitBtn.disabled = false;
-                                }
-                            }
+                            // cek apakah password baru sama konfirmasi password cocok
+                            const isPasswordMatch = newPasswordInput.value === confirmationInput.value;
+
+                            // kalo nggak cocok, tampilin warning, kalo cocok disembunyiin
+                            confirmationWarning.style.display = isPasswordMatch ? 'none' : 'block';
+
+                            // tombol submit aktif cuma kalo password bener dan cocok sama konfirmasi
+                            submitBtn.disabled = !(isPasswordMatch && /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(newPasswordInput.value));
                         }
                     </script>
-
-
                 </div>
                 <br>
                 <!-- /.container-fluid -->

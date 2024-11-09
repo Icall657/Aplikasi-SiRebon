@@ -32,7 +32,7 @@ class WajibController extends Controller
         $wajib->update($request->all()); // Menyimpan data yang telah diperbarui
         return redirect()->route('wajib-retribusi.index')->with('success', 'Data berhasil diubah.');
     }
-    
+
     public function destroy($id)
     {
         DB::beginTransaction();
@@ -59,13 +59,11 @@ class WajibController extends Controller
         return view('fitur.Wajib-Retribusi.create');
     }
 
-    // Menyimpan data Wajib Retribusi yang baru
     public function store(Request $request)
     {
         Log::info('Data input:', $request->all());
 
         $request->validate([
-            'username' => 'required|string|max:255|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
             'nama' => 'required|string|max:255',
@@ -79,7 +77,7 @@ class WajibController extends Controller
 
         try {
             $user = User::create([
-                'username' => $request->username,
+                'username' => $request->nama,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'level' => 'Wajib Retribusi',

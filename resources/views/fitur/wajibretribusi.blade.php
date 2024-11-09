@@ -237,7 +237,7 @@
                                 <tr>
                                     <th style="width: 50px;">No.</th>
                                     <th>Nama Lengkap</th>
-                                    <th>Telpon</th>
+                                    <th>Telepon</th>
                                     <th>NIK</th>
                                     <th>Alamat</th>
                                     <th>Kelurahan</th>

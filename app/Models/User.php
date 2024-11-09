@@ -48,4 +48,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(WajibRetribusi::class, 'id_user');
     }
+
+    public function kapals()
+    {
+        return $this->hasMany(Kapal::class, 'id_user');
+    }
 }

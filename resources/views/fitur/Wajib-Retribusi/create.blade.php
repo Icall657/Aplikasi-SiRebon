@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Tambah Wajib Retribusi SiRebon</title>
     <!-- Custom fonts for this template-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -34,49 +35,61 @@
                         <form action="{{ route('wajib-retribusi.store') }}" method="POST">
                             @csrf
                             <div class="form-group mb-3">
-                                <label for="username">Username</label>
-                                <input type="text" name="username" id="username" class="form-control" value="{{ old('username') }}" placeholder="Masukkan Username" required autocomplete="off">
-                                @error('username') <span class="text-danger">{{ $message }}</span> @enderror
+                                <label for="nama">Nama Lengkap</label>
+                                <input type="text" name="nama" id="nama" class="form-control" value="{{ old('nama') }}" placeholder="Masukkan Nama Lengkap" required autocomplete="off">
                             </div>
                             <div class="form-group mb-3">
                                 <label for="email">Email</label>
                                 <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}" placeholder="Masukkan Email" required autocomplete="off">
-                                @error('email') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             <div class="form-group mb-3">
                                 <label for="password">Password</label>
-                                <input type="password" name="password" id="password" class="form-control" placeholder="Masukkan Password" required autocomplete="off">
-                                @error('password') <span class="text-danger">{{ $message }}</span> @enderror
-                            </div>
-                            <div class="form-group mb-3">
-                                <label for="nama">Nama Lengkap</label>
-                                <input type="text" name="nama" id="nama" class="form-control" value="{{ old('nama') }}" placeholder="Masukkan Nama Lengkap" required autocomplete="off">
-                                @error('nama') <span class="text-danger">{{ $message }}</span> @enderror
+                                <div class="input-group">
+                                    <input type="password" name="password" id="password" class="form-control" placeholder="Masukkan Password" required autocomplete="off" minlength="8" pattern="^(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$">
+                                    <button type="button" class="btn btn-outline-secondary" onclick="togglePassword()">
+                                        <i class="fa fa-eye" id="toggleIcon"></i>
+                                    </button>
+                                </div>
+                                <small class="form-text text-muted">Password harus minimal 8 karakter dan mengandung setidaknya 1 karakter khusus.</small>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="no_hp">Nomor Telepon</label>
                                 <input type="text" name="no_hp" id="no_hp" class="form-control" value="{{ old('no_hp') }}" placeholder="Masukkan Nomor Telepon" required autocomplete="off">
-                                @error('no_hp') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             <div class="form-group mb-3">
                                 <label for="nik">NIK</label>
                                 <input type="text" name="nik" id="nik" class="form-control" value="{{ old('nik') }}" placeholder="Masukkan NIK" required autocomplete="off">
-                                @error('nik') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             <div class="form-group mb-3">
                                 <label for="alamat">Alamat</label>
                                 <textarea name="alamat" id="alamat" class="form-control" placeholder="Masukkan Alamat" required autocomplete="off">{{ old('alamat') }}</textarea>
-                                @error('alamat') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             <div class="form-group mb-3">
                                 <label for="kelurahan">Kelurahan</label>
                                 <input type="text" name="kelurahan" id="kelurahan" class="form-control" value="{{ old('kelurahan') }}" placeholder="Masukkan Kelurahan" required autocomplete="off">
-                                @error('kelurahan') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                         
                             <button type="submit" class="btn btn-primary">Simpan Data</button>
                             <a href="{{ route('wajib-retribusi.index') }}" class="btn btn-secondary">Batal</a>
                         </form>
+                        
+                        
+                        <script>
+                        function togglePassword() {
+                            const passwordField = document.getElementById('password');
+                            const toggleIcon = document.getElementById('toggleIcon');
+                            if (passwordField.type === 'password') {
+                                passwordField.type = 'text';
+                                toggleIcon.classList.remove('fa-eye');
+                                toggleIcon.classList.add('fa-eye-slash');
+                            } else {
+                                passwordField.type = 'password';
+                                toggleIcon.classList.remove('fa-eye-slash');
+                                toggleIcon.classList.add('fa-eye');
+                            }
+                        }
+                        </script>
+                        
                         
                     </div>
                 </div>

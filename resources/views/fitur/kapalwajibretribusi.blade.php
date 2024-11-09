@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,59 +41,58 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            @if (auth()->user()->level == "Admin Aplikasi")
-            <hr class="sidebar-divider my-0">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('home.index') }}">
-                    <i class="fa fa-home"></i>
-                    <span>beranda</span></a>
-            </li>
+            @if (auth()->user()->level == 'Admin Aplikasi')
+                <hr class="sidebar-divider my-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('home.index') }}">
+                        <i class="fa fa-home"></i>
+                        <span>beranda</span></a>
+                </li>
 
-            <hr class="sidebar-divider my-0">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('rekening.index') }}">
-                    <i class="fa fa-credit-card"></i>
-                    <span>Rekening Pembayaran Retribusi</span></a>
-            </li>
+                <hr class="sidebar-divider my-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('rekening.index') }}">
+                        <i class="fa fa-credit-card"></i>
+                        <span>Rekening Pembayaran Retribusi</span></a>
+                </li>
 
-            <hr class="sidebar-divider my-0">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('wajib-retribusi.index') }}">
-                    <i class="fa fa-anchor"></i>
-                    <span>Wajib Retribusi</span></a>
-            </li>
+                <hr class="sidebar-divider my-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('wajib-retribusi.index') }}">
+                        <i class="fa fa-anchor"></i>
+                        <span>Wajib Retribusi</span></a>
+                </li>
 
-            <hr class="sidebar-divider my-0">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('pembayaran-retribusi.index') }}">
-                    <i class="fa fa-dollar-sign"></i>
-                    <span>Pembayaran Retribusi</span></a>
-            </li>
+                <hr class="sidebar-divider my-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('pembayaran-retribusi.index') }}">
+                        <i class="fa fa-dollar-sign"></i>
+                        <span>Pembayaran Retribusi</span></a>
+                </li>
             @endif
 
             <!-- Divider -->
-            @if (auth()->user()->level == "Wajib Retribusi")
-            <hr class="sidebar-divider my-0">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('profil.index') }}">
-                    <i class="fa fa-address-card"></i>
-                    <span>Profil</span></a>
-            </li>
+            @if (auth()->user()->level == 'Wajib Retribusi')
+                <hr class="sidebar-divider my-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('profil.index') }}">
+                        <i class="fa fa-address-card"></i>
+                        <span>Profil</span></a>
+                </li>
 
-            <hr class="sidebar-divider">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('kapalku.index') }}">
-                    <i class="fa fa-ship"></i>
-                    <span>Kapalku</span></a>
-            </li>
+                <hr class="sidebar-divider">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('kapalku.index') }}">
+                        <i class="fa fa-ship"></i>
+                        <span>Kapalku</span></a>
+                </li>
 
-            <hr class="sidebar-divider">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('konfirmasi.index') }}">
-                    <i class="fa fa-check-circle"></i>
-                    <span>Konfirmasi Pembayaran Retribusi</span></a>
-            </li>
-
+                <hr class="sidebar-divider">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('konfirmasi.index') }}">
+                        <i class="fa fa-check-circle"></i>
+                        <span>Konfirmasi Pembayaran Retribusi</span></a>
+                </li>
             @endif
             <hr class="sidebar-divider">
             <li class="nav-item">
@@ -154,8 +152,8 @@
                     <form
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
+                            <input type="text" class="form-control bg-light border-0 small"
+                                placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="button">
                                     <i class="fas fa-search fa-sm"></i>
@@ -197,15 +195,16 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->level }}</span>
-                                <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                <span
+                                    class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->level }}</span>
+                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
                                 <!--- <div class="dropdown-divider"></div> -->
-                                <a class="dropdown-item" href="" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="" data-toggle="modal"
+                                    data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -223,47 +222,49 @@
                     <!-- Content Row -->
                     <div class="row">
 
-                        
+
                     </div>
 
                     <!-- Content Row -->
-                      
+
                     <!-- ISI KONTEN -->
                     <div class="table-container">
-                        @if (auth()->user()->level == "Admin Aplikasi")
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <button class="btn btn-primary btn-add">Tambah Data</button>
-                                </div>
+                        @if (auth()->user()->level == 'Admin Aplikasi')
+                            <div class="d-flex justify-content-between align-items-center">
+                                <button class="btn btn-primary btn-add">Tambah Data</button>
+                            </div>
                         @endif
-                                <table class="table table-bordered mt-3">
-                                    <thead class="table-light">
-                                        <tr>
-                                        <th style="width: 50px;">No.</th>
-                                            <th>nama Pemilik</th>
-                                            <th>Nama kapal</th>
-                                            <th>jenis kapal</th>
-                                            @if (auth()->user()->level == "Admin Aplikasi")
-                                            <th style="width: 150px;">Aksi</th>
-                                            @endif
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>ikbal</td>
-                                            <td>kapalan</td>
-                                            <td>12345</td>
-                                            @if (auth()->user()->level == "Admin Aplikasi")
+                        <table class="table table-bordered mt-3">
+                            <thead class="table-light">
+                                <tr>
+                                    <th style="width: 50px;">No.</th>
+                                    <th>Nama Pemilik</th>
+                                    <th>Nama Kapal</th>
+                                    <th>Jenis Kapal</th>
+                                    @if (auth()->user()->level == 'Admin Aplikasi')
+                                        <th style="width: 150px;">Aksi</th>
+                                    @endif
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($kapals as $key => $kapal)
+                                    <tr>
+                                        <td>{{ $key + 1 }}</td>
+                                        <td>{{ $kapal->user->username ?? 'Tidak ada pemilik' }}</td>
+                                        <td>{{ $kapal->nama_kapal }}</td>
+                                        <td>{{ $kapal->jenisKapal->jenis_kapal ?? 'Jenis kapal tidak ditemukan' }}</td>
+                                        @if (auth()->user()->level == 'Admin Aplikasi')
                                             <td>
                                                 <button class="btn btn-primary btn-sm">Ubah</button>
                                                 <button class="btn btn-danger btn-sm">Hapus</button>
                                             </td>
-                                            @endif
-                                        </tr>
-                                        <!-- Repeat rows as needed -->
-                                    </tbody>
-                                </table>
-                            </div>
+                                        @endif
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    
                     <!-- Content Row -->
 
                 </div>
@@ -307,7 +308,7 @@
                 <div class="modal-body">Klik "Logout" Jika Anda Yakin Ingin Keluar</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="{{ route ('logout') }}">Logout</a>
+                    <a class="btn btn-primary" href="{{ route('logout') }}">Logout</a>
                 </div>
             </div>
         </div>
