@@ -46,37 +46,16 @@
                                     <label class="form-label">Password</label>
                                 </div>
                                 <div style="position: relative;" size="30">
-                                    <!-- Ikon lock dan ikon mata -->
                                     <i class="fa fa-lock" style="position: absolute; left: 10px; top: 10px; color: #888;"></i>
-                                    
-                                    <!-- Input Password -->
                                     <input id="password" type="password" name="password" autocomplete="off" class="form-control form-control-lg" placeholder="Masukkan password" size="30" style="padding-left: 30px; height: 40px;" />
-                            
-                                    <!-- Tombol Mata -->
                                     <i id="togglePassword" class="fa fa-eye" style="position: absolute; right: 10px; top: 10px; cursor: pointer; color: #888;"></i>
                                 </div>
                             </div>
-                            
-                            <!-- Menambahkan SweetAlert (Optional) -->
-                            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-                            
-                            <script>
-                                // JavaScript untuk toggle password visibility
-                                const togglePassword = document.getElementById('togglePassword');
-                                const password = document.getElementById('password');
-                            
-                                togglePassword.addEventListener('click', function (e) {
-                                    // Toggle tipe input password
-                                    const type = password.type === 'password' ? 'text' : 'password';
-                                    password.type = type;
-                            
-                                    // Toggle ikon mata
-                                    this.classList.toggle('fa-eye');
-                                    this.classList.toggle('fa-eye-slash');
-                                });
-                            </script>
-                            
-                                <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
+                            <div class="mb-4" style="text-align: left;">
+                                <a href="#" class="text-primary">Lupa password?</a>
+                            </div>
+
+                            <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
                             </form>
                         
                         </div>
@@ -85,45 +64,19 @@
             </div>
         </div>
     </section>
-        <!-- SweetAlert untuk Pesan Berhasil -->
-        @if (session('success'))
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                Swal.fire({
-                    title: 'Berhasil!',
-                    text: "{{ session('success') }}",
-                    icon: 'success',
-                    confirmButtonText: 'Lanjut'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = "{{ route('home') }}";
-                    }
-                });
-            });
-        </script>
-    @endif
 
-    <!-- SweetAlert untuk Pesan Gagal -->
-    @if (session('error'))
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                Swal.fire({
-                    title: 'Login Gagal!',
-                    text: "{{ session('error') }}",
-                    icon: 'error',
-                    confirmButtonText: 'Coba Lagi'
-                });
-            });
-        </script>
-    @endif
-   <!-- Script Vendor -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="js/sb-admin-2.min.js"></script>
-    <script src="vendor/chart.js/Chart.min.js"></script>
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Script toggle password -->
+    <script>
+        const togglePassword = document.getElementById('togglePassword');
+        const password = document.getElementById('password');
+
+        togglePassword.addEventListener('click', function () {
+            const type = password.type === 'password' ? 'text' : 'password';
+            password.type = type;
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+    </script>
 </body>
+
 </html>

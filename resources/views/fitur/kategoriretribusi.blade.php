@@ -235,11 +235,11 @@
                         </div>
                         @endif
 
-                        <table class="table table-bordered mt-3">
+                        <table class="table table-bordered mt-3 text-center">
                             <thead class="table-light">
                                 <tr>
                                     <th style="width: 50px;">No.</th>
-                                    <th>kategori retribusi</th>
+                                    <th>Kategori Retribusi</th>
                                     @if (auth()->user()->level == 'Admin Aplikasi')
                                         <th style="width: 150px;">Aksi</th>
                                     @endif
@@ -269,6 +269,7 @@
                                 <!-- Repeat rows as needed -->
                             </tbody>
                         </table>
+                        
                     </div>
                     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 

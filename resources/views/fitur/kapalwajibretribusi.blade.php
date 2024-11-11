@@ -241,9 +241,13 @@
                                     <th style="width: 50px;">No.</th>
                                     <th>Nama Pemilik</th>
                                     <th>Nama Kapal</th>
-                                    <th>Jenis Kapal</th>
-                                    <th>Ukuran</th>
+                                    @if (auth()->user()->level == 'Wajib Retribusi')
+                                        <th>Nilai Retribusi</th>
+                                        <th>Tanggal Pembayaran</th>
+                                    @endif
                                     @if (auth()->user()->level == 'Admin Aplikasi')
+                                        <th>Jenis Kapal</th>
+                                        <th>Ukuran</th>
                                         <th style="width: 150px;">Aksi</th>
                                     @endif
                                 </tr>
@@ -254,11 +258,19 @@
                                         <td>{{ $key + 1 }}</td>
                                         <td>{{ $kapal->user->username ?? 'Tidak ada pemilik' }}</td>
                                         <td>{{ $kapal->nama_kapal }}</td>
-                                        <td>{{ $kapal->jenisKapal->jenis_kapal ?? 'Jenis kapal tidak ditemukan' }}</td>
-                                        <td>{{ $kapal->ukuran }}</td>
+                                        @if (auth()->user()->level == 'Wajib Retribusi')
+                                            <td>Rp
+                                                {{ number_format($kapal->jenisKapal->biaya_retribusi, 0, ',', '.') ?? 'Tidak ada biaya' }}
+                                            </td>
+                                            <td>{{ $kapal->created_at->format('d F Y') }}</td>
+                                        @endif
                                         @if (auth()->user()->level == 'Admin Aplikasi')
+                                            <td>{{ $kapal->jenisKapal->jenis_kapal ?? 'Jenis kapal tidak ditemukan' }}
+                                            </td>
+                                            <td>{{ $kapal->ukuran }}</td>
                                             <td>
-                                                <button class="btn btn-primary btn-sm">Ubah</button>
+                                                <a href="{{ route('kapal-wajib-retribusi.edit', $kapal->id) }}"
+                                                    class="btn btn-primary btn-sm">Ubah</a>
                                                 <form id="deleteForm{{ $kapal->id }}"
                                                     action="{{ route('kapal-wajib-retribusi.destroy', $kapal->id) }}"
                                                     method="POST" style="display:inline;">

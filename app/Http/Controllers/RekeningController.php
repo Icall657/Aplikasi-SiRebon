@@ -10,67 +10,78 @@ class RekeningController extends Controller
 {
     public function index()
     {
+        // ambil semua data rekening
         $rekening = MsRekening::all();
         return view('fitur.rekeningpembayaran', compact('rekening'));
     }
 
     public function create()
     {
+        // ambil daftar bank buat dropdown
         $refBanks = RefBank::all();
         return view('fitur.Rekening.create', compact('refBanks'));
     }
 
     public function store(Request $request)
     {
+        // validasi input rekening biar valid
         $request->validate([
             'id_ref_bank' => 'required|exists:ref_bank,id',
             'nama_akun' => 'required|string|max:50',
             'no_rekening' => 'required|string|max:50',
         ]);
 
-        MsRekening::create($request->all());
+        // simpan data rekening baru ke database
+        MsRekening::create(attributes: $request->all());
 
+        // balik ke halaman rekening dengan pesan sukses
         return redirect()->route('rekening.index')->with('success', 'Data rekening berhasil ditambahkan.');
     }
 
     public function destroy($id)
     {
+        // cari data rekening berdasarkan id
         $data = MsRekening::findOrFail($id);
+        
+        // hapus data rekening
         $data->delete();
 
+        // balik ke halaman rekening dengan pesan sukses
         return redirect()->route('rekening.index')->with('success', 'Data berhasil dihapus.');
     }
 
     public function edit($id)
     {
-        // Temukan data rekening berdasarkan ID
+        // temukan data rekening berdasarkan id
         $data = MsRekening::findOrFail($id);
 
-        // Ambil daftar bank dari tabel ref_bank untuk dropdown (jika diperlukan)
+        // ambil daftar bank dari tabel ref_bank buat dropdown
         $refBanks = RefBank::all();
 
-        // Kirim data rekening yang ingin diedit dan daftar bank ke view
+        // kirim data rekening yang ingin diedit dan daftar bank ke view
         return view('fitur.Rekening.edit', compact('data', 'refBanks'));
     }
 
     public function update(Request $request, $id)
     {
+        // cari data rekening berdasarkan id
         $data = MsRekening::findOrFail($id);
 
-        // Validasi input
+        // validasi input sebelum update
         $request->validate([
             'id_ref_bank' => 'required|exists:ref_bank,id',
             'nama_akun' => 'required|string|max:50',
             'no_rekening' => 'required|string|max:50',
         ]);
 
-        // Update data
+        // update data rekening
         $data->update([
             'id_ref_bank' => $request->id_ref_bank,
             'nama_akun' => $request->nama_akun,
             'no_rekening' => $request->no_rekening,
         ]);
 
+        // balik ke halaman rekening dengan pesan sukses
         return redirect()->route('rekening.index')->with('success', 'Data rekening berhasil diperbarui.');
     }
 }

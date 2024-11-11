@@ -10,12 +10,13 @@ use Illuminate\Support\Facades\Hash;
 class ProfilController extends Controller
 {
     public function index(){
+        // ambil data wajib retribusi berdasarkan user yang login
         $wajibRetribusi = WajibRetribusi::where('id_user', auth()->user()->id)->get();
         return view('fitur.profil');
     } 
 
     public function update(Request $request) {
-        // Validasi input
+        // validasi input dari form
         $request->validate([
             'username' => 'required|string|max:255',
             'nik' => 'required|string|max:16',
@@ -24,50 +25,46 @@ class ProfilController extends Controller
             'alamat' => 'required|string|max:255',
         ]);
     
-        // Ambil user yang sedang login
+        // ambil data user yang lagi login
         $user = Auth::user();
         
-        // Update kolom 'username' di tabel users
+        // update username di tabel users
         $user->username = $request->input('username');
-        $user->save();  // Simpan perubahan pada tabel users
+        $user->save();  // simpan perubahan ke tabel users
     
-        // Ambil data wajib_retribusi terkait dengan user yang sedang login
-        $wajibRetribusi = $user->wajibRetribusi; // Misalnya relasi pada model User
+        // ambil data wajib_retribusi yang terhubung dengan user
+        $wajibRetribusi = $user->wajibRetribusi; // misalnya ada relasi di model User
     
-        // Jika data wajib_retribusi ada, perbarui data terkait
+        // update data wajib_retribusi jika ada
         foreach ($wajibRetribusi as $wajib) {
             $wajib->nik = $request->input('nik');
             $wajib->nama = $request->input('namaLengkap');
             $wajib->no_hp = $request->input('telepon');
             $wajib->alamat = $request->input('alamat');
-            $wajib->save(); // Simpan perubahan ke tabel wajib_retribusi
+            $wajib->save(); // simpan perubahan ke tabel wajib_retribusi
         }
     
-        // Redirect kembali dengan pesan sukses
+        // redirect kembali dengan pesan sukses
         return redirect()->route('profil.index')->with('success', 'Profil berhasil diperbarui!');
     }
     
-    
-
     public function gantiPassword(){
+        // tampilkan halaman ganti password
         return view('fitur.profil');
     } 
 
-    // Fungsi untuk mengupdate profil pengguna
-
-
-
     public function prosesGantiPassword(Request $request){
-        //cek password lama
+        // cek password lama
         if(!Hash::check($request->old_password, auth()->user()->password)){
             return back()->with('error', 'password lama salah');
         }
 
-        //cek password baru dan konfirmasi password
+        // cek password baru dan konfirmasi password
         if($request->new_password != $request->password_confirmation){
             return back()->with('error', 'password baru dan konfirmasi password tidak sama');
         }
 
+        // update password user
         auth()->user()->update([
             'password' => Hash::make($request->new_password)
         ]);

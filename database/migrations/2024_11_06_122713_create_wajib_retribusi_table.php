@@ -20,6 +20,7 @@ class CreateWajibRetribusiTable extends Migration
             $table->string('no_hp', 16); // no_hp dengan panjang maksimal 16 karakter
             $table->string('nik', 16); // nik dengan panjang maksimal 16 karakter
             $table->text('alamat'); // alamat dalam bentuk teks
+            $table->text('kelurahan');
             $table->timestamps();
 
             // Definisikan foreign key ke tabel users

@@ -9,69 +9,70 @@ class KategoriController extends Controller
 {
     public function index()
     {
-        // Mengambil semua data dari tabel kategori_retribusi
+        // ambil semua data dari tabel kategori_retribusi
         $kategoris = KategoriRetribusi::all();
 
-        // Mengirim data ke view
+        // kirim data ke view
         return view('fitur.kategoriretribusi', compact('kategoris'));
     }
 
     public function create()
     {
-        return view('fitur.Kategori.create');  // pastikan view ini berada di resources/views/kategori-retribusi/create.blade.php
+        // buka halaman buat kategori baru
+        return view('fitur.Kategori.create');
     }
 
-    // Menyimpan data kategori retribusi yang baru
     public function store(Request $request)
     {
-        // Validasi input
+        // validasi input kategori biar sesuai aturan
         $request->validate([
             'kategori' => 'required|string|max:255',
         ]);
 
-        // Simpan data kategori ke dalam tabel
+        // simpan data kategori baru ke database
         KategoriRetribusi::create([
             'kategori' => $request->kategori,
         ]);
 
-        // Redirect ke halaman kategori retribusi dengan pesan sukses
+        // balik ke halaman kategori dengan pesan sukses
         return redirect()->route('kategori-retribusi.index')->with('success', 'Kategori Retribusi berhasil ditambahkan.');
     }
 
     public function edit($id)
     {
-
+        // ambil data kategori berdasarkan id buat diedit
         $kategori = KategoriRetribusi::findOrFail($id);
 
+        // kirim data kategori ke view edit
         return view('fitur.Kategori.edit', compact('kategori'));
     }
 
     public function update(Request $request, $id)
     {
-
+        // validasi input kategori sebelum update
         $request->validate([
             'kategori' => 'required|string|max:255',
         ]);
 
-
+        // cari data kategori sesuai id dan update
         $kategori = KategoriRetribusi::findOrFail($id);
         $kategori->update([
             'kategori' => $request->input('kategori'),
         ]);
 
-
+        // balik ke halaman kategori dengan pesan sukses
         return redirect()->route('kategori-retribusi.index')->with('success', 'Data kategori berhasil diubah.');
     }
 
     public function destroy($id)
     {
-        // Mencari data kategori berdasarkan ID
+        // cari data kategori sesuai id
         $kategori = KategoriRetribusi::findOrFail($id);
 
-        // Menghapus data kategori
+        // hapus data kategori
         $kategori->delete();
 
-        // Redirect ke halaman kategori dengan pesan sukses
+        // balik ke halaman kategori dengan pesan sukses
         return redirect()->route('kategori-retribusi.index')->with('success', 'Data kategori berhasil dihapus.');
     }
 }

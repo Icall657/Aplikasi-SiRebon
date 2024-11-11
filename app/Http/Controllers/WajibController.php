@@ -13,56 +13,59 @@ class WajibController extends Controller
 {
     public function index()
     {
+        // ambil data wajib retribusi yang punya user dengan level 'Wajib Retribusi'
         $wajibRetribusi = WajibRetribusi::whereHas('user', function ($query) {
             $query->where('level', 'Wajib Retribusi');
         })->get();
-        return view('fitur.wajibretribusi', compact('wajibRetribusi')); // Mengirim data ke view
+        return view('fitur.wajibretribusi', compact('wajibRetribusi')); // kirim data ke view
     }
-
 
     public function edit($id)
     {
+        // cari data wajib_retribusi berdasarkan id
         $wajib = WajibRetribusi::findOrFail($id);
-        return view('fitur.Wajib-Retribusi.edit', compact('wajib')); // Menampilkan halaman edit
+        return view('fitur.Wajib-Retribusi.edit', compact('wajib')); // tampilkan halaman edit
     }
 
     public function update(Request $request, $id)
     {
+        // cari data wajib_retribusi berdasarkan id
         $wajib = WajibRetribusi::findOrFail($id);
-        $wajib->update($request->all()); // Menyimpan data yang telah diperbarui
-        return redirect()->route('wajib-retribusi.index')->with('success', 'Data berhasil diubah.');
+        $wajib->update($request->all()); // update data yang diubah
+        return redirect()->route('wajib-retribusi.index')->with('success', 'Data udah berhasil diubah.');
     }
 
     public function destroy($id)
     {
         DB::beginTransaction();
         try {
+            // cari data wajib_retribusi berdasarkan id
             $wajib = WajibRetribusi::findOrFail($id);
-            $user = $wajib->user;
-            $wajib->delete();
+            $user = $wajib->user; // cari user yang terhubung
+            $wajib->delete(); // hapus data wajib_retribusi
             if ($user) {
-                $user->delete();
+                $user->delete(); // hapus juga usernya
             }
 
             DB::commit();
 
-            return redirect()->route('wajib-retribusi.index')->with('success', 'Data berhasil dihapus');
+            return redirect()->route('wajib-retribusi.index')->with('success', 'Data udah kebuang, bro.');
         } catch (\Exception $e) {
             DB::rollback();
-            return redirect()->route('wajib-retribusi.index')->with('error', 'Terjadi kesalahan saat menghapus data');
+            return redirect()->route('wajib-retribusi.index')->with('error', 'Eh, ada error waktu ngehapus datanya.');
         }
     }
 
-
     public function create()
     {
-        return view('fitur.Wajib-Retribusi.create');
+        return view('fitur.Wajib-Retribusi.create'); // tampilin form buat tambah data
     }
 
     public function store(Request $request)
     {
-        Log::info('Data input:', $request->all());
+        Log::info('Data yang dimasukin:', $request->all());
 
+        // validasi inputan, biar ga salah
         $request->validate([
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
@@ -76,6 +79,7 @@ class WajibController extends Controller
         DB::beginTransaction();
 
         try {
+            // bikin user baru
             $user = User::create([
                 'username' => $request->nama,
                 'email' => $request->email,
@@ -83,6 +87,7 @@ class WajibController extends Controller
                 'level' => 'Wajib Retribusi',
             ]);
 
+            // bikin data wajib_retribusi yang nyambung ke user baru
             WajibRetribusi::create([
                 'id_user' => $user->id,
                 'nama' => $request->nama,
@@ -94,13 +99,13 @@ class WajibController extends Controller
 
             DB::commit();
 
-            Log::info('Data berhasil disimpan.');
+            Log::info('Data udah ke-save dengan baik.');
 
-            return redirect()->route('wajib-retribusi.index')->with('success', 'Data berhasil ditambahkan.');
+            return redirect()->route('wajib-retribusi.index')->with('success', 'Data berhasil dimasukin, bro!');
         } catch (\Exception $e) {
             DB::rollback();
-            Log::error('Error saat menyimpan data:', ['error' => $e->getMessage()]);
-            return redirect()->back()->with('error', 'Terjadi kesalahan saat menambah data.');
+            Log::error('Error pas nyimpen data:', ['error' => $e->getMessage()]);
+            return redirect()->back()->with('error', 'Aduh, ada masalah pas nambahin data.');
         }
     }
 }
