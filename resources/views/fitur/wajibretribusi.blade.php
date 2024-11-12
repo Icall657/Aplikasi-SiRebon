@@ -255,7 +255,7 @@
                                         <td>{{ $wajib->no_hp }}</td>
                                         <td>{{ $wajib->nik }}</td>
                                         <td>{{ $wajib->alamat }}</td>
-                                        <td>{{ $wajib->kelurahan }}</td>
+                                        <td>{{ $wajib->kelurahan->nama_kelurahan }}</td>
                                         <td>
                                             <div class="d-flex">
                                                 <a href="{{ route('wajib-retribusi.edit', $wajib->id) }}"

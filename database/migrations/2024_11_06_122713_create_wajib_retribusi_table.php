@@ -14,18 +14,18 @@ class CreateWajibRetribusiTable extends Migration
     public function up()
     {
         Schema::create('wajib_retribusi', function (Blueprint $table) {
-            $table->id(); // id sebagai primary key dan auto_increment
-            $table->unsignedBigInteger('id_user'); // kolom id_user sebagai foreign key
-            $table->string('nama', 50); // nama dengan panjang maksimal 50 karakter
-            $table->string('no_hp', 16); // no_hp dengan panjang maksimal 16 karakter
-            $table->string('nik', 16); // nik dengan panjang maksimal 16 karakter
-            $table->text('alamat'); // alamat dalam bentuk teks
-            $table->text('kelurahan');
+            $table->id();
+            $table->unsignedBigInteger('id_user');
+            $table->string('nama', 50);
+            $table->string('no_hp', 16);
+            $table->string('nik', 16);
+            $table->text('alamat');
+            $table->unsignedBigInteger('id_kelurahan');
             $table->timestamps();
 
-            // Definisikan foreign key ke tabel users
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
-        });
+            $table->foreign('id_kelurahan')->references('id')->on('kelurahan')->onDelete('cascade');
+        });        
     }
 
     /**

@@ -64,10 +64,17 @@
                                 <textarea name="alamat" id="alamat" class="form-control" placeholder="Masukkan Alamat" required autocomplete="off">{{ old('alamat') }}</textarea>
                             </div>
                             <div class="form-group mb-3">
-                                <label for="kelurahan">Kelurahan</label>
-                                <input type="text" name="kelurahan" id="kelurahan" class="form-control" value="{{ old('kelurahan') }}" placeholder="Masukkan Kelurahan" required autocomplete="off">
+                                <label for="id_kelurahan">Kelurahan</label>
+                                <select name="id_kelurahan" id="id_kelurahan" class="form-control" required>
+                                    <option value="" disabled selected>Pilih Kelurahan</option>
+                                    @foreach ($kelurahans as $kelurahan)
+                                        <option value="{{ $kelurahan->id }}" {{ old('id_kelurahan') == $kelurahan->id ? 'selected' : '' }}>
+                                            {{ $kelurahan->nama_kelurahan }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
-                        
+
                             <button type="submit" class="btn btn-primary">Simpan Data</button>
                             <a href="{{ route('wajib-retribusi.index') }}" class="btn btn-secondary">Batal</a>
                         </form>

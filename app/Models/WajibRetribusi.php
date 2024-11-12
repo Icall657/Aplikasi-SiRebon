@@ -17,12 +17,17 @@ class WajibRetribusi extends Model
         'no_hp',
         'nik',
         'alamat',
-        'kelurahan',
+        'id_kelurahan',
     ];
 
     // Relasi ke model User
     public function user()
     {
         return $this->belongsTo(User::class, 'id_user');
+    }
+
+    public function kelurahan()
+    {
+        return $this->belongsTo(Kelurahan::class, 'id_kelurahan');
     }
 }

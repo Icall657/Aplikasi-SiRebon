@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\WajibRetribusi;
+use App\Models\Kelurahan;
 use Illuminate\Http\Request;
+use App\Models\WajibRetribusi;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Hash;
 
 class WajibController extends Controller
 {
@@ -24,7 +25,8 @@ class WajibController extends Controller
     {
         // cari data wajib_retribusi berdasarkan id
         $wajib = WajibRetribusi::findOrFail($id);
-        return view('fitur.Wajib-Retribusi.edit', compact('wajib')); // tampilkan halaman edit
+        $kelurahans = Kelurahan::all();
+        return view('fitur.Wajib-Retribusi.edit', compact('wajib','kelurahans')); // tampilkan halaman edit
     }
 
     public function update(Request $request, $id)
@@ -58,7 +60,8 @@ class WajibController extends Controller
 
     public function create()
     {
-        return view('fitur.Wajib-Retribusi.create'); // tampilin form buat tambah data
+        $kelurahans = Kelurahan::all();
+        return view('fitur.Wajib-Retribusi.create', compact('kelurahans'));
     }
 
     public function store(Request $request)
@@ -73,7 +76,7 @@ class WajibController extends Controller
             'no_hp' => 'required|string|max:15',
             'nik' => 'required|string|max:16',
             'alamat' => 'required|string|max:255',
-            'kelurahan' => 'required|string|max:255',
+            'id_kelurahan' => 'required|exists:kelurahan,id',
         ]);
 
         DB::beginTransaction();
@@ -94,7 +97,7 @@ class WajibController extends Controller
                 'no_hp' => $request->no_hp,
                 'nik' => $request->nik,
                 'alamat' => $request->alamat,
-                'kelurahan' => $request->kelurahan,
+                'id_kelurahan' => $request->id_kelurahan,
             ]);
 
             DB::commit();
