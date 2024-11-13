@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,59 +41,58 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            @if (auth()->user()->level == "Admin Aplikasi")
-            <hr class="sidebar-divider my-0">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('home.index') }}">
-                    <i class="fa fa-home"></i>
-                    <span>beranda</span></a>
-            </li>
+            @if (auth()->user()->level == 'Admin Aplikasi')
+                <hr class="sidebar-divider my-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('home.index') }}">
+                        <i class="fa fa-home"></i>
+                        <span>beranda</span></a>
+                </li>
 
-            <hr class="sidebar-divider my-0">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('rekening.index') }}">
-                    <i class="fa fa-credit-card"></i>
-                    <span>Rekening Pembayaran Retribusi</span></a>
-            </li>
+                <hr class="sidebar-divider my-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('rekening.index') }}">
+                        <i class="fa fa-credit-card"></i>
+                        <span>Rekening Pembayaran Retribusi</span></a>
+                </li>
 
-            <hr class="sidebar-divider my-0">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('wajib-retribusi.index') }}">
-                    <i class="fa fa-anchor"></i>
-                    <span>Wajib Retribusi</span></a>
-            </li>
+                <hr class="sidebar-divider my-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('wajib-retribusi.index') }}">
+                        <i class="fa fa-anchor"></i>
+                        <span>Wajib Retribusi</span></a>
+                </li>
 
-            <hr class="sidebar-divider my-0">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('pembayaran-retribusi.index') }}">
-                    <i class="fa fa-dollar-sign"></i>
-                    <span>Pembayaran Retribusi</span></a>
-            </li>
+                <hr class="sidebar-divider my-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('pembayaran-retribusi.index') }}">
+                        <i class="fa fa-dollar-sign"></i>
+                        <span>Pembayaran Retribusi</span></a>
+                </li>
             @endif
 
             <!-- Divider -->
-            @if (auth()->user()->level == "Wajib Retribusi")
-            <hr class="sidebar-divider my-0">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('profil.index') }}">
-                    <i class="fa fa-address-card"></i>
-                    <span>Profil</span></a>
-            </li>
+            @if (auth()->user()->level == 'Wajib Retribusi')
+                <hr class="sidebar-divider my-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('profil.index') }}">
+                        <i class="fa fa-address-card"></i>
+                        <span>Profil</span></a>
+                </li>
 
-            <hr class="sidebar-divider">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('kapalku.index') }}">
-                    <i class="fa fa-ship"></i>
-                    <span>Kapalku</span></a>
-            </li>
+                <hr class="sidebar-divider">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('kapalku.index') }}">
+                        <i class="fa fa-ship"></i>
+                        <span>Kapalku</span></a>
+                </li>
 
-            <hr class="sidebar-divider">
-            <li class="nav-item active">
-                <a class="nav-link" href="{{ route('konfirmasi.index') }}">
-                    <i class="fa fa-check-circle"></i>
-                    <span>Konfirmasi Pembayaran Retribusi</span></a>
-            </li>
-
+                <hr class="sidebar-divider">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ route('konfirmasi.index') }}">
+                        <i class="fa fa-check-circle"></i>
+                        <span>Konfirmasi Pembayaran Retribusi</span></a>
+                </li>
             @endif
             <hr class="sidebar-divider">
             <li class="nav-item">
@@ -154,8 +152,8 @@
                     <form
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
+                            <input type="text" class="form-control bg-light border-0 small"
+                                placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="button">
                                     <i class="fas fa-search fa-sm"></i>
@@ -190,22 +188,23 @@
                                 </form>
                             </div>
                         </li>
-                        
+
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->level }}</span>
-                                <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                <span
+                                    class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->level }}</span>
+                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
                                 <!--- <div class="dropdown-divider"></div> -->
-                                <a class="dropdown-item" href="" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="" data-toggle="modal"
+                                    data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -223,42 +222,55 @@
                     <!-- Content Row -->
                     <div class="row">
 
-                        
+
                     </div>
 
                     <!-- Content Row -->
-                    <h1>Konfirmasi Pembayaran Retribusi</h1>
-                    <form action="proses_transfer.php" method="post" enctype="multipart/form-data">
+                    <form action="#" method="post">
                         <div class="form-group">
-                            <label for="jenis_bank">Jenis Bank:</label>
-                            <select id="jenis_bank" name="jenis_bank" class="form-control" required>
+                            <label for="id_ref_bank">Jenis Bank:</label>
+                            <select id="id_ref_bank" name="id_ref_bank" class="form-control" required>
                                 <option value="">Pilih Jenis Bank</option>
-                                <option value="bank_a">Bank A</option>
-                                <option value="bank_b">Bank B</option>
-                                <option value="bank_c">Bank C</option>
-                                <option value="bank_d">Bank D</option>
+                                @foreach ($banks as $bank)
+                                    <option value="{{ $bank->id }}"
+                                        {{ old('id_ref_bank') == $bank->id ? 'selected' : '' }}>
+                                        {{ $bank->nama_bank }}
+                                    </option>
+                                @endforeach
                             </select>
                         </div>
-            
+
+
+
                         <div class="form-group">
                             <label for="nominal_transfer">Nominal Transfer:</label>
-                            <input type="number" id="nominal_transfer" name="nominal_transfer" class="form-control" required>
+                            <input type="number" id="nominal_transfer" name="nominal_transfer" class="form-control"
+                                required>
                         </div>
-            
+
                         <div class="form-group">
-                            <label for="nomor_rekening">Nomor Rekening:</label>
-                            <input type="text" id="nomor_rekening" name="nomor_rekening" class="form-control" required>
+                            <label for="id_ms_rekening">Nomor Rekening:</label>
+                            <select id="id_ms_rekening" name="id_ms_rekening" class="form-control" required>
+                                <option value="">Pilih Rekening</option>
+                                @foreach ($msRekenings as $rekening)
+                                    <option value="{{ $rekening->id }}"
+                                        {{ old('id_ms_rekening') == $rekening->id ? 'selected' : '' }}>
+                                        {{ $rekening->no_rekening }} ({{ $rekening->nama_akun }})
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
-            
-                            <div class="form-group mb-3">
-                                <label for="formFile" class="form-label">Bukti Pembayaran:</label>
-                                <input class="form-control" type="file" id="formFile">
-                            </div>
-            
+
+
+                        <div class="form-group mb-3">
+                            <label for="formFile" class="form-label">Bukti Pembayaran:</label>
+                            <input class="form-control" type="file" id="formFile">
+                        </div>
+
                         <button type="submit" class="btn btn-primary">Kirim</button>
                     </form>
                     <!-- ISI KONTEN -->
-                        
+
                     <!-- Content Row -->
 
                 </div>
@@ -302,7 +314,7 @@
                 <div class="modal-body">Klik "Logout" Jika Anda Yakin Ingin Keluar</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="{{ route ('logout') }}">Logout</a>
+                    <a class="btn btn-primary" href="{{ route('logout') }}">Logout</a>
                 </div>
             </div>
         </div>

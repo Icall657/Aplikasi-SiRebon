@@ -53,4 +53,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Kapal::class, 'id_user');
     }
+
+    public function konfirmasiBayar()
+    {
+        return $this->hasMany(KonfirmasiBayar::class, 'id_user');
+    }
 }

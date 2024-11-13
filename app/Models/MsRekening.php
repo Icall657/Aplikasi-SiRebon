@@ -16,4 +16,9 @@ class MsRekening extends Model
     {
         return $this->belongsTo(RefBank::class, 'id_ref_bank');
     }
+
+    public function konfirmasiBayar()
+    {
+        return $this->hasMany(KonfirmasiBayar::class, 'id_ms_rekening');
+    }
 }
