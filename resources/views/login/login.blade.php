@@ -77,6 +77,18 @@
             this.classList.toggle('fa-eye-slash');
         });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        @if(session('error'))
+            Swal.fire({
+                title: 'Login Gagal!',
+                text: '{{ session('error') }}',
+                icon: 'error',
+                confirmButtonText: 'Coba Lagi'
+            });
+        @endif
+    </script>
+
 </body>
 
 </html>
