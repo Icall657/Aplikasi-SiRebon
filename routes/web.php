@@ -44,6 +44,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('kapal-wajib-retribusi', KapalwajibController::class);
     Route::resource('kapalku', KapalkuController::class);
     Route::resource('konfirmasi', KonfirmasiController::class);
+    Route::post('/konfirmasi/confirm', [KonfirmasiController::class, 'confirm'])->name('konfirmasi.confirm');
     Route::resource('profil', ProfilController::class);
     Route::resource('retribusi', RetribusiController::class);
     Route::resource('belum-retribusi', BelumRetribusiController::class);

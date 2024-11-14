@@ -226,7 +226,15 @@
                     </div>
 
                     <!-- Content Row -->
-                    <form action="#" method="post">
+                    <form action="{{ route('konfirmasi.confirm') }}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+
                         <div class="form-group">
                             <label for="id_ref_bank">Jenis Bank:</label>
                             <select id="id_ref_bank" name="id_ref_bank" class="form-control" required>
@@ -239,8 +247,6 @@
                                 @endforeach
                             </select>
                         </div>
-
-
 
                         <div class="form-group">
                             <label for="nominal_transfer">Nominal Transfer:</label>
@@ -261,14 +267,15 @@
                             </select>
                         </div>
 
-
                         <div class="form-group mb-3">
                             <label for="formFile" class="form-label">Bukti Pembayaran:</label>
-                            <input class="form-control" type="file" id="formFile">
+                            <input class="form-control" type="file" id="formFile" name="file_bukti" required>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Kirim</button>
                     </form>
+
+
                     <!-- ISI KONTEN -->
 
                     <!-- Content Row -->
@@ -322,6 +329,7 @@
 
 
     <!-- Bootstrap core JavaScript-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 

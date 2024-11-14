@@ -244,7 +244,7 @@
                                 </div>
                             </div>
 
-                            @foreach (auth()->user()->wajibRetribusi as $wajib)
+                            @if ($wajib = auth()->user()->wajibRetribusi->first())
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="nik">NIK</label>
@@ -270,7 +270,7 @@
                                             value="{{ $wajib->alamat }}">
                                     </div>
                                 </div>
-                            @endforeach
+                            @endif
 
                             <button type="submit" name="save" class="btn btn-primary mt-1">Simpan</button>
                         </form>
