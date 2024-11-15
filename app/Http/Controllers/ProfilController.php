@@ -12,7 +12,7 @@ class ProfilController extends Controller
     public function index(){
         // ambil data wajib retribusi berdasarkan user yang login
         $wajibRetribusi = WajibRetribusi::where('id_user', auth()->user()->id)->get();
-        return view('fitur.profil');
+        return view('fitur.profil', compact('wajibRetribusi'));
     } 
 
     public function update(Request $request) {

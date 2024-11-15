@@ -52,7 +52,7 @@
                                 </div>
                             </div>
                             <div class="mb-4" style="text-align: left;">
-                                <a href="#" class="text-primary">Lupa password?</a>
+                                <a href="{{route('forgot_password.index')}}" class="text-primary">Lupa password?</a>
                             </div>
 
                             <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
