@@ -9,10 +9,9 @@ class KonfirmasiBayar extends Model
 {
     use HasFactory;
 
-    protected $table = 'konfirmasi_bayar'; // Nama tabel di database
-    protected $primaryKey = 'id'; // Primary key
+    protected $table = 'konfirmasi_bayar';
+    protected $primaryKey = 'id';
 
-    // Daftar kolom yang dapat diisi (mass assignable)
     protected $fillable = [
         'id_user',
         'id_ms_rekening',

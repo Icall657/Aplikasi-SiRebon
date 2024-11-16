@@ -45,6 +45,8 @@ class KonfirmasiController extends Controller
         $konfirmasiBayar->no_rekening_pemilik = $msRekening->no_rekening;
         $konfirmasiBayar->status = 'P';
         $konfirmasiBayar->save();
+        $konfirmasiBayar->tindaklanjut_tgl = now();
+        $konfirmasiBayar->tindaklanjut_user = 'admin';
 
         return redirect()->route('konfirmasi.index')->with('success', 'Terima kasih telah membayar retribusi. Mohon tunggu konfirmasi dari admin.');
     }

@@ -236,7 +236,7 @@
                         @endif
 
                         <div class="form-group">
-                            <label for="id_ref_bank">Jenis Bank:</label>
+                            <label for="id_ref_bank">Jenis Bank</label>
                             <select id="id_ref_bank" name="id_ref_bank" class="form-control" required>
                                 <option value="">Pilih Jenis Bank</option>
                                 @foreach ($banks as $bank)
@@ -249,13 +249,13 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="nominal_transfer">Nominal Transfer:</label>
+                            <label for="nominal_transfer">Nominal Transfer</label>
                             <input type="number" id="nominal_transfer" name="nominal_transfer" class="form-control"
                                 required>
                         </div>
 
                         <div class="form-group">
-                            <label for="id_ms_rekening">Nomor Rekening:</label>
+                            <label for="id_ms_rekening">Nomor Rekening</label>
                             <select id="id_ms_rekening" name="id_ms_rekening" class="form-control" required>
                                 <option value="">Pilih Rekening</option>
                                 @foreach ($msRekenings as $rekening)
@@ -267,9 +267,9 @@
                             </select>
                         </div>
 
-                        <div class="form-group mb-3">
-                            <label for="formFile" class="form-label">Bukti Pembayaran:</label>
-                            <input class="form-control" type="file" id="formFile" name="file_bukti" required>
+                        <div class="form-group">
+                            <label for="file_bukti">Bukti Pembayaran</label>
+                            <input type="file" name="file_bukti" id="file_bukti" class="form-control" accept="image/*" required>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Kirim</button>

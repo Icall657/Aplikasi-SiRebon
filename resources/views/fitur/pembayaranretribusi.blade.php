@@ -230,7 +230,7 @@
                         <div class="d-flex justify-content-between mb-3">
                             <button class="btn btn-primary">Tambah Data</button>
                         </div>
-                    
+
                         <table class="table table-bordered text-center">
                             <thead>
                                 <tr>
@@ -245,28 +245,49 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($konfirmasiBayar as $index => $data)
                                     <tr>
-                                        <td>1</td>
-                                        <td>Faisal</td>
-                                        <td>764466</td>
-                                        <td></td>
-                                        <td>15 Oct 2024</td>
-                                        <td>15 Oct 2024</td>
-                                        <td>admin</td>
+                                        <td>{{ $index + 1 }}</td>
+                                        <td class="text-nowrap">{{ $data->user->wajibRetribusi->nama }}</td>
+                                        <td>{{ $data->msRekening?->no_rekening }}</td>
+                                        <td class="text-center">
+                                            @if ($data->file_bukti)
+                                                <img src="{{ asset('storage/' . $data->file_bukti) }}" class="rounded img-fluid" style="max-width: 80px;">
+                                            @else
+                                                <span>No Image Available</span>
+                                            @endif
+                                        </td>
+                                        <td class="text-nowrap">
+                                            {{ $data->tgl_bayar ? \Carbon\Carbon::parse($data->tgl_bayar)->format('d M Y') : '-' }}
+                                        </td>
+                                        <td>{{ $data->tindaklanjut_tgl ? \Carbon\Carbon::parse($data->tindaklanjut_tgl)->format('d M Y') : '-' }}
+                                        </td>
+                                        <td>{{ $data->tindaklanjut_user ?? '-' }}</td>
                                         <td>
-                                            <!-- Tombol Aksi -->
-                                            <form action="#">
+                                            <form action="#" method="POST" class="d-flex justify-content-start">
                                                 @csrf
                                                 @method('PUT')
-                                                <button type="submit" name="status" value="sesuai" class="btn btn-success btn-sm">Sesuai</button>
-                                                <button type="submit" name="status" value="tidak_sesuai" class="btn btn-danger btn-sm">Tidak Sesuai</button>
+                                                <button type="submit" name="status" value="sesuai"
+                                                    class="btn btn-success btn-sm mr-2">Sesuai</button>
+                                                <button type="submit" name="status" value="tidak_sesuai"
+                                                    class="btn btn-danger btn-sm">Tidak Sesuai</button>
                                             </form>
                                         </td>
                                     </tr>
+                                @endforeach
+
+                                @if ($konfirmasiBayar->isEmpty())
+                                    <tr>
+                                        <td colspan="8" class="text-center">
+                                            <div class="alert alert-warning m-0">Tidak ada pembayaran yang masuk.</div>
+                                        </td>
+                                    </tr>
+                                @endif
                             </tbody>
                         </table>
+
                     </div>
-                    
+
 
 
 
