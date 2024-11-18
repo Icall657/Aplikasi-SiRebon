@@ -60,7 +60,8 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('wajib-retribusi.index') }}">
                         <i class="fa fa-anchor"></i>
-                        <span>Wajib Retribusi</span></a>
+                        <span>Wajib Retribusi</span>
+                    </a>
                 </li>
 
                 <hr class="sidebar-divider my-0">

@@ -20,6 +20,7 @@ class CreateWajibRetribusiTable extends Migration
             $table->string('no_hp', 16);
             $table->string('nik', 16);
             $table->text('alamat');
+            $table->char('status', 1);
             $table->unsignedBigInteger('id_kelurahan');
             $table->timestamps();
 

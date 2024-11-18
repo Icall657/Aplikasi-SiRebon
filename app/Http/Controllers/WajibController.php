@@ -41,13 +41,8 @@ class WajibController extends Controller
     {
         DB::beginTransaction();
         try {
-            // cari data wajib_retribusi berdasarkan id
             $wajib = WajibRetribusi::findOrFail($id);
-            $user = $wajib->user; // cari user yang terhubung
-            $wajib->delete(); // hapus data wajib_retribusi
-            if ($user) {
-                $user->delete(); // hapus juga usernya
-            }
+            $wajib->delete();
 
             DB::commit();
 
@@ -66,49 +61,25 @@ class WajibController extends Controller
 
     public function store(Request $request)
     {
-        Log::info('Data yang dimasukin:', $request->all());
+    $request->validate([
+        'nama' => 'required|string|max:255',
+        'no_hp' => 'required|string|max:15|regex:/^[0-9]+$/',
+        'nik' => 'required|string|regex:/^[0-9]+$/',
+        'alamat' => 'required|string|max:255',
+        'id_kelurahan' => 'required|exists:kelurahan,id',
+        'status' => 'required|in:A,B',
+    ]);
 
-        // validasi inputan, biar ga salah
-        $request->validate([
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8',
-            'nama' => 'required|string|max:255',
-            'no_hp' => 'required|string|max:15',
-            'nik' => 'required|string|max:16',
-            'alamat' => 'required|string|max:255',
-            'id_kelurahan' => 'required|exists:kelurahan,id',
-        ]);
+    WajibRetribusi::create([
+        'id_user' => auth()->id(),
+        'nama' => $request->nama,
+        'no_hp' => $request->no_hp,
+        'nik' => $request->nik,
+        'alamat' => $request->alamat,
+        'id_kelurahan' => $request->id_kelurahan,
+        'status' => $request->status,
+    ]);
 
-        DB::beginTransaction();
-
-        try {
-            // bikin user baru
-            $user = User::create([
-                'username' => $request->nama,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'level' => 'Wajib Retribusi',
-            ]);
-
-            // bikin data wajib_retribusi yang nyambung ke user baru
-            WajibRetribusi::create([
-                'id_user' => $user->id,
-                'nama' => $request->nama,
-                'no_hp' => $request->no_hp,
-                'nik' => $request->nik,
-                'alamat' => $request->alamat,
-                'id_kelurahan' => $request->id_kelurahan,
-            ]);
-
-            DB::commit();
-
-            Log::info('Data udah ke-save dengan baik.');
-
-            return redirect()->route('wajib-retribusi.index')->with('success', 'Data berhasil dimasukin, bro!');
-        } catch (\Exception $e) {
-            DB::rollback();
-            Log::error('Error pas nyimpen data:', ['error' => $e->getMessage()]);
-            return redirect()->back()->with('error', 'Aduh, ada masalah pas nambahin data.');
-        }
-    }
+    return redirect()->route('wajib-retribusi.index')->with('success', 'Data berhasil ditambahkan.');
+    }    
 }

@@ -256,7 +256,7 @@
                                 @foreach ($kapals as $key => $kapal)
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
-                                        <td>{{ $kapal->user->username ?? 'Tidak ada pemilik' }}</td>
+                                        <td>{{ $kapal->user->wajibRetribusi->nama ?? 'Tidak ada pemilik' }}</td>
                                         <td>{{ $kapal->nama_kapal }}</td>
                                         @if (auth()->user()->level == 'Wajib Retribusi')
                                             <td>Rp

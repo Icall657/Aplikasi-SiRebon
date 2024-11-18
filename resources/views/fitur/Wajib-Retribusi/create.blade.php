@@ -36,33 +36,35 @@
                             <div class="form-group mb-3">
                                 <label for="nama">Nama Lengkap</label>
                                 <input type="text" name="nama" id="nama" class="form-control" value="{{ old('nama') }}" placeholder="Masukkan Nama Lengkap" required autocomplete="off">
+                                @error('nama')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
-                            <div class="form-group mb-3">
-                                <label for="email">Email</label>
-                                <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}" placeholder="Masukkan Email" required autocomplete="off">
-                            </div>
-                            <div class="form-group mb-3">
-                                <label for="password">Password</label>
-                                <div class="input-group">
-                                    <input type="password" name="password" id="password" class="form-control" placeholder="Masukkan Password" required autocomplete="off" minlength="8" pattern="^(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$">
-                                    <button type="button" class="btn btn-outline-secondary" onclick="togglePassword()">
-                                        <i class="fa fa-eye" id="toggleIcon"></i>
-                                    </button>
-                                </div>
-                                <small class="form-text text-muted">Password harus minimal 8 karakter dan mengandung setidaknya 1 karakter khusus.</small>
-                            </div>
+                        
                             <div class="form-group mb-3">
                                 <label for="no_hp">Nomor Telepon</label>
                                 <input type="text" name="no_hp" id="no_hp" class="form-control" value="{{ old('no_hp') }}" placeholder="Masukkan Nomor Telepon" required autocomplete="off">
+                                @error('no_hp')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
+                        
                             <div class="form-group mb-3">
                                 <label for="nik">NIK</label>
                                 <input type="text" name="nik" id="nik" class="form-control" value="{{ old('nik') }}" placeholder="Masukkan NIK" required autocomplete="off">
+                                @error('nik')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
+                        
                             <div class="form-group mb-3">
                                 <label for="alamat">Alamat</label>
                                 <textarea name="alamat" id="alamat" class="form-control" placeholder="Masukkan Alamat" required autocomplete="off">{{ old('alamat') }}</textarea>
+                                @error('alamat')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
+                        
                             <div class="form-group mb-3">
                                 <label for="id_kelurahan">Kelurahan</label>
                                 <select name="id_kelurahan" id="id_kelurahan" class="form-control" required>
@@ -73,28 +75,26 @@
                                         </option>
                                     @endforeach
                                 </select>
+                                @error('id_kelurahan')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
-
+                        
+                            <div class="form-group mb-3">
+                                <label for="status">Status</label>
+                                <select name="status" id="status" class="form-control" required>
+                                    <option value="" disabled selected>Pilih Status</option>
+                                    <option value="A" {{ old('status') == 'A' ? 'selected' : '' }}>A (Aktif)</option>
+                                    <option value="B" {{ old('status') == 'B' ? 'selected' : '' }}>B (Tidak Aktif)</option>
+                                </select>
+                                @error('status')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        
                             <button type="submit" class="btn btn-primary">Simpan Data</button>
                             <a href="{{ route('wajib-retribusi.index') }}" class="btn btn-secondary">Batal</a>
-                        </form>
-                        
-                        
-                        <script>
-                        function togglePassword() {
-                            const passwordField = document.getElementById('password');
-                            const toggleIcon = document.getElementById('toggleIcon');
-                            if (passwordField.type === 'password') {
-                                passwordField.type = 'text';
-                                toggleIcon.classList.remove('fa-eye');
-                                toggleIcon.classList.add('fa-eye-slash');
-                            } else {
-                                passwordField.type = 'password';
-                                toggleIcon.classList.remove('fa-eye-slash');
-                                toggleIcon.classList.add('fa-eye');
-                            }
-                        }
-                        </script>
+                        </form>                        
                     </div>
                 </div>
             </div>

@@ -81,7 +81,7 @@
                 </li>
 
                 <hr class="sidebar-divider">
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="{{ route('kapalku.index') }}">
                         <i class="fa fa-ship"></i>
                         <span>Kapalku</span></a>
@@ -231,7 +231,7 @@
                             <a href="{{ route('wajib-retribusi.create') }}" class="btn btn-primary btn-add">Tambah
                                 Data</a>
                         </div>
-
+                    @if (auth()->user()->level == 'Admin Aplikasi')
                         <table class="table table-bordered mt-3">
                             <thead class="table-light">
                                 <tr>
@@ -292,7 +292,7 @@
                                 });
                             }
                         </script>
-
+                    @endif
                     </div>
                     <!-- ISI KONTEN -->
 
