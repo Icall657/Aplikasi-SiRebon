@@ -40,14 +40,16 @@
                             <div class="row mb-3">
                                 <label class="col-sm-3 col-form-label" for="id_user">Nama Pemilik</label>
                                 <div class="col-sm-9">
-                                    <select name="id_user" id="id_user" class="form-select" required>
-                                        @foreach ($users as $user)
+                                <select name="id_user" class="form-control">
+                                    @foreach ($users as $user)
+                                        @if ($user->wajibRetribusi)
                                             <option value="{{ $user->id }}"
                                                 {{ $kapal->id_user == $user->id ? 'selected' : '' }}>
-                                                {{ $user->username }}
+                                                {{ $user->wajibRetribusi->nama }}
                                             </option>
-                                        @endforeach
-                                    </select>
+                                        @endif
+                                    @endforeach
+                                </select>
                                 </div>
                             </div>
                             <div class="row mb-3">

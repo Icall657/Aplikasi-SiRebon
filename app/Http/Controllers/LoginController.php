@@ -14,11 +14,9 @@ class LoginController extends Controller
 
     public function postlogin(Request $request)
     {
-        // Mengambil kredensial tanpa opsi remember me
         $credentials = $request->only('username', 'password');
 
         if (Auth::attempt($credentials)) {
-            // Cek level user untuk menentukan redirect
             $user = Auth::user();
 
             if ($user->level === 'Admin Aplikasi') {

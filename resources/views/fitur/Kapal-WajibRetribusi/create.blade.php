@@ -42,7 +42,7 @@
                                 <div class="col-sm-9">
                                     <select name="id_user" id="id_user" class="form-select" required>
                                         @foreach ($users as $user)
-                                            <option value="{{ $user->id }}">{{ $user->username }}</option>
+                                            <option value="{{ $user->id }}">{{ $user->wajibRetribusi->nama }}</option>
                                         @endforeach
                                     </select>
                                 </div>

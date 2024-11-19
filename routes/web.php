@@ -36,6 +36,7 @@ use App\Http\Controllers\BelumRetribusiController;
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::get('/login', [LoginController::class, 'halamanlogin'])->name('login');
 route::post('/postlogin', [LoginController::class, 'postlogin'])->name('postlogin');
 route::get('/logout', [LoginController::class, 'logout'])->name('logout');
