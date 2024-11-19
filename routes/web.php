@@ -1,20 +1,26 @@
 <?php
 
+use App\Models\User;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Password;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\WajibController;
+use Illuminate\Auth\Events\PasswordReset;
+use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\KapalkuController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\RekeningController;
-use App\Http\Controllers\KapalwajibController;
-use App\Http\Controllers\PembayaranController;
-use App\Http\Controllers\KonfirmasiController;
-use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\RetribusiController;
-use App\Http\Controllers\BelumRetribusiController;
+use App\Http\Controllers\KapalwajibController;
+use App\Http\Controllers\KonfirmasiController;
+use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\LupaPaswordController;
+use App\Http\Controllers\BelumRetribusiController;
 
 /*
 |--------------------------------------------------------------------------

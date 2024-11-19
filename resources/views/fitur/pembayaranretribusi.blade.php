@@ -248,7 +248,8 @@
                                 @foreach ($konfirmasiBayar as $index => $data)
                                     <tr>
                                         <td>{{ $index + 1 }}</td>
-                                        <td class="text-nowrap">{{ $data->user->wajibRetribusi->nama }}</td>
+                                        {{-- <td class="text-nowrap">{{ $data->user->wajibRetribusi->nama }}</td> --}}
+                                        <td>{{ $data->msRekening?->nama_akun }}</td>
                                         <td>{{ $data->msRekening?->no_rekening }}</td>
                                         <td class="text-center">
                                             @if ($data->file_bukti)
