@@ -25,8 +25,17 @@ class KonfirmasiController extends Controller
             'file_bukti' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
         ]);
 
-        $user = auth()->user();
+        if ($request->hasFile('file_bukti')) {
+            $file = $request->file('file_bukti');
+            $allowedExtensions = ['jpg', 'jpeg', 'png', 'pdf'];
+            $fileExtension = $file->getClientOriginalExtension();
 
+            if (!in_array($fileExtension, $allowedExtensions)) {
+                return back()->withErrors(['file_bukti' => 'File yang diupload tidak dikenal. Harap unggah file dengan ekstensi jpg, jpeg, png, atau pdf.']);
+            }
+        }
+
+        $user = auth()->user();
         $msRekening = MsRekening::find($request->id_ms_rekening);
 
         if (!$msRekening) {

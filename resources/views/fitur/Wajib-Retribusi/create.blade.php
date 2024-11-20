@@ -34,29 +34,49 @@
                         <form action="{{ route('wajib-retribusi.store') }}" method="POST">
                             @csrf
                             <div class="form-group mb-3">
+                                <label for="id_user">Pilih Nama Pengguna</label>
+                                <select name="id_user" id="id_user" class="form-control" required>
+                                    <option value="" disabled selected>Pilih Nama Pengguna</option>
+                                    @foreach ($users as $user)
+                                        <option value="{{ $user->id }}"
+                                            {{ old('id_user') == $user->id ? 'selected' : '' }}>
+                                            {{ $user->username }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('id_user')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group mb-3">
                                 <label for="nama">Nama Lengkap</label>
-                                <input type="text" name="nama" id="nama" class="form-control" value="{{ old('nama') }}" placeholder="Masukkan Nama Lengkap" required autocomplete="off">
+                                <input type="text" name="nama" id="nama" class="form-control"
+                                    value="{{ old('nama') }}" placeholder="Masukkan Nama Lengkap" required
+                                    autocomplete="off">
                                 @error('nama')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                        
+
                             <div class="form-group mb-3">
                                 <label for="no_hp">Nomor Telepon</label>
-                                <input type="text" name="no_hp" id="no_hp" class="form-control" value="{{ old('no_hp') }}" placeholder="Masukkan Nomor Telepon" required autocomplete="off">
+                                <input type="text" name="no_hp" id="no_hp" class="form-control"
+                                    value="{{ old('no_hp') }}" placeholder="Masukkan Nomor Telepon" required
+                                    autocomplete="off">
                                 @error('no_hp')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                        
+
                             <div class="form-group mb-3">
                                 <label for="nik">NIK</label>
-                                <input type="text" name="nik" id="nik" class="form-control" value="{{ old('nik') }}" placeholder="Masukkan NIK" required autocomplete="off">
+                                <input type="text" name="nik" id="nik" class="form-control"
+                                    value="{{ old('nik') }}" placeholder="Masukkan NIK" required autocomplete="off">
                                 @error('nik')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                        
+
                             <div class="form-group mb-3">
                                 <label for="alamat">Alamat</label>
                                 <textarea name="alamat" id="alamat" class="form-control" placeholder="Masukkan Alamat" required autocomplete="off">{{ old('alamat') }}</textarea>
@@ -64,13 +84,14 @@
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                        
+
                             <div class="form-group mb-3">
                                 <label for="id_kelurahan">Kelurahan</label>
                                 <select name="id_kelurahan" id="id_kelurahan" class="form-control" required>
                                     <option value="" disabled selected>Pilih Kelurahan</option>
                                     @foreach ($kelurahans as $kelurahan)
-                                        <option value="{{ $kelurahan->id }}" {{ old('id_kelurahan') == $kelurahan->id ? 'selected' : '' }}>
+                                        <option value="{{ $kelurahan->id }}"
+                                            {{ old('id_kelurahan') == $kelurahan->id ? 'selected' : '' }}>
                                             {{ $kelurahan->nama_kelurahan }}
                                         </option>
                                     @endforeach
@@ -79,30 +100,32 @@
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                        
+
                             <div class="form-group mb-3">
                                 <label for="status">Status</label>
                                 <select name="status" id="status" class="form-control" required>
                                     <option value="" disabled selected>Pilih Status</option>
-                                    <option value="A" {{ old('status') == 'A' ? 'selected' : '' }}>A (Aktif)</option>
-                                    <option value="B" {{ old('status') == 'B' ? 'selected' : '' }}>B (Tidak Aktif)</option>
+                                    <option value="A" {{ old('status') == 'A' ? 'selected' : '' }}>A (Aktif)
+                                    </option>
+                                    <option value="B" {{ old('status') == 'B' ? 'selected' : '' }}>B (Tidak Aktif)
+                                    </option>
                                 </select>
                                 @error('status')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                        
+
                             <button type="submit" class="btn btn-primary">Simpan Data</button>
                             <a href="{{ route('wajib-retribusi.index') }}" class="btn btn-secondary">Batal</a>
-                        </form>                        
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <!-- Skrip Bootstrap dan tambahan lainnya tetap sama seperti di atas -->
-    
+
 
     <!-- Skrip Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

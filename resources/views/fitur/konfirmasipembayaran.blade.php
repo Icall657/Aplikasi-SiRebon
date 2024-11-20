@@ -228,10 +228,16 @@
                     <!-- Content Row -->
                     <form action="{{ route('konfirmasi.confirm') }}" method="post" enctype="multipart/form-data">
                         @csrf
-                        
+
                         @if (session('success'))
                             <div class="alert alert-success">
                                 {{ session('success') }}
+                            </div>
+                        @endif
+
+                        @if ($errors->has('file_bukti'))
+                            <div class="alert alert-danger">
+                                {{ $errors->first('file_bukti') }}
                             </div>
                         @endif
 
@@ -269,7 +275,8 @@
 
                         <div class="form-group">
                             <label for="file_bukti">Bukti Pembayaran</label>
-                            <input type="file" name="file_bukti" id="file_bukti" class="form-control" accept="image/*" required>
+                            <input type="file" name="file_bukti" id="file_bukti" class="form-control"
+                                accept="image/*" required>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Kirim</button>

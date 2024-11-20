@@ -32,16 +32,19 @@
                         <form action="{{ route('kategori-retribusi.update', $kategori->id) }}" method="POST">
                             @csrf
                             @method('PUT')
-
+                        
                             <div class="form-group mb-3">
                                 <label for="kategori">Nama Kategori</label>
                                 <input type="text" name="kategori" id="kategori" class="form-control"
-                                    value="{{ $kategori->kategori }}" required>
+                                    value="{{ old('kategori', $kategori->kategori) }}" required autocomplete="off">
+                                @error('kategori')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
-
+                        
                             <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                             <a href="{{ route('kategori-retribusi.index') }}" class="btn btn-secondary">Batal</a>
-                        </form>
+                        </form>                        
                     </div>
                 </div>
             </div>

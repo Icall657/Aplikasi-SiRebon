@@ -32,34 +32,47 @@
                         <hr>
                         <form action="{{ route('rekening.store') }}" method="POST">
                             @csrf
+
                             <div class="row mb-3">
                                 <label class="col-sm-3 col-form-label" for="id_ref_bank">Nama Bank</label>
                                 <div class="col-sm-9">
-                                    <select name="id_ref_bank" id="id_ref_bank" class="form-select">
+                                    <select name="id_ref_bank" id="id_ref_bank" class="form-select" required>
+                                        <option value="" disabled selected>Pilih Nama Bank</option>
                                         @foreach ($refBanks as $bank)
-                                            <option value="{{ $bank->id }}">{{ $bank->nama_bank }}</option>
+                                            <option value="{{ $bank->id }}"
+                                                {{ old('id_ref_bank') == $bank->id ? 'selected' : '' }}>
+                                                {{ $bank->nama_bank }}
+                                            </option>
                                         @endforeach
                                     </select>
+                                    @error('id_ref_bank')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
 
-                            <!-- Nama Akun -->
                             <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label">Nama Akun</label>
+                                <label class="col-sm-3 col-form-label" for="nama_akun">Nama Akun</label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="nama_akun" class="form-control" required autocomplete="off">
+                                    <input type="text" name="nama_akun" class="form-control"
+                                        value="{{ old('nama_akun') }}" required autocomplete="off">
+                                    @error('nama_akun')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
 
-                            <!-- Nomor Rekening -->
                             <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label">Nomor Rekening</label>
+                                <label class="col-sm-3 col-form-label" for="no_rekening">Nomor Rekening</label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="no_rekening" class="form-control" required autocomplete="off">
+                                    <input type="text" name="no_rekening" class="form-control"
+                                        value="{{ old('no_rekening') }}" required autocomplete="off">
+                                    @error('no_rekening')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
 
-                            <!-- Tombol Simpan -->
                             <button type="submit" class="btn btn-primary mt-4">Simpan</button>
                             <a href="{{ route('rekening.index') }}" class="btn btn-secondary mt-4">Kembali</a>
                         </form>
@@ -68,7 +81,7 @@
             </div>
         </div>
     </div>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>

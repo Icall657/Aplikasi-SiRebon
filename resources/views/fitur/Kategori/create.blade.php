@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +19,9 @@
         background-color: #4E73DF;
     }
 </style>
+
 <body>
+
     <body>
         <div class="container mt-5">
             <div class="row justify-content-center">
@@ -29,12 +32,17 @@
                             <hr>
                             <form action="{{ route('kategori-retribusi.store') }}" method="POST">
                                 @csrf
-    
+
                                 <div class="form-group mb-3">
                                     <label for="kategori">Nama Kategori</label>
-                                    <input type="text" name="kategori" id="kategori" class="form-control" placeholder="Masukkan nama kategori retribusi" required>
+                                    <input type="text" name="kategori" id="kategori" class="form-control"
+                                        placeholder="Masukkan nama kategori retribusi" value="{{ old('kategori') }}"
+                                        required autocomplete="off">
+                                    @error('kategori')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
-    
+
                                 <button type="submit" class="btn btn-primary">Tambah</button>
                                 <a href="{{ route('kategori-retribusi.index') }}" class="btn btn-secondary">Kembali</a>
                             </form>
@@ -45,4 +53,5 @@
         </div>
     </body>
 </body>
+
 </html>

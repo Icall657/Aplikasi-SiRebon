@@ -33,31 +33,45 @@
                         <form action="{{ route('wajib-retribusi.update', $wajib->id) }}" method="POST">
                             @csrf
                             @method('PUT')
+
                             <div class="form-group mb-3">
                                 <label for="nama">Nama Lengkap</label>
                                 <input type="text" name="nama" id="nama" class="form-control"
-                                    value="{{ $wajib->nama }}" required>
+                                    value="{{ old('nama', $wajib->nama) }}" required>
+                                @error('nama')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="form-group mb-3">
                                 <label for="no_hp">Nomor Telepon</label>
                                 <input type="text" name="no_hp" id="no_hp" class="form-control"
-                                    value="{{ $wajib->no_hp }}" required>
+                                    value="{{ old('no_hp', $wajib->no_hp) }}" required>
+                                @error('no_hp')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="form-group mb-3">
                                 <label for="nik">NIK</label>
                                 <input type="text" name="nik" id="nik" class="form-control"
-                                    value="{{ $wajib->nik }}" required>
+                                    value="{{ old('nik', $wajib->nik) }}" required>
+                                @error('nik')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="form-group mb-3">
                                 <label for="alamat">Alamat</label>
-                                <textarea name="alamat" id="alamat" class="form-control" required>{{ $wajib->alamat }}</textarea>
+                                <textarea name="alamat" id="alamat" class="form-control" required>{{ old('alamat', $wajib->alamat) }}</textarea>
+                                @error('alamat')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
+
                             <div class="form-group mb-3">
-                                <label for="kelurahan">Kelurahan</label>
-                                <select name="id_kelurahan" id="kelurahan" class="form-control" required>
+                                <label for="id_kelurahan">Kelurahan</label>
+                                <select name="id_kelurahan" id="id_kelurahan" class="form-control" required>
                                     <option value="" disabled>Pilih Kelurahan</option>
                                     @foreach ($kelurahans as $kelurahan)
                                         <option value="{{ $kelurahan->id }}"
@@ -66,7 +80,11 @@
                                         </option>
                                     @endforeach
                                 </select>
+                                @error('id_kelurahan')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
+
                             <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                             <a href="{{ route('wajib-retribusi.index') }}" class="btn btn-secondary">Batal</a>
                         </form>

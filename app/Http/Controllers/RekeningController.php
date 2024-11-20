@@ -24,17 +24,18 @@ class RekeningController extends Controller
 
     public function store(Request $request)
     {
-        // validasi input rekening biar valid
         $request->validate([
             'id_ref_bank' => 'required|exists:ref_bank,id',
-            'nama_akun' => 'required|string|max:50',
-            'no_rekening' => 'required|string|max:50',
+            'nama_akun' => 'required|string|max:50|unique:ms_rekening,nama_akun',
+            'no_rekening' => 'required|string|digits:12|max:50|unique:ms_rekening,no_rekening',
+        ], [
+            'nama_akun.unique' => 'Nama akun sudah terdaftar. Silakan pilih nama akun lain.',
+            'no_rekening.digits' => 'Nomor rekening harus terdiri dari 12 digit.',
+            'no_rekening.unique' => 'Nomor rekening sudah terdaftar. Silakan pilih nomor rekening lain.',
         ]);
 
-        // simpan data rekening baru ke database
         MsRekening::create(attributes: $request->all());
 
-        // balik ke halaman rekening dengan pesan sukses
         return redirect()->route('rekening.index')->with('success', 'Data rekening berhasil ditambahkan.');
     }
 
@@ -42,7 +43,7 @@ class RekeningController extends Controller
     {
         // cari data rekening berdasarkan id
         $data = MsRekening::findOrFail($id);
-        
+
         // hapus data rekening
         $data->delete();
 
