@@ -70,7 +70,7 @@ class KapalwajibController extends Controller
     {
         // ambil data kapal sesuai id buat diedit
         $kapal = Kapal::findOrFail($id);
-        $users = User::all();
+        $users = User::with('wajibRetribusi')->get();
         $refJenisKapals = RefJenisKapal::all();
 
         return view('fitur.Kapal-WajibRetribusi.edit', compact('kapal', 'users', 'refJenisKapals'));
