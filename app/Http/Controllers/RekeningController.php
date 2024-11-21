@@ -26,7 +26,7 @@ class RekeningController extends Controller
     {
         $request->validate([
             'id_ref_bank' => 'required|exists:ref_bank,id',
-            'nama_akun' => 'required|string|max:50|unique:ms_rekening,nama_akun',
+            'nama_akun' => 'required|string|max:50',
             'no_rekening' => 'required|string|digits:12|max:50|unique:ms_rekening,no_rekening',
         ], [
             'nama_akun.unique' => 'Nama akun sudah terdaftar. Silakan pilih nama akun lain.',
