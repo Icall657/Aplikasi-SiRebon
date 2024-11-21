@@ -23,8 +23,19 @@ class KonfirmasiController extends Controller
             'nominal_transfer' => 'required|numeric',
             'id_ms_rekening' => 'required|exists:ms_rekening,id',
             'file_bukti' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
+        ], [
+            'id_ref_bank.required' => 'Jenis bank harus dipilih.',
+            'id_ref_bank.exists' => 'Jenis bank yang dipilih tidak valid.',
+            'nominal_transfer.required' => 'Nominal transfer harus diisi.',
+            'nominal_transfer.numeric' => 'Nominal transfer harus berupa angka.',
+            'id_ms_rekening.required' => 'Nomor rekening harus dipilih.',
+            'id_ms_rekening.exists' => 'Nomor rekening yang dipilih tidak valid.',
+            'file_bukti.required' => 'File bukti pembayaran harus diunggah.',
+            'file_bukti.file' => 'Field bukti pembayaran harus berupa file.',
+            'file_bukti.mimes' => 'Bukti pembayaran harus berupa file dengan tipe: jpg, jpeg, png, atau pdf.',
+            'file_bukti.max' => 'File bukti pembayaran maksimal 2MB.',
         ]);
-
+        
         if ($request->hasFile('file_bukti')) {
             $file = $request->file('file_bukti');
             $allowedExtensions = ['jpg', 'jpeg', 'png', 'pdf'];
@@ -40,6 +51,15 @@ class KonfirmasiController extends Controller
 
         if (!$msRekening) {
             return back()->withErrors(['id_ms_rekening' => 'Rekening tidak ditemukan.']);
+        }
+
+        $refBank = RefBank::find($request->id_ref_bank);
+        if ($msRekening->id_ref_bank != $refBank->id) {
+            return back()->withErrors(['id_ref_bank' => 'Nama bank tidak sesuai dengan rekening yang dipilih.']);
+        }
+
+        if ($msRekening->no_rekening != $request->no_rekening) {
+            return back()->withErrors(['no_rekening' => 'Nomor rekening tidak sesuai.']);
         }
 
         $filePath = $request->file('file_bukti')->store('bukti_pembayaran', 'public');

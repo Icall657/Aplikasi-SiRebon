@@ -228,19 +228,13 @@
                     <!-- Content Row -->
                     <form action="{{ route('konfirmasi.confirm') }}" method="post" enctype="multipart/form-data">
                         @csrf
-
+                    
                         @if (session('success'))
                             <div class="alert alert-success">
                                 {{ session('success') }}
                             </div>
                         @endif
-
-                        @if ($errors->has('file_bukti'))
-                            <div class="alert alert-danger">
-                                {{ $errors->first('file_bukti') }}
-                            </div>
-                        @endif
-
+                    
                         <div class="form-group">
                             <label for="id_ref_bank">Jenis Bank</label>
                             <select id="id_ref_bank" name="id_ref_bank" class="form-control" required>
@@ -252,14 +246,21 @@
                                     </option>
                                 @endforeach
                             </select>
+                            @if ($errors->has('id_ref_bank'))
+                                <small class="text-danger">{{ $errors->first('id_ref_bank') }}</small>
+                            @endif
                         </div>
-
+                    
                         <div class="form-group">
-                            <label for="nominal_transfer">Nominal Transfer</label>
-                            <input type="number" id="nominal_transfer" name="nominal_transfer" class="form-control"
-                                required>
+                            <label for="nominal_transfer">Nominal Transfer (Rp)</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Rp</span>
+                                </div>
+                                <input type="number" id="nominal_transfer" name="nominal_transfer" class="form-control" required autocomplete="off">
+                            </div>
                         </div>
-
+                    
                         <div class="form-group">
                             <label for="id_ms_rekening">Nomor Rekening</label>
                             <select id="id_ms_rekening" name="id_ms_rekening" class="form-control" required>
@@ -271,18 +272,21 @@
                                     </option>
                                 @endforeach
                             </select>
+                            @if ($errors->has('id_ms_rekening'))
+                                <small class="text-danger">{{ $errors->first('id_ms_rekening') }}</small>
+                            @endif
                         </div>
-
+                    
                         <div class="form-group">
                             <label for="file_bukti">Bukti Pembayaran</label>
-                            <input type="file" name="file_bukti" id="file_bukti" class="form-control"
-                                accept="image/*" required>
+                            <input type="file" name="file_bukti" id="file_bukti" class="form-control" accept="image/*" required>
+                            @if ($errors->has('file_bukti'))
+                                <small class="text-danger">{{ $errors->first('file_bukti') }}</small>
+                            @endif
                         </div>
-
+                    
                         <button type="submit" class="btn btn-primary">Kirim</button>
                     </form>
-
-
                     <!-- ISI KONTEN -->
 
                     <!-- Content Row -->

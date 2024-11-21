@@ -11,10 +11,12 @@ class ProfilController extends Controller
 {
     public function index()
     {
-        // ambil data wajib retribusi berdasarkan user yang login
-        $wajibRetribusi = WajibRetribusi::where('id_user', auth()->user()->id)->get();
+        $user = auth()->user();
+        $wajibRetribusi = WajibRetribusi::where('id_user', $user->id)->first();
+
         return view('fitur.profil', compact('wajibRetribusi'));
     }
+
 
     public function update(Request $request)
     {
@@ -56,12 +58,10 @@ class ProfilController extends Controller
             return back()->with('error', 'password lama salah');
         }
 
-        // cek password baru dan konfirmasi password
         if ($request->new_password != $request->password_confirmation) {
             return back()->with('error', 'password baru dan konfirmasi password tidak sama');
         }
 
-        // update password user
         auth()->user()->update([
             'password' => Hash::make($request->new_password)
         ]);

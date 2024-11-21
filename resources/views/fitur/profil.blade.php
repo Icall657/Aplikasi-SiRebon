@@ -244,17 +244,17 @@
                                 </div>
                             </div>
 
-                            @if ($wajib = auth()->user()->wajibRetribusi->first())
+                            @if ($wajibRetribusi)
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="nik">NIK</label>
                                         <input type="text" class="form-control" id="nik" name="nik"
-                                            value="{{ $wajib->nik }}">
+                                            value="{{ $wajibRetribusi->nik }}">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="namaLengkap">Nama Lengkap</label>
                                         <input type="text" class="form-control" id="namaLengkap"
-                                            name="namaLengkap" value="{{ $wajib->nama }}">
+                                            name="namaLengkap" value="{{ $wajibRetribusi->nama }}">
                                     </div>
                                 </div>
 
@@ -262,15 +262,16 @@
                                     <div class="form-group col-md-6">
                                         <label for="telepon">Telepon</label>
                                         <input type="text" class="form-control" id="telepon" name="telepon"
-                                            value="{{ $wajib->no_hp }}">
+                                            value="{{ $wajibRetribusi->no_hp }}">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="alamat">Alamat</label>
                                         <input type="text" class="form-control" id="alamat" name="alamat"
-                                            value="{{ $wajib->alamat }}">
+                                            value="{{ $wajibRetribusi->alamat }}">
                                     </div>
                                 </div>
                             @endif
+
 
                             <button type="submit" name="save" class="btn btn-primary mt-1">Simpan</button>
                         </form>
