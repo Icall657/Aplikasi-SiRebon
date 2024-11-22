@@ -50,6 +50,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('rekening', RekeningController::class);
     Route::resource('wajib-retribusi', WajibController::class);
     Route::resource('pembayaran-retribusi', PembayaranController::class);
+    Route::put('/update-status/{id}', [PembayaranController::class, 'updateStatus'])->name('konfirmasi-bayar.update-status');
     Route::resource('kategori-retribusi', KategoriController::class);
     Route::resource('kapal-wajib-retribusi', KapalwajibController::class);
     Route::resource('kapalku', KapalkuController::class);

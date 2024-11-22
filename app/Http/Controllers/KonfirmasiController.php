@@ -16,8 +16,7 @@ class KonfirmasiController extends Controller
         return view('fitur.konfirmasipembayaran', compact('banks', 'msRekenings'));
     }
 
-    public function confirm(Request $request)
-    {
+    public function confirm(Request $request){
         $request->validate([
             'id_ref_bank' => 'required|exists:ref_bank,id',
             'nominal_transfer' => 'required|numeric',
@@ -35,7 +34,7 @@ class KonfirmasiController extends Controller
             'file_bukti.mimes' => 'Bukti pembayaran harus berupa file dengan tipe: jpg, jpeg, png, atau pdf.',
             'file_bukti.max' => 'File bukti pembayaran maksimal 2MB.',
         ]);
-        
+
         if ($request->hasFile('file_bukti')) {
             $file = $request->file('file_bukti');
             $allowedExtensions = ['jpg', 'jpeg', 'png', 'pdf'];
@@ -58,10 +57,6 @@ class KonfirmasiController extends Controller
             return back()->withErrors(['id_ref_bank' => 'Nama bank tidak sesuai dengan rekening yang dipilih.']);
         }
 
-        if ($msRekening->no_rekening != $request->no_rekening) {
-            return back()->withErrors(['no_rekening' => 'Nomor rekening tidak sesuai.']);
-        }
-
         $filePath = $request->file('file_bukti')->store('bukti_pembayaran', 'public');
 
         $konfirmasiBayar = new KonfirmasiBayar();
@@ -74,8 +69,6 @@ class KonfirmasiController extends Controller
         $konfirmasiBayar->no_rekening_pemilik = $msRekening->no_rekening;
         $konfirmasiBayar->status = 'P';
         $konfirmasiBayar->save();
-        $konfirmasiBayar->tindaklanjut_tgl = now();
-        $konfirmasiBayar->tindaklanjut_user = 'admin';
 
         return redirect()->route('konfirmasi.index')->with('success', 'Terima kasih telah membayar retribusi. Mohon tunggu konfirmasi dari admin.');
     }
