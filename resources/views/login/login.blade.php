@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Login SiRebon</title>
+    <title>Login SiRepal</title>
 
     <!-- FontAwesome & Google Fonts -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
@@ -29,7 +29,7 @@
                                 <div class="brand-icon mb-3">
                                     <i class="fa fa-anchor fa-3x"></i>
                                 </div>
-                                <h3 class="mb-5"><strong>LOGIN SIREBON</strong></h3>
+                                <h3 class="mb-5"><strong>LOGIN SIREPAL</strong></h3>
 
                                 <div class="form-outline mb-4">
                                   <div style="text-align: left;">

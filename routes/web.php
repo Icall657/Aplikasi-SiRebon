@@ -58,9 +58,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/konfirmasi/confirm', [KonfirmasiController::class, 'confirm'])->name('konfirmasi.confirm');
     Route::resource('profil', ProfilController::class);
     Route::resource('retribusi', RetribusiController::class);
+    Route::resource('belum-retribusi', BelumRetribusiController::class);
 });
 
-Route::resource('belum-retribusi', BelumRetribusiController::class);
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/ganti-password', [ProfilController::class, 'gantiPassword'])->name('gantiPassword');
     Route::post('/ganti-password', [ProfilController::class, 'prosesGantiPassword'])->name('prosesGantiPassword');

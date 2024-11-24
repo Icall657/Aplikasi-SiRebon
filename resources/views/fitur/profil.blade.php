@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Aplikasi SiRebon</title>
+    <title>Aplikasi SiRepal</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -33,7 +33,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon">
-                    <img src="sirebon.png" alt="" style="width: 77px; height: 77px;">
+                    <img src="SiRepal.png" alt="" style="width: 77px; height: 77px;">
                 </div>
             </a>
 
@@ -275,7 +275,6 @@
 
                             <button type="submit" name="save" class="btn btn-primary mt-1">Simpan</button>
                         </form>
-
                     </div>
 
                     <br>
@@ -404,7 +403,7 @@
                 <footer class="sticky-footer bg-white">
                     <div class="container my-auto">
                         <div class="copyright text-center my-auto">
-                            <span>2024 &copy; SiRebon. Dinas Komunikasi, Informatika & Statistik.</span>
+                            <span>2024 &copy; SiRepal. Dinas Komunikasi, Informatika & Statistik.</span>
                         </div>
                     </div>
                 </footer>
