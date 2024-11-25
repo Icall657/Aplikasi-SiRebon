@@ -266,10 +266,23 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Rp</span>
                                 </div>
-                                <input type="number" id="nominal_transfer" name="nominal_transfer"
-                                    class="form-control" required autocomplete="off">
+                                <input type="text" id="nominal_transfer_display" class="form-control" required autocomplete="off"
+                                    oninput="formatRupiah(this)" placeholder="0">
+                                <input type="hidden" id="nominal_transfer" name="nominal_transfer">
                             </div>
                         </div>
+                        <script>
+                            function formatRupiah(input) {
+                                let rawValue = input.value.replace(/[^,\d]/g, '');
+                                
+                                let formattedValue = new Intl.NumberFormat('id-ID').format(rawValue);
+                        
+                                input.value = formattedValue;
+                        
+                                document.getElementById('nominal_transfer').value = rawValue;
+                            }
+                        </script>
+                                                
 
                         <div class="form-group">
                             <label for="id_ms_rekening">Nomor Rekening</label>

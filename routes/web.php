@@ -18,6 +18,7 @@ use App\Http\Controllers\RekeningController;
 use App\Http\Controllers\RetribusiController;
 use App\Http\Controllers\KapalwajibController;
 use App\Http\Controllers\KonfirmasiController;
+use App\Http\Controllers\MultiadminController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\LupaPaswordController;
 use App\Http\Controllers\BelumRetribusiController;
@@ -59,6 +60,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('profil', ProfilController::class);
     Route::resource('retribusi', RetribusiController::class);
     Route::resource('belum-retribusi', BelumRetribusiController::class);
+    Route::resource('multiadmin', MultiadminController::class);
 });
 
 Route::group(['middleware' => ['auth']], function () {

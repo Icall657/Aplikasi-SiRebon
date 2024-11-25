@@ -23,6 +23,8 @@ class LoginController extends Controller
                 return redirect()->route('home.index')->with('success', 'Selamat datang, Admin!');
             } elseif ($user->level === 'Wajib Retribusi') {
                 return redirect()->route('profil.index')->with('success', 'Selamat datang di halaman profil Anda!');
+            } elseif ($user->level === 'Multiadmin') {
+                return redirect()->route('multiadmin.index')->with('success', 'Selamat datang di halaman Multiadmin!');
             }
         }
 
@@ -31,10 +33,10 @@ class LoginController extends Controller
 
 
 
+
     public function logout()
     {
         Auth::logout();
         return redirect('/login');
     }
-    
 }
