@@ -238,11 +238,11 @@
                         <table class="table table-bordered mt-3">
                             <thead class="table-light">
                                 <tr>
-                                        <th style="width: 50px;">No.</th>
+                                    <th style="width: 50px;">No.</th>
                                     @if (auth()->user()->level == 'Admin Aplikasi')
                                         <th>Nama Pemilik</th>
                                     @endif
-                                        <th>Nama Kapal</th>
+                                    <th>Nama Kapal</th>
                                     @if (auth()->user()->level == 'Wajib Retribusi')
                                         <th>Nilai Retribusi</th>
                                         <th>Tanggal Pembayaran</th>
@@ -255,7 +255,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($kapals as $key => $kapal)
+                                @forelse ($kapals as $key => $kapal)
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
                                         @if (auth()->user()->level == 'Admin Aplikasi')
@@ -264,7 +264,7 @@
                                         <td>{{ $kapal->nama_kapal }}</td>
                                         @if (auth()->user()->level == 'Wajib Retribusi')
                                             <td>Rp
-                                                {{ number_format($kapal->jenisKapal->biaya_retribusi, 0, ',', '.') ?? 'Tidak ada biaya' }}
+                                                {{ number_format($kapal->jenisKapal->biaya_retribusi ?? 0, 0, ',', '.') }}
                                             </td>
                                             <td>{{ $kapal->created_at->format('d F Y') }}</td>
                                         @endif
@@ -286,7 +286,11 @@
                                             </td>
                                         @endif
                                     </tr>
-                                @endforeach
+                                @empty
+                                    <tr>
+                                        <td colspan="7" class="text-center">Tidak ada data tersedia.</td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                         <script>

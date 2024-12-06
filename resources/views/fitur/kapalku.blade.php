@@ -149,18 +149,21 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <form
+                    <form action="{{ route('kapalku.index') }}" method="GET"
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small"
-                                placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                            <input type="text" name="search" value="{{ request('search') }}"
+                                class="form-control bg-light border-0 small"
+                                placeholder="Cari nama kapal atau pemilik..." aria-label="Search"
+                                aria-describedby="basic-addon2">
                             <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
+                                <button class="btn btn-primary" type="submit">
                                     <i class="fas fa-search fa-sm"></i>
                                 </button>
                             </div>
                         </div>
                     </form>
+
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -223,7 +226,8 @@
                     <div class="row">
                         <div class="table-container">
                             <div class="d-flex justify-content-between align-items-center">
-                                <button class="btn btn-primary btn-add">Tambah Data</button>
+                                <a href="{{ route('kapalku.create') }}" class="btn btn-primary btn-add">Tambah
+                                    Data</a>
                             </div>
                         </div>
                     </div>
@@ -250,8 +254,15 @@
                                         {{ $kapal['jenis_kapal']['jenis_kapal'] ?? 'Tidak diketahui' }}</td>
                                     <td class="text-center">{{ $kapal['ukuran'] }}</td>
                                     <td class="text-center">
-                                        <a href="#" class="btn btn-primary btn-sm m-1">Ubah</a>
-                                        <a href="#" class="btn btn-danger btn-sm m-1">Hapus</a>
+                                        <a href="{{ route('kapalku.edit', $kapal['id']) }}"
+                                            class="btn btn-primary btn-sm m-1">Ubah</a>
+                                        <form action="{{ route('kapalku.destroy', $kapal['id']) }}" method="POST"
+                                            style="display:inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm m-1"
+                                                onclick="return confirm('yakin hapus data ini?')">hapus</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @empty

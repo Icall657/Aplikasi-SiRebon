@@ -9,7 +9,7 @@ class Kapal extends Model
 {
     use HasFactory;
 
-    protected $table = 'kapal'; // nama tabel yang digunakan
+    protected $table = 'kapal';
     protected $fillable = [
         'id_user',
         'nama_kapal',

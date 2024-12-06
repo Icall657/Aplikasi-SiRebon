@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kapal;
 use Illuminate\Http\Request;
 use App\Models\KonfirmasiBayar;
 

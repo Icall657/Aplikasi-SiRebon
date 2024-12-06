@@ -12,10 +12,19 @@ class KapalwajibController extends Controller
 {
     public function index()
     {
-        // ambil semua data kapal lengkap sama data relasinya, biar gampang akses info lain
-        $kapals = Kapal::with(['user', 'jenisKapal'])->get();
+        $user = auth()->user();
+
+        if ($user->level === 'Wajib Retribusi') {
+            $kapals = Kapal::with(['jenisKapal', 'user.wajibRetribusi'])
+                ->where('id_user', $user->id)
+                ->get();
+        } else {
+            $kapals = Kapal::with(['jenisKapal', 'user.wajibRetribusi'])->get();
+        }
+
         return view('fitur.kapalwajibretribusi', compact('kapals'));
     }
+
 
     public function create()
     {
