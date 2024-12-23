@@ -113,15 +113,9 @@
                 Laporan
             </div>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('retribusi.index') }}">
-                    <i class="fa fa-user"></i>
-                    <span>Retribusi</span></a>
-            </li>
-            <hr class="sidebar-divider">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('belum-retribusi.index') }}">
-                    <i class="fa fa-user-times"></i>
-                    <span>Belum Membayar Retribusi</span></a>
+                <a class="nav-link" href="{{ route('carilaporan.index') }}">
+                    <i class="fa fa-search"></i>
+                    <span>Cari Laporan</span></a>
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -232,7 +226,7 @@
                         </div>
 
                         <table class="table table-bordered text-center">
-                            <thead>
+                            <thead class="table-light">
                                 <tr>
                                     <th>No.</th>
                                     <th>Nama Lengkap</th>

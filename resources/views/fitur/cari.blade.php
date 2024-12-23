@@ -57,7 +57,7 @@
                 </li>
 
                 <hr class="sidebar-divider my-0">
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="{{ route('wajib-retribusi.index') }}">
                         <i class="fa fa-anchor"></i>
                         <span>Wajib Retribusi</span></a>
@@ -76,14 +76,14 @@
                 <hr class="sidebar-divider my-0">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('profil.index') }}">
-                        <i class="fa fa-address-card"></i>
+                        <i class="fa fa-user"></i>
                         <span>Profil</span></a>
                 </li>
 
                 <hr class="sidebar-divider">
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="{{ route('kapalku.index') }}">
-                        <i class="fa fa-ship"></i>
+                        <i class="fa fa-male"></i>
                         <span>Kapalku</span></a>
                 </li>
 
@@ -112,7 +112,7 @@
             <div class="sidebar-heading">
                 Laporan
             </div>
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="{{ route('carilaporan.index') }}">
                     <i class="fa fa-search"></i>
                     <span>Cari Laporan</span></a>
@@ -188,7 +188,7 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expandfed="false">
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span
                                     class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->level }}</span>
                                 <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
@@ -196,7 +196,19 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <!--- <div class="dropdown-divider"></div> -->
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Profile
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Settings
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Activity Log
+                                </a>
+                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="" data-toggle="modal"
                                     data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -220,75 +232,47 @@
                     </div>
 
                     <!-- Content Row -->
-                    <div class="table-container">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <a href="{{ route('wajib-retribusi.create') }}" class="btn btn-primary btn-add">Tambah
-                                Data</a>
-                        </div>
-                    @if (auth()->user()->level == 'Admin Aplikasi')
-                        <table class="table table-bordered mt-3">
-                            <thead class="table-light">
-                                <tr>
-                                    <th style="width: 50px;">No.</th>
-                                    <th>Nama Lengkap</th>
-                                    <th>Telepon</th>
-                                    <th>NIK</th>
-                                    <th>Alamat</th>
-                                    <th>Kelurahan</th>
-                                    <th style="width: 150px;">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @php
-                                    $no = 1;
-                                @endphp
-                                @foreach ($wajibRetribusi as $wajib)
-                                    <tr>
-                                        <td>{{ $no++ }}</td>
-                                        <td>{{ $wajib->nama }}</td>
-                                        <td>{{ $wajib->no_hp }}</td>
-                                        <td>{{ $wajib->nik }}</td>
-                                        <td>{{ $wajib->alamat }}</td>
-                                        <td>{{ $wajib->kelurahan->nama_kelurahan }}</td>
-                                        <td>
-                                            <div class="d-flex">
-                                                <a href="{{ route('wajib-retribusi.edit', $wajib->id) }}"
-                                                    class="btn btn-primary btn-sm m-1">Ubah</a>
-                                                <form id="deleteForm{{ $wajib->id }}"
-                                                    action="{{ route('wajib-retribusi.destroy', $wajib->id) }}"
-                                                    method="POST" style="display:inline;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="button" class="btn btn-danger btn-sm m-1"
-                                                        onclick="deleteData({{ $wajib->id }})">Hapus</button>
-                                                </form>
+
+                    <div class="container mt-5">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
+                                <div class="card shadow">
+                                    <div class="card-header bg-primary text-white text-center">
+                                        <h5 class="mb-0">Cari Laporan</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <form action="{{ route('laporan.index') }}" method="GET" autocomplete="off">
+                                            @csrf
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="tanggal_awal" class="font-weight-bold">Tanggal Awal</label>
+                                                        <input type="date" name="tanggal_awal" id="tanggal_awal" class="form-control rounded-pill" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="tanggal_akhir" class="font-weight-bold">Tanggal Akhir</label>
+                                                        <input type="date" name="tanggal_akhir" id="tanggal_akhir" class="form-control rounded-pill" required>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        <script>
-                            function deleteData(id) {
-                                Swal.fire({
-                                    title: 'Apakah Anda yakin?',
-                                    text: 'Data ini akan dihapus secara permanen!',
-                                    icon: 'warning',
-                                    showCancelButton: true,
-                                    confirmButtonColor: '#d33',
-                                    cancelButtonColor: '#3085d6',
-                                    confirmButtonText: 'Ya, hapus!',
-                                    cancelButtonText: 'Batal'
-                                }).then((result) => {
-                                    if (result.isConfirmed) {
-                                        document.getElementById('deleteForm' + id).submit();
-                                    }
-                                });
-                            }
-                        </script>
-                    @endif
+                                            <div class="text-center mt-4">
+                                                <button type="submit" class="btn btn-primary btn-lg rounded-pill">
+                                                    <i class="fas fa-search"></i> Cari Laporan
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="card-footer text-muted text-center">
+                                        Pilih rentang tanggal untuk melihat laporan
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <!-- ISI KONTEN -->
+                    
+
 
                     <!-- Content Row -->
 
@@ -341,7 +325,6 @@
 
 
     <!-- Bootstrap core JavaScript-->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 

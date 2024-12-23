@@ -27,12 +27,25 @@ class MultiadminController extends Controller
     public function store(Request $request)
     {
         // Validasi input utama untuk pengguna
-        $request->validate([
-            'username' => 'required|string|max:255|unique:users',
-            'level' => 'required|in:Wajib Retribusi,Admin Aplikasi,Multiadmin',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|string|min:8',
-        ]);
+        $request->validate(
+            [
+                'username' => 'required|string|max:255|unique:users',
+                'level' => 'required|in:Wajib Retribusi,Admin Aplikasi,Multiadmin',
+                'email' => 'required|email|max:255|unique:users',
+                'password' => 'required|string|min:8',
+            ],
+            [
+                'username.required' => 'Username harus diisi.',
+                'username.unique' => 'Username sudah digunakan, silakan pilih username lain.',
+                'level.required' => 'Level harus dipilih.',
+                'level.in' => 'Level yang dipilih tidak valid.',
+                'email.required' => 'Email harus diisi.',
+                'email.email' => 'Format email tidak valid.',
+                'email.unique' => 'Email sudah terdaftar, silakan gunakan email lain.',
+                'password.required' => 'Password harus diisi.',
+                'password.min' => 'Password minimal harus 8 karakter.',
+            ]
+        );
 
         $user = User::create([
             'username' => $request->username,
@@ -45,13 +58,24 @@ class MultiadminController extends Controller
         Log::info('User baru dibuat', ['id' => $user->id, 'username' => $user->username, 'level' => $user->level]);
 
         if ($request->level === 'Wajib Retribusi') {
-            $request->validate([
-                'nama' => 'required|string|max:255',
-                'no_hp' => 'required|string|max:15',
-                'nik' => 'required|string|max:16',
-                'alamat' => 'required|string',
-                'id_kelurahan' => 'required|exists:kelurahan,id',
-            ]);
+            $request->validate(
+                [
+                    'nama' => 'required|string|max:255',
+                    'no_hp' => 'required|string|max:15',
+                    'nik' => 'required|string|max:16',
+                    'alamat' => 'required|string',
+                    'id_kelurahan' => 'required|exists:kelurahan,id',
+                ],
+                [
+                    'nama.required' => 'Nama lengkap harus diisi.',
+                    'no_hp.required' => 'Nomor HP harus diisi.',
+                    'nik.required' => 'NIK harus diisi.',
+                    'nik.max' => 'NIK tidak boleh lebih dari 16 karakter.',
+                    'alamat.required' => 'Alamat harus diisi.',
+                    'id_kelurahan.required' => 'Kelurahan harus dipilih.',
+                    'id_kelurahan.exists' => 'Kelurahan yang dipilih tidak valid.',
+                ]
+            );
 
             try {
                 WajibRetribusi::create([

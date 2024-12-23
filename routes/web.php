@@ -5,6 +5,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CariController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Password;
 use App\Http\Controllers\LoginController;
@@ -48,6 +49,7 @@ route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('home', HomeController::class);
     Route::resource('laporan', LaporanController::class);
+    Route::resource('carilaporan', CariController::class);
     Route::resource('rekening', RekeningController::class);
     Route::resource('wajib-retribusi', WajibController::class);
     Route::resource('pembayaran-retribusi', PembayaranController::class);

@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\KonfirmasiBayar;
 
 class HomeController extends Controller
 {
     public function index(){
-        return view('home');
+        $jumlahSudahBayar = KonfirmasiBayar::where('status', 'Y')->count();
+        return view('home', compact('jumlahSudahBayar'));
     }
-
 }

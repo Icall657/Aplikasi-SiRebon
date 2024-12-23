@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,59 +41,58 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            @if (auth()->user()->level == "Admin Aplikasi")
-            <hr class="sidebar-divider my-0">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('home.index') }}">
-                    <i class="fa fa-home"></i>
-                    <span>beranda</span></a>
-            </li>
+            @if (auth()->user()->level == 'Admin Aplikasi')
+                <hr class="sidebar-divider my-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('home.index') }}">
+                        <i class="fa fa-home"></i>
+                        <span>beranda</span></a>
+                </li>
 
-            <hr class="sidebar-divider my-0">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('rekening.index') }}">
-                    <i class="fa fa-credit-card"></i>
-                    <span>Rekening Pembayaran Retribusi</span></a>
-            </li>
+                <hr class="sidebar-divider my-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('rekening.index') }}">
+                        <i class="fa fa-credit-card"></i>
+                        <span>Rekening Pembayaran Retribusi</span></a>
+                </li>
 
-            <hr class="sidebar-divider my-0">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('wajib-retribusi.index') }}">
-                    <i class="fa fa-anchor"></i>
-                    <span>Wajib Retribusi</span></a>
-            </li>
+                <hr class="sidebar-divider my-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('wajib-retribusi.index') }}">
+                        <i class="fa fa-anchor"></i>
+                        <span>Wajib Retribusi</span></a>
+                </li>
 
-            <hr class="sidebar-divider my-0">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('pembayaran-retribusi.index') }}">
-                    <i class="fa fa-dollar-sign"></i>
-                    <span>Pembayaran Retribusi</span></a>
-            </li>
+                <hr class="sidebar-divider my-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('pembayaran-retribusi.index') }}">
+                        <i class="fa fa-dollar-sign"></i>
+                        <span>Pembayaran Retribusi</span></a>
+                </li>
             @endif
 
             <!-- Divider -->
-            @if (auth()->user()->level == "Wajib Retribusi")
-            <hr class="sidebar-divider my-0">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('profil.index') }}">
-                    <i class="fa fa-user"></i>
-                    <span>Profil</span></a>
-            </li>
+            @if (auth()->user()->level == 'Wajib Retribusi')
+                <hr class="sidebar-divider my-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('profil.index') }}">
+                        <i class="fa fa-user"></i>
+                        <span>Profil</span></a>
+                </li>
 
-            <hr class="sidebar-divider">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('kapalku.index') }}">
-                    <i class="fa fa-male"></i>
-                    <span>Kapalku</span></a>
-            </li>
+                <hr class="sidebar-divider">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('kapalku.index') }}">
+                        <i class="fa fa-male"></i>
+                        <span>Kapalku</span></a>
+                </li>
 
-            <hr class="sidebar-divider">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('konfirmasi.index') }}">
-                    <i class="fa fa-check-circle"></i>
-                    <span>Konfirmasi Pembayaran Retribusi</span></a>
-            </li>
-
+                <hr class="sidebar-divider">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('konfirmasi.index') }}">
+                        <i class="fa fa-check-circle"></i>
+                        <span>Konfirmasi Pembayaran Retribusi</span></a>
+                </li>
             @endif
             <hr class="sidebar-divider">
             <li class="nav-item">
@@ -111,10 +109,13 @@
             </li>
 
             <hr class="sidebar-divider">
+            <div class="sidebar-heading">
+                Laporan
+            </div>
             <li class="nav-item active">
-                <a class="nav-link" href="{{ route('laporan.index') }}">
-                    <i class="fa fa-clipboard"></i>
-                    <span>Laporan</span></a>
+                <a class="nav-link" href="{{ route('carilaporan.index') }}">
+                    <i class="fa fa-search"></i>
+                    <span>Cari Laporan</span></a>
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -145,8 +146,8 @@
                     <form
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
+                            <input type="text" class="form-control bg-light border-0 small"
+                                placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="button">
                                     <i class="fas fa-search fa-sm"></i>
@@ -181,16 +182,16 @@
                                 </form>
                             </div>
                         </li>
-                        
+
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->level }}</span>
-                                <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                <span
+                                    class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->level }}</span>
+                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -208,7 +209,8 @@
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="" data-toggle="modal"
+                                    data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -226,12 +228,45 @@
                     <!-- Content Row -->
                     <div class="row">
 
-                        
+
                     </div>
 
                     <!-- Content Row -->
 
-                    <!-- ISI KONTEN -->
+                    <div class="container mt-5">
+                        <div class="table-container">
+                            <table class="table table-bordered table-striped">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th style="width: 50px;" class="text-center">No.</th>
+                                        <th style="width: 150px;" class="text-center">Nama Wajib Retribusi</th>
+                                        <th style="width: 150px;" class="text-center">Tanggal Bayar</th>
+                                        <th style="width: 180px;" class="text-center">Nominal Total Retribusi</th>
+                                        <th style="width: 150px;" class="text-center">Bank</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse ($laporan as $index => $data)
+                                        <tr>
+                                            <td class="text-center">{{ $index + 1 }}</td>
+                                            <td class="text-center">{{ $data->user->wajibRetribusi->nama ?? 'Nama Tidak Ditemukan' }}</td>
+                                            <td class="text-center">{{ \Carbon\Carbon::parse($data->tgl_bayar)->format('d-m-Y') }}</td>
+                                            <td class="text-center">Rp. {{ number_format($data->msRekening->nominal_total_retribusi, 0, ',', '.') }}</td>
+                                            <td class="text-center">{{ $data->refBank->nama_bank ?? 'Bank Tidak Ditemukan' }}</td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="5" class="text-center">Data tidak ditemukan untuk rentang tanggal yang dipilih.</td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    
+                    
+
 
                     <!-- Content Row -->
 
@@ -276,7 +311,7 @@
                 <div class="modal-body">Klik "Logout" Jika Anda Yakin Ingin Keluar</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="{{ route ('logout') }}">Logout</a>
+                    <a class="btn btn-primary" href="{{ route('logout') }}">Logout</a>
                 </div>
             </div>
         </div>
