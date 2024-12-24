@@ -251,7 +251,7 @@
                                             <td class="text-center">{{ $index + 1 }}</td>
                                             <td class="text-center">{{ $data->user->wajibRetribusi->nama ?? 'Nama Tidak Ditemukan' }}</td>
                                             <td class="text-center">{{ \Carbon\Carbon::parse($data->tgl_bayar)->format('d-m-Y') }}</td>
-                                            <td class="text-center">Rp. {{ number_format($data->msRekening->nominal_total_retribusi, 0, ',', '.') }}</td>
+                                            <td class="text-center">Rp. {{ number_format($data->nominal, 0, ',', '.') }}</td>
                                             <td class="text-center">{{ $data->refBank->nama_bank ?? 'Bank Tidak Ditemukan' }}</td>
                                         </tr>
                                     @empty

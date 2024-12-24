@@ -63,6 +63,7 @@ class KonfirmasiController extends Controller
         $konfirmasiBayar->id_user = $user->id;
         $konfirmasiBayar->id_ms_rekening = $request->id_ms_rekening;
         $konfirmasiBayar->file_bukti = $filePath;
+        $konfirmasiBayar->nominal = $request->nominal_transfer;
         $konfirmasiBayar->tgl_bayar = now();
         $konfirmasiBayar->nama_pemilik_rekening = $msRekening->nama_akun;
         $konfirmasiBayar->id_ref_bank = $request->id_ref_bank;

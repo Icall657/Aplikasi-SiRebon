@@ -16,6 +16,7 @@ class KonfirmasiBayar extends Model
         'id_user',
         'id_ms_rekening',
         'file_bukti',
+        'nominal',
         'tgl_bayar',
         'nama_pemilik_rekening',
         'id_ref_bank',

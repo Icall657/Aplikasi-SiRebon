@@ -281,7 +281,7 @@
                         <div class="form-group">
                             <label for="id_ms_rekening">Nomor Rekening</label>
                             <select id="id_ms_rekening" name="id_ms_rekening" class="form-control" required>
-                                <option value="" disabled selected>Pilih Rekening</option> <!-- Tambahkan disabled dan selected -->
+                                <option value="" disabled selected>Pilih Rekening</option>
                                 @foreach ($msRekenings as $rekening)
                                     <option value="{{ $rekening->id }}" {{ old('id_ms_rekening') == $rekening->id ? 'selected' : '' }}>
                                         {{ $rekening->no_rekening }} ({{ $rekening->nama_akun }})
