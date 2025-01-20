@@ -81,7 +81,6 @@ Route::post('/forgot-password', function (Request $request) {
 
     try {
         $status = Password::sendResetLink($request->only('email'));
-
     } catch (\Exception $e) {
         return back()->withErrors(['email' => 'Error: ' . $e->getMessage()]);
     }
@@ -89,14 +88,15 @@ Route::post('/forgot-password', function (Request $request) {
     return $status === Password::RESET_LINK_SENT
         ? back()->with(['status' => __('Kami telah mengirimkan tautan untuk mereset kata sandi Anda')])
         : back()->withErrors(['email' => __('Gagal mengirim tautan reset kata sandi')]);
-
 })->middleware('guest')->name('password.email');
+
 
 
 
 Route::get('/reset-password/{token}', function (string $token) {
     return view('login.reset_password', ['token' => $token]);
 })->middleware('guest')->name('password.reset');
+
 
 Route::post('/reset-password', function (Request $request) {
     $request->validate([
@@ -122,7 +122,6 @@ Route::post('/reset-password', function (Request $request) {
         'password.confirmed' => 'Konfirmasi password tidak cocok.',
     ]);
     
- 
     $status = Password::reset(
         $request->only('email', 'password', 'password_confirmation', 'token'),
         function (User $user, string $password) {
