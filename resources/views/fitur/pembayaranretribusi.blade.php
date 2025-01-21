@@ -221,10 +221,6 @@
 
                     <!-- Content Row -->
                     <div class="container">
-                        <div class="d-flex justify-content-between mb-3">
-                            <button class="btn btn-primary">Tambah Data</button>
-                        </div>
-
                         <table class="table table-bordered text-center">
                             <thead class="table-light">
                                 <tr>

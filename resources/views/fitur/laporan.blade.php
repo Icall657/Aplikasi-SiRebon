@@ -243,6 +243,7 @@
                                         <th style="width: 150px;" class="text-center">Tanggal Bayar</th>
                                         <th style="width: 180px;" class="text-center">Nominal Total Retribusi</th>
                                         <th style="width: 150px;" class="text-center">Bank</th>
+                                        <th style="width: 150px;" class="text-center">Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -253,6 +254,17 @@
                                             <td class="text-center">{{ \Carbon\Carbon::parse($data->tgl_bayar)->format('d-m-Y') }}</td>
                                             <td class="text-center">Rp. {{ number_format($data->nominal, 0, ',', '.') }}</td>
                                             <td class="text-center">{{ $data->refBank->nama_bank ?? 'Bank Tidak Ditemukan' }}</td>
+                                            <td class="text-center">
+                                                @if ($data->status == 'P')
+                                                    <span>Pending</span>
+                                                @elseif ($data->status == 'Y')
+                                                    <span>Disetujui</span>
+                                                @elseif ($data->status == 'N')
+                                                    <span>Tidak Disetujui</span>
+                                                @else
+                                                    <span>Status Tidak Diketahui</span>
+                                                @endif
+                                            </td>
                                         </tr>
                                     @empty
                                         <tr>

@@ -4,22 +4,25 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\KonfirmasiBayar;
+use Illuminate\Support\Facades\Auth;
 
 class LaporanController extends Controller
 {
-    // LaporanController.php
     public function index(Request $request)
     {
-        // Ambil input tanggal awal dan tanggal akhir dari request
         $tanggal_awal = $request->input('tanggal_awal');
         $tanggal_akhir = $request->input('tanggal_akhir');
+        $user = Auth::user();
 
-        // Query untuk mengambil data berdasarkan tanggal
-        $laporan = KonfirmasiBayar::with(['user', 'msRekening', 'refBank'])
-            ->whereBetween('tgl_bayar', [$tanggal_awal, $tanggal_akhir])
-            ->get();
+        $laporanQuery = KonfirmasiBayar::with(['user', 'msRekening', 'refBank'])
+            ->whereBetween('tgl_bayar', [$tanggal_awal, $tanggal_akhir]);
 
-        // Kirim data ke view laporan
+        if ($user->level === 'Wajib Retribusi') {
+            $laporanQuery->where('id_user', $user->id);
+        }
+
+        $laporan = $laporanQuery->get();
+
         return view('fitur.laporan', compact('laporan'));
     }
 }

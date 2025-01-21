@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\RefBank;
 use App\Models\Kelurahan;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\WajibRetribusi;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
+use App\Models\MsRekening;  // Tambahkan model MsRekening
 
 class MultiadminController extends Controller
 {
@@ -21,8 +23,10 @@ class MultiadminController extends Controller
     public function create()
     {
         $kelurahans = Kelurahan::all();
-        return view('fitur.Multiadmin.create', compact('kelurahans'));
+        $refBanks = RefBank::all(); // Query untuk mendapatkan data bank
+        return view('fitur.Multiadmin.create', compact('kelurahans', 'refBanks'));
     }
+
 
     public function store(Request $request)
     {
@@ -92,6 +96,37 @@ class MultiadminController extends Controller
             } catch (\Exception $e) {
                 Log::error('Error saat menambahkan data wajib_retribusi', ['error' => $e->getMessage(), 'user_id' => $user->id]);
                 return redirect()->route('multiadmin.index')->with('error', 'Gagal menambahkan data Wajib Retribusi.');
+            }
+        }
+
+        if ($request->level === 'Wajib Retribusi') {
+            $request->validate(
+                [
+                    'id_ref_bank' => 'required|exists:ref_bank,id',
+                    'nama_akun' => 'required|string|max:255',
+                    'no_rekening' => 'required|string|max:20',
+                ],
+                [
+                    'id_ref_bank.required' => 'Bank harus dipilih.',
+                    'id_ref_bank.exists' => 'Bank yang dipilih tidak valid.',
+                    'nama_akun.required' => 'Nama akun harus diisi.',
+                    'no_rekening.required' => 'Nomor rekening harus diisi.',
+                    'no_rekening.max' => 'Nomor rekening tidak boleh lebih dari 20 karakter.',
+                ]
+            );
+
+            try {
+                MsRekening::create([
+                    'id_user' => $user->id,
+                    'id_ref_bank' => $request->id_ref_bank,
+                    'nama_akun' => $request->nama_akun,
+                    'no_rekening' => $request->no_rekening,
+                ]);
+
+                Log::info('Data MsRekening berhasil ditambahkan', ['user_id' => $user->id, 'nama_akun' => $request->nama_akun]);
+            } catch (\Exception $e) {
+                Log::error('Error saat menambahkan data MsRekening', ['error' => $e->getMessage(), 'user_id' => $user->id]);
+                return redirect()->route('multiadmin.index')->with('error', 'Gagal menambahkan data rekening.');
             }
         }
 
