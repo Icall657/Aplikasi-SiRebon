@@ -10,7 +10,7 @@ class MsRekening extends Model
     use HasFactory;
 
     protected $table = 'ms_rekening';
-    protected $fillable = ['id_ref_bank', 'nama_akun', 'no_rekening'];
+    protected $fillable = ['id_ref_bank','id_user', 'nama_akun', 'no_rekening'];
 
     public function refBank()
     {
@@ -20,5 +20,10 @@ class MsRekening extends Model
     public function konfirmasiBayar()
     {
         return $this->hasMany(KonfirmasiBayar::class, 'id_ms_rekening');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user');
     }
 }

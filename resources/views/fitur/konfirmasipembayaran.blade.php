@@ -238,6 +238,14 @@
                             </div>
                         @endif
 
+                        @if (!session('success') && !$errors->any())
+                            <div class="alert alert-secondary">
+                                <strong>Informasi:</strong> Silakan transfer ke rekening <strong>172639482736</strong>
+                                dan
+                                unggah bukti screenshot pembayaran Anda.
+                            </div>
+                        @endif
+                        
                         <div class="form-group">
                             <label for="id_ref_bank">Jenis Bank</label>
                             <select id="id_ref_bank" name="id_ref_bank" class="form-control" required>
@@ -260,30 +268,31 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Rp</span>
                                 </div>
-                                <input type="text" id="nominal_transfer_display" class="form-control" required autocomplete="off"
-                                    oninput="formatRupiah(this)" placeholder="0">
+                                <input type="text" id="nominal_transfer_display" class="form-control" required
+                                    autocomplete="off" oninput="formatRupiah(this)" placeholder="0">
                                 <input type="hidden" id="nominal_transfer" name="nominal_transfer">
                             </div>
                         </div>
                         <script>
                             function formatRupiah(input) {
                                 let rawValue = input.value.replace(/[^,\d]/g, '');
-                                
+
                                 let formattedValue = new Intl.NumberFormat('id-ID').format(rawValue);
-                        
+
                                 input.value = formattedValue;
-                        
+
                                 document.getElementById('nominal_transfer').value = rawValue;
                             }
                         </script>
-                                                
+
 
                         <div class="form-group">
                             <label for="id_ms_rekening">Nomor Rekening</label>
                             <select id="id_ms_rekening" name="id_ms_rekening" class="form-control" required>
                                 <option value="" disabled selected>Pilih Rekening</option>
                                 @foreach ($msRekenings as $rekening)
-                                    <option value="{{ $rekening->id }}" {{ old('id_ms_rekening') == $rekening->id ? 'selected' : '' }}>
+                                    <option value="{{ $rekening->id }}"
+                                        {{ old('id_ms_rekening') == $rekening->id ? 'selected' : '' }}>
                                         {{ $rekening->no_rekening }} ({{ $rekening->nama_akun }})
                                     </option>
                                 @endforeach
@@ -292,7 +301,7 @@
                                 <small class="text-danger">{{ $errors->first('id_ms_rekening') }}</small>
                             @endif
                         </div>
-                        
+
 
                         <div class="form-group">
                             <label for="file_bukti">Bukti Pembayaran</label>

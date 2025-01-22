@@ -11,12 +11,15 @@ class KonfirmasiController extends Controller
 {
     public function index()
     {
+        $userId = auth()->id();
         $banks = RefBank::all();
-        $msRekenings = MsRekening::all();
+        $msRekenings = MsRekening::where('id_user', $userId)->get();
+
         return view('fitur.konfirmasipembayaran', compact('banks', 'msRekenings'));
     }
 
-    public function confirm(Request $request){
+    public function confirm(Request $request)
+    {
         $request->validate([
             'id_ref_bank' => 'required|exists:ref_bank,id',
             'nominal_transfer' => 'required|numeric',
