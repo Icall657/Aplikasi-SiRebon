@@ -232,41 +232,59 @@
                         <table class="table table-bordered mt-3">
                             <thead class="table-light">
                                 <tr>
-                                    <th style="width: 50px;">No.</th>
+                                    <th class="text-center" style="width: 50px;">No.</th>
                                     @if (auth()->user()->level == 'Admin Aplikasi')
-                                        <th>Nama Pemilik</th>
+                                        <th class="text-center">Nama Pemilik</th>
                                     @endif
-                                    <th>Nama Kapal</th>
+                                    <th class="text-center">Nama Kapal</th>
                                     @if (auth()->user()->level == 'Wajib Retribusi')
-                                        <th>Nilai Retribusi</th>
-                                        <th>Tanggal Pembayaran</th>
+                                        <th class="text-center">Nilai Retribusi</th>
+                                        <th class="text-center">Tanggal Pembayaran</th>
+                                        <th class="text-center">Status</th>
                                     @endif
                                     @if (auth()->user()->level == 'Admin Aplikasi')
-                                        <th>Jenis Kapal</th>
-                                        <th>Ukuran</th>
-                                        <th style="width: 150px;">Aksi</th>
+                                        <th class="text-center">Jenis Kapal</th>
+                                        <th class="text-center">Ukuran</th>
+                                        <th class="text-center" style="width: 150px;">Aksi</th>
                                     @endif
                                 </tr>
                             </thead>
                             <tbody>
                                 @forelse ($kapals as $key => $kapal)
                                     <tr>
-                                        <td>{{ $key + 1 }}</td>
+                                        <td class="text-center">{{ $key + 1 }}</td>
                                         @if (auth()->user()->level == 'Admin Aplikasi')
-                                            <td>{{ $kapal->user->wajibRetribusi->nama ?? 'Tidak ada pemilik' }}</td>
+                                            <td class="text-center">
+                                                {{ $kapal->user->wajibRetribusi->nama ?? 'Tidak ada pemilik' }}</td>
                                         @endif
-                                        <td>{{ $kapal->nama_kapal }}</td>
+                                        <td class="text-center">{{ $kapal->nama_kapal }}</td>
                                         @if (auth()->user()->level == 'Wajib Retribusi')
-                                            <td>Rp
+                                            <td class="text-center">Rp
                                                 {{ number_format($kapal->jenisKapal->biaya_retribusi ?? 0, 0, ',', '.') }}
                                             </td>
-                                            <td>{{ $kapal->created_at->format('d F Y') }}</td>
+                                            <td class="text-center">{{ $kapal->created_at->format('d F Y') }}</td>
+                                            <td class="text-center">
+                                                @if ($kapal->konfirmasiBayar)
+                                                    @if ($kapal->konfirmasiBayar->status == 'P')
+                                                        Pembayaran Sedang Diproses
+                                                    @elseif ($kapal->konfirmasiBayar->status == 'Y')
+                                                        Sudah Membayar Retribusi
+                                                    @elseif ($kapal->konfirmasiBayar->status == 'N')
+                                                        Pembayaran Tidak Disetujui
+                                                    @else
+                                                        Tidak Ada Status
+                                                    @endif
+                                                @else
+                                                    Belum membayar Retribusi
+                                                @endif
+                                            </td>                                            
                                         @endif
                                         @if (auth()->user()->level == 'Admin Aplikasi')
-                                            <td>{{ $kapal->jenisKapal->jenis_kapal ?? 'Jenis kapal tidak ditemukan' }}
+                                            <td class="text-center">
+                                                {{ $kapal->jenisKapal->jenis_kapal ?? 'Jenis kapal tidak ditemukan' }}
                                             </td>
-                                            <td>{{ $kapal->ukuran }}</td>
-                                            <td>
+                                            <td class="text-center">{{ $kapal->ukuran }}</td>
+                                            <td class="text-center">
                                                 <a href="{{ route('kapal-wajib-retribusi.edit', $kapal->id) }}"
                                                     class="btn btn-primary btn-sm">Ubah</a>
                                                 <form id="deleteForm{{ $kapal->id }}"

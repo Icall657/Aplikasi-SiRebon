@@ -31,6 +31,6 @@ class Kapal extends Model
 
     public function konfirmasiBayar()
     {
-        return $this->hasMany(KonfirmasiBayar::class, 'id_kapal');
+        return $this->hasOne(KonfirmasiBayar::class, 'id_kapal');
     }
 }

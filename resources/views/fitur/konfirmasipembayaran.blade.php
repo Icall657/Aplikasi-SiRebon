@@ -247,7 +247,7 @@
                         @endif
 
                         <div class="form-group">
-                            <label for="id_kapal">Kapal</label>
+                            <label for="id_kapal">Nama Kapal</label>
                             <select id="id_kapal" name="id_kapal" class="form-control" required
                                 onchange="updateNominal()">
                                 <option value="">Pilih Kapal</option>
@@ -270,27 +270,34 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Rp</span>
                                 </div>
-                                <input type="text" name="nominal_transfer" id="nominal_transfer_display" class="form-control" readonly
-                                    required autocomplete="off" oninput="formatRupiah(this)" placeholder="0"
+                                <input type="text" id="nominal_transfer_display" class="form-control" readonly
+                                    required autocomplete="off" value="0">
+                                <input type="hidden" name="nominal_transfer" id="nominal_transfer_hidden"
                                     value="0">
                             </div>
                         </div>
+
                         <script>
                             function updateNominal() {
                                 const kapalSelect = document.getElementById('id_kapal');
                                 const selectedOption = kapalSelect.options[kapalSelect.selectedIndex];
                                 const biayaRetribusi = selectedOption.getAttribute('data-biaya-retribusi');
-                                const nominalTransferInput = document.getElementById('nominal_transfer_display');
+                                const nominalTransferDisplay = document.getElementById('nominal_transfer_display');
+                                const nominalTransferHidden = document.getElementById('nominal_transfer_hidden');
 
                                 if (biayaRetribusi) {
-                                    const formattedValue = new Intl.NumberFormat('id-ID').format(biayaRetribusi);
-                                    nominalTransferInput.value = formattedValue;
+                                    const biayaAsli = Number(biayaRetribusi);
+                                    const formattedValue = new Intl.NumberFormat('id-ID').format(biayaAsli);
+
+                                    nominalTransferDisplay.value = formattedValue;
+
+                                    nominalTransferHidden.value = biayaAsli;
                                 } else {
-                                    nominalTransferInput.value = '0';
+                                    nominalTransferDisplay.value = '0';
+                                    nominalTransferHidden.value = '0';
                                 }
                             }
                         </script>
-
 
                         <div class="form-group">
                             <label for="id_ref_bank">Jenis Bank</label>

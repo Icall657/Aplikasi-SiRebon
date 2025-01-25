@@ -15,15 +15,16 @@ class KapalwajibController extends Controller
         $user = auth()->user();
 
         if ($user->level === 'Wajib Retribusi') {
-            $kapals = Kapal::with(['jenisKapal', 'user.wajibRetribusi'])
+            $kapals = Kapal::with(['jenisKapal', 'user.wajibRetribusi', 'konfirmasiBayar'])
                 ->where('id_user', $user->id)
                 ->get();
         } else {
-            $kapals = Kapal::with(['jenisKapal', 'user.wajibRetribusi'])->get();
+            $kapals = Kapal::with(['jenisKapal', 'user.wajibRetribusi', 'konfirmasiBayar'])->get();
         }
 
         return view('fitur.kapalwajibretribusi', compact('kapals'));
     }
+
 
 
     public function create()
