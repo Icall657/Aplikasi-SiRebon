@@ -28,4 +28,9 @@ class Kapal extends Model
     {
         return $this->belongsTo(RefJenisKapal::class, 'id_jenis_kapal');
     }
+
+    public function konfirmasiBayar()
+    {
+        return $this->hasMany(KonfirmasiBayar::class, 'id_kapal');
+    }
 }

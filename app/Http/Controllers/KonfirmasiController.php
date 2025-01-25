@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kapal;
 use App\Models\RefBank;
 use App\Models\MsRekening;
 use Illuminate\Http\Request;
@@ -14,18 +15,23 @@ class KonfirmasiController extends Controller
         $userId = auth()->id();
         $banks = RefBank::all();
         $msRekenings = MsRekening::where('id_user', $userId)->get();
+        $kapals = Kapal::with('jenisKapal')->where('id_user', $userId)->get();
 
-        return view('fitur.konfirmasipembayaran', compact('banks', 'msRekenings'));
+        return view('fitur.konfirmasipembayaran', compact('banks', 'msRekenings', 'kapals'));
     }
+
 
     public function confirm(Request $request)
     {
         $request->validate([
+            'id_kapal' => 'required|exists:kapal,id',
             'id_ref_bank' => 'required|exists:ref_bank,id',
             'nominal_transfer' => 'required|numeric',
             'id_ms_rekening' => 'required|exists:ms_rekening,id',
             'file_bukti' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
         ], [
+            'id_kapal.required' => 'Kapal harus dipilih.',
+            'id_kapal.exists' => 'Kapal yang dipilih tidak valid.',
             'id_ref_bank.required' => 'Jenis bank harus dipilih.',
             'id_ref_bank.exists' => 'Jenis bank yang dipilih tidak valid.',
             'nominal_transfer.required' => 'Nominal transfer harus diisi.',
@@ -60,10 +66,16 @@ class KonfirmasiController extends Controller
             return back()->withErrors(['id_ref_bank' => 'Nama bank tidak sesuai dengan rekening yang dipilih.']);
         }
 
+        $kapal = Kapal::where('id', $request->id_kapal)->where('id_user', $user->id)->first();
+        if (!$kapal) {
+            return back()->withErrors(['id_kapal' => 'Kapal tidak ditemukan atau bukan milik Anda.']);
+        }
+
         $filePath = $request->file('file_bukti')->store('bukti_pembayaran', 'public');
 
         $konfirmasiBayar = new KonfirmasiBayar();
         $konfirmasiBayar->id_user = $user->id;
+        $konfirmasiBayar->id_kapal = $request->id_kapal;
         $konfirmasiBayar->id_ms_rekening = $request->id_ms_rekening;
         $konfirmasiBayar->file_bukti = $filePath;
         $konfirmasiBayar->nominal = $request->nominal_transfer;

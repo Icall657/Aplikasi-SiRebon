@@ -245,7 +245,53 @@
                                 unggah bukti screenshot pembayaran Anda.
                             </div>
                         @endif
-                        
+
+                        <div class="form-group">
+                            <label for="id_kapal">Kapal</label>
+                            <select id="id_kapal" name="id_kapal" class="form-control" required
+                                onchange="updateNominal()">
+                                <option value="">Pilih Kapal</option>
+                                @foreach ($kapals as $kapal)
+                                    <option value="{{ $kapal->id }}"
+                                        data-biaya-retribusi="{{ $kapal->jenisKapal->biaya_retribusi }}"
+                                        {{ old('id_kapal') == $kapal->id ? 'selected' : '' }}>
+                                        {{ $kapal->nama_kapal }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @if ($errors->has('id_kapal'))
+                                <small class="text-danger">{{ $errors->first('id_kapal') }}</small>
+                            @endif
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nominal_transfer">Nominal Transfer (Rp)</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Rp</span>
+                                </div>
+                                <input type="text" name="nominal_transfer" id="nominal_transfer_display" class="form-control" readonly
+                                    required autocomplete="off" oninput="formatRupiah(this)" placeholder="0"
+                                    value="0">
+                            </div>
+                        </div>
+                        <script>
+                            function updateNominal() {
+                                const kapalSelect = document.getElementById('id_kapal');
+                                const selectedOption = kapalSelect.options[kapalSelect.selectedIndex];
+                                const biayaRetribusi = selectedOption.getAttribute('data-biaya-retribusi');
+                                const nominalTransferInput = document.getElementById('nominal_transfer_display');
+
+                                if (biayaRetribusi) {
+                                    const formattedValue = new Intl.NumberFormat('id-ID').format(biayaRetribusi);
+                                    nominalTransferInput.value = formattedValue;
+                                } else {
+                                    nominalTransferInput.value = '0';
+                                }
+                            }
+                        </script>
+
+
                         <div class="form-group">
                             <label for="id_ref_bank">Jenis Bank</label>
                             <select id="id_ref_bank" name="id_ref_bank" class="form-control" required>
@@ -261,30 +307,6 @@
                                 <small class="text-danger">{{ $errors->first('id_ref_bank') }}</small>
                             @endif
                         </div>
-
-                        <div class="form-group">
-                            <label for="nominal_transfer">Nominal Transfer (Rp)</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Rp</span>
-                                </div>
-                                <input type="text" id="nominal_transfer_display" class="form-control" required
-                                    autocomplete="off" oninput="formatRupiah(this)" placeholder="0">
-                                <input type="hidden" id="nominal_transfer" name="nominal_transfer">
-                            </div>
-                        </div>
-                        <script>
-                            function formatRupiah(input) {
-                                let rawValue = input.value.replace(/[^,\d]/g, '');
-
-                                let formattedValue = new Intl.NumberFormat('id-ID').format(rawValue);
-
-                                input.value = formattedValue;
-
-                                document.getElementById('nominal_transfer').value = rawValue;
-                            }
-                        </script>
-
 
                         <div class="form-group">
                             <label for="id_ms_rekening">Nomor Rekening</label>

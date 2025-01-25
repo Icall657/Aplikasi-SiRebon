@@ -47,7 +47,6 @@
                                     <option value="">Pilih Level</option>
                                     <option value="Wajib Retribusi">Wajib Retribusi</option>
                                     <option value="Admin Aplikasi">Admin Aplikasi</option>
-                                    <option value="Multiadmin">Multiadmin</option>
                                 </select>
                                 @error('level')
                                     <small class="text-danger">{{ $message }}</small>

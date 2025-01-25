@@ -15,6 +15,7 @@ class KonfirmasiBayar extends Model
     protected $fillable = [
         'id_user',
         'id_ms_rekening',
+        'id_kapal',
         'file_bukti',
         'nominal',
         'tgl_bayar',
@@ -48,5 +49,10 @@ class KonfirmasiBayar extends Model
     public function refBank()
     {
         return $this->belongsTo(RefBank::class, 'id_ref_bank');
+    }
+
+    public function kapal()
+    {
+        return $this->belongsTo(Kapal::class, 'id_kapal');
     }
 }
