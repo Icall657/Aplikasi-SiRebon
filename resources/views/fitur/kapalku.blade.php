@@ -233,7 +233,6 @@
                                 <th style="width: 150px;" class="text-center">Nama Kapal</th>
                                 <th style="width: 150px;" class="text-center">Jenis Kapal</th>
                                 <th style="width: 180px;" class="text-center">Ukuran</th>
-                                <th style="width: 180px;" class="text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -247,17 +246,6 @@
                                     <td class="text-center">
                                         {{ $kapal['jenis_kapal']['jenis_kapal'] ?? 'Tidak diketahui' }}</td>
                                     <td class="text-center">{{ $kapal['ukuran'] }}</td>
-                                    <td class="text-center">
-                                        <a href="{{ route('kapalku.edit', $kapal['id']) }}"
-                                            class="btn btn-primary btn-sm m-1">Ubah</a>
-                                        <form action="{{ route('kapalku.destroy', $kapal['id']) }}" method="POST"
-                                            style="display:inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm m-1"
-                                                onclick="return confirm('yakin hapus data ini?')">hapus</button>
-                                        </form>
-                                    </td>
                                 </tr>
                             @empty
                                 <tr>

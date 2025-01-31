@@ -211,13 +211,16 @@
                     <div class="form-container">
                         <form method="POST" action="{{ route('profil.update', ['profil' => Auth::user()->id]) }}">
                             @csrf
-                            @method('PUT') <!-- Mengubah metode POST menjadi PUT -->
+                            @method('PUT')
 
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="username">Username</label>
-                                    <input type="text" class="form-control" id="username" name="username"
-                                        value="{{ auth()->user()->username }}">
+                                    <input type="text" class="form-control @error('username') is-invalid @enderror"
+                                        id="username" autocomplete="off" name="username" value="{{ auth()->user()->username }}">
+                                    @error('username')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="hakakses">Hak Akses</label>
@@ -230,30 +233,44 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="nik">NIK</label>
-                                        <input type="text" class="form-control" id="nik" name="nik"
-                                            value="{{ $wajibRetribusi->nik }}">
+                                        <input type="text" class="form-control @error('nik') is-invalid @enderror"
+                                            id="nik" autocomplete="off" name="nik" value="{{ $wajibRetribusi->nik }}">
+                                        @error('nik')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="namaLengkap">Nama Lengkap</label>
-                                        <input type="text" class="form-control" id="namaLengkap"
-                                            name="namaLengkap" value="{{ $wajibRetribusi->nama }}">
+                                        <input type="text"
+                                            class="form-control @error('namaLengkap') is-invalid @enderror"
+                                            id="namaLengkap" autocomplete="off" name="namaLengkap" value="{{ $wajibRetribusi->nama }}">
+                                        @error('namaLengkap')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
 
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="telepon">Telepon</label>
-                                        <input type="text" class="form-control" id="telepon" name="telepon"
-                                            value="{{ $wajibRetribusi->no_hp }}">
+                                        <input type="text"
+                                            class="form-control @error('telepon') is-invalid @enderror" id="telepon"
+                                            name="telepon" autocomplete="off" value="{{ $wajibRetribusi->no_hp }}">
+                                        @error('telepon')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="alamat">Alamat</label>
-                                        <input type="text" class="form-control" id="alamat" name="alamat"
-                                            value="{{ $wajibRetribusi->alamat }}">
+                                        <input type="text"
+                                            class="form-control @error('alamat') is-invalid @enderror" id="alamat"
+                                            name="alamat" autocomplete="off" value="{{ $wajibRetribusi->alamat }}">
+                                        @error('alamat')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                             @endif
-
 
                             <button type="submit" name="save" class="btn btn-primary mt-1">Simpan</button>
                         </form>

@@ -20,15 +20,35 @@ class ProfilController extends Controller
 
     public function update(Request $request)
     {
+        $messages = [
+            'username.required' => 'Username wajib diisi.',
+            'username.string' => 'Username harus berupa teks.',
+            'username.max' => 'Username maksimal 255 karakter.',
+            'nik.required' => 'NIK wajib diisi.',
+            'nik.string' => 'NIK harus berupa teks.',
+            'nik.max' => 'NIK maksimal 16 karakter.',
+            'nik.regex' => 'NIK hanya boleh berisi angka.',
+            'namaLengkap.required' => 'Nama lengkap wajib diisi.',
+            'namaLengkap.string' => 'Nama lengkap harus berupa teks.',
+            'namaLengkap.max' => 'Nama lengkap maksimal 255 karakter.',
+            'namaLengkap.regex' => 'Nama lengkap hanya boleh berisi huruf dan spasi.',
+            'telepon.required' => 'Nomor telepon wajib diisi.',
+            'telepon.string' => 'Nomor telepon harus berupa teks.',
+            'telepon.max' => 'Nomor telepon maksimal 16 karakter.',
+            'telepon.regex' => 'Nomor telepon hanya boleh berisi angka.',
+            'alamat.required' => 'Alamat wajib diisi.',
+            'alamat.string' => 'Alamat harus berupa teks.',
+            'alamat.max' => 'Alamat maksimal 255 karakter.',
+        ];
+
         $request->validate([
             'username' => 'required|string|max:255',
-            'nik' => 'required|string|max:16',
-            'namaLengkap' => 'required|string|max:255',
-            'telepon' => 'required|string|max:16',
+            'nik' => 'required|string|max:16|regex:/^[0-9]+$/',
+            'namaLengkap' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
+            'telepon' => 'required|string|max:16|regex:/^[0-9]+$/',
             'alamat' => 'required|string|max:255',
-        ]);
+        ], $messages);
 
-        // ambil data user yang sedang login
         $user = Auth::user();
         $user->username = $request->input('username');
         $user->save();

@@ -70,11 +70,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/ganti-password', [ProfilController::class, 'prosesGantiPassword'])->name('prosesGantiPassword');
 });
 
-
 Route::resource('forgot_password', LupaPaswordController::class);
-// Route::get('forgot_password', function () {
-//     return view('login.forgot_password');
-// })->middleware('guest')->name('password.request');
 
 Route::post('/forgot-password', function (Request $request) {
     $request->validate(['email' => 'required|email']);
