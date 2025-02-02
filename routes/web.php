@@ -43,9 +43,6 @@ Route::get('/login', [LoginController::class, 'halamanlogin'])->name('login');
 route::post('/postlogin', [LoginController::class, 'postlogin'])->name('postlogin');
 route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
-
-
-
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('home', HomeController::class);
     Route::resource('laporan', LaporanController::class);

@@ -40,40 +40,59 @@
                             <div class="row mb-3">
                                 <label class="col-sm-3 col-form-label" for="id_user">Nama Pemilik</label>
                                 <div class="col-sm-9">
-                                <select name="id_user" id="id_user" class="form-select" required>
-                                    @foreach ($users as $user)
-                                        <option value="{{ $user->id }}">
-                                            {{ optional($user->wajibRetribusi)->nama ?? 'Nama Tidak Tersedia' }}
-                                        </option>
-                                    @endforeach
-                                </select>
+                                    <select name="id_user" id="id_user" class="form-select" required>
+                                        @foreach ($users as $user)
+                                            <option value="{{ $user->id }}"
+                                                {{ old('id_user') == $user->id ? 'selected' : '' }}>
+                                                {{ optional($user->wajibRetribusi)->nama ?? 'Nama Tidak Tersedia' }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('id_user')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
+
                             <div class="row mb-3">
                                 <label class="col-sm-3 col-form-label">Nama Kapal</label>
                                 <div class="col-sm-9">
                                     <input type="text" name="nama_kapal" class="form-control" required
-                                        autocomplete="off">
+                                        autocomplete="off" value="{{ old('nama_kapal') }}">
+                                    @error('nama_kapal')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
+
                             <div class="row mb-3">
                                 <label class="col-sm-3 col-form-label" for="id_jenis_kapal">Jenis Kapal</label>
                                 <div class="col-sm-9">
                                     <select name="id_jenis_kapal" id="id_jenis_kapal" class="form-select" required>
                                         @foreach ($refJenisKapals as $jenisKapal)
-                                            <option value="{{ $jenisKapal->id }}">{{ $jenisKapal->jenis_kapal }}
+                                            <option value="{{ $jenisKapal->id }}"
+                                                {{ old('id_jenis_kapal') == $jenisKapal->id ? 'selected' : '' }}>
+                                                {{ $jenisKapal->jenis_kapal }}
                                             </option>
                                         @endforeach
                                     </select>
+                                    @error('id_jenis_kapal')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
+
                             <div class="row mb-3">
                                 <label class="col-sm-3 col-form-label">Ukuran</label>
                                 <div class="col-sm-9">
                                     <input type="text" name="ukuran" class="form-control" required
-                                        autocomplete="off">
+                                        autocomplete="off" value="{{ old('ukuran') }}">
+                                    @error('ukuran')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
+
                             <button type="submit" class="btn btn-primary mt-4">Simpan</button>
                             <a href="{{ route('kapal-wajib-retribusi.index') }}"
                                 class="btn btn-secondary mt-4">Kembali</a>

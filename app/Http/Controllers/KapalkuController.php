@@ -71,25 +71,48 @@ class KapalkuController extends Controller
         return view('fitur.kapalku.create', compact('jenisKapalList'));
     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            "nama_kapal" => 'required|string|max:255',
-            "id_jenis_kapal" => 'required|exists:ref_jenis_kapal,id',
-            "ukuran" => 'required|regex:/^\d+(\.\d+)?m$/',
-        ]);
+    public function store(Request $request) 
+{
+    $request->validate([
+        'nama_kapal' => 'required|string|max:255',
+        'id_jenis_kapal' => 'required|exists:ref_jenis_kapal,id',
+        'ukuran' => 'required|numeric|min:5|max:400',
+    ], [
+        'nama_kapal.required' => 'Nama kapal wajib diisi.',
+        'nama_kapal.string' => 'Nama kapal harus berupa teks.',
+        'nama_kapal.max' => 'Nama kapal maksimal 255 karakter.',
+
+        'id_jenis_kapal.required' => 'Jenis kapal wajib dipilih.',
+        'id_jenis_kapal.exists' => 'Jenis kapal yang dipilih tidak valid.',
+
+        'ukuran.required' => 'Ukuran kapal wajib diisi.',
+        'ukuran.numeric' => 'Ukuran kapal harus berupa angka.',
+        'ukuran.min' => 'Ukuran kapal minimal 5 meter.',
+        'ukuran.max' => 'Ukuran kapal terlalu besar! Maksimal 400 meter.',
+    ]);
+
+    try {
+        $ukuran = $request->ukuran;
+        if (!str_ends_with($ukuran, 'm')) {
+            $ukuran .= 'm';
+        }
 
         Kapal::create([
             'nama_kapal' => $request->nama_kapal,
             'id_jenis_kapal' => $request->id_jenis_kapal,
-            'ukuran' => $request->ukuran,
+            'ukuran' => $ukuran,
             'id_user' => Auth::id(),
             'created_id' => Auth::id(),
             'updated_id' => Auth::id(),
         ]);
 
         return redirect()->route('kapalku.index')->with('success', 'Data kapal berhasil ditambahkan.');
+    } catch (\Exception $e) {
+        Log::error('Gagal menyimpan data kapal:', ['error' => $e->getMessage()]);
+        return redirect()->back()->with('error', 'Terjadi kesalahan saat menyimpan data kapal.');
     }
+}
+
 
     public function destroy($id)
     {

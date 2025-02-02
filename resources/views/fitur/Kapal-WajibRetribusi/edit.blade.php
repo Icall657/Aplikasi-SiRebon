@@ -37,48 +37,68 @@
                         <form action="{{ route('kapal-wajib-retribusi.update', $kapal->id) }}" method="POST">
                             @csrf
                             @method('PUT')
+
                             <div class="row mb-3">
                                 <label class="col-sm-3 col-form-label" for="id_user">Nama Pemilik</label>
                                 <div class="col-sm-9">
-                                <select name="id_user" class="form-control">
-                                    @foreach ($users as $user)
-                                        @if ($user->wajibRetribusi)
-                                            <option value="{{ $user->id }}"
-                                                {{ $kapal->id_user == $user->id ? 'selected' : '' }}>
-                                                {{ $user->wajibRetribusi->nama }}
-                                            </option>
-                                        @endif
-                                    @endforeach
-                                </select>
+                                    <select name="id_user" class="form-control @error('id_user') is-invalid @enderror">
+                                        @foreach ($users as $user)
+                                            @if ($user->wajibRetribusi)
+                                                <option value="{{ $user->id }}"
+                                                    {{ old('id_user', $kapal->id_user) == $user->id ? 'selected' : '' }}>
+                                                    {{ $user->wajibRetribusi->nama }}
+                                                </option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                    @error('id_user')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
+
                             <div class="row mb-3">
                                 <label class="col-sm-3 col-form-label">Nama Kapal</label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="nama_kapal" class="form-control"
-                                        value="{{ $kapal->nama_kapal }}" required autocomplete="off">
+                                    <input type="text" name="nama_kapal"
+                                        class="form-control @error('nama_kapal') is-invalid @enderror"
+                                        value="{{ old('nama_kapal', $kapal->nama_kapal) }}" required autocomplete="off">
+                                    @error('nama_kapal')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
+
                             <div class="row mb-3">
                                 <label class="col-sm-3 col-form-label" for="id_jenis_kapal">Jenis Kapal</label>
                                 <div class="col-sm-9">
-                                    <select name="id_jenis_kapal" id="id_jenis_kapal" class="form-select" required>
+                                    <select name="id_jenis_kapal" id="id_jenis_kapal"
+                                        class="form-select @error('id_jenis_kapal') is-invalid @enderror" required>
                                         @foreach ($refJenisKapals as $jenisKapal)
                                             <option value="{{ $jenisKapal->id }}"
-                                                {{ $kapal->id_jenis_kapal == $jenisKapal->id ? 'selected' : '' }}>
+                                                {{ old('id_jenis_kapal', $kapal->id_jenis_kapal) == $jenisKapal->id ? 'selected' : '' }}>
                                                 {{ $jenisKapal->jenis_kapal }}
                                             </option>
                                         @endforeach
                                     </select>
+                                    @error('id_jenis_kapal')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
+
                             <div class="row mb-3">
                                 <label class="col-sm-3 col-form-label">Ukuran</label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="ukuran" class="form-control"
-                                        value="{{ $kapal->ukuran }}" required autocomplete="off">
+                                    <input type="text" name="ukuran"
+                                        class="form-control @error('ukuran') is-invalid @enderror"
+                                        value="{{ old('ukuran', $kapal->ukuran) }}" required autocomplete="off">
+                                    @error('ukuran')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
+
                             <button type="submit" class="btn btn-primary mt-4">Simpan</button>
                             <a href="{{ route('kapal-wajib-retribusi.index') }}"
                                 class="btn btn-secondary mt-4">Kembali</a>
