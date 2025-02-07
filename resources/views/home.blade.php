@@ -214,7 +214,8 @@
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                     Jumlah Sudah Bayar</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $jumlahSudahBayar }}</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                    {{ $jumlahSudahBayar }}</div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-user fa-2x text-gray-300"></i>
@@ -232,7 +233,8 @@
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                                     Jumlah Belum Bayar</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $jumlahBelumBayar }}</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                    {{ $jumlahBelumBayar }}</div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-user fa-2x text-gray-300"></i>
@@ -261,9 +263,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>                            
+                            </div>
                         @endif
-
                     </div>
 
                     <!-- Content Row -->

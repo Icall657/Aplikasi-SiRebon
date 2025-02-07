@@ -48,7 +48,7 @@
                         <i class="fa fa-home"></i>
                         <span>beranda</span></a>
                 </li>
-
+                
                 <hr class="sidebar-divider my-0">
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ route('rekening.index') }}">

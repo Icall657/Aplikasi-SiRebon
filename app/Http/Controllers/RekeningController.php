@@ -10,10 +10,14 @@ class RekeningController extends Controller
 {
     public function index()
     {
-        // ambil semua data rekening
-        $rekening = MsRekening::all();
+        // ambil semua data rekening yang terkait dengan wajib retribusi yang masih aktif
+        $rekening = MsRekening::whereHas('user.wajibRetribusi', function ($query) {
+            $query->where('status', '!=', 'B');
+        })->get();
+
         return view('fitur.rekeningpembayaran', compact('rekening'));
     }
+
 
     public function create()
     {

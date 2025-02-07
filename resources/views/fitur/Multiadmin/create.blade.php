@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Tambah User SiRepal</title>
+    <title>Tambah Wajib Retribusi</title>
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -28,7 +28,7 @@
             <div class="col-md-10">
                 <div class="card profile-card">
                     <div class="card-body">
-                        <h2>Tambah Data User</h2>
+                        <h2>Tambah Wajib Retribusi</h2>
                         <form action="{{ route('multiadmin.store') }}" method="POST" autocomplete="off">
                             @csrf
                             <div class="form-group">
@@ -165,7 +165,7 @@
                             </div>
 
                             <button type="submit" class="btn btn-primary mt-4">Simpan</button>
-                            <a href="{{ route('multiadmin.index') }}" class="btn btn-secondary mt-4">Kembali</a>
+                            <a href="{{ route('wajib-retribusi.index') }}" class="btn btn-secondary mt-4">Kembali</a>
                         </form>
                         <script>
                             document.getElementById('level').addEventListener('change', function() {

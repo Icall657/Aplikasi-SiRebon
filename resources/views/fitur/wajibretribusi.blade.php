@@ -48,7 +48,7 @@
                         <i class="fa fa-home"></i>
                         <span>beranda</span></a>
                 </li>
-
+                
                 <hr class="sidebar-divider my-0">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('rekening.index') }}">
@@ -222,71 +222,71 @@
                     <!-- Content Row -->
                     <div class="table-container">
                         <div class="d-flex justify-content-between align-items-center">
-                            <a href="{{ route('wajib-retribusi.create') }}" class="btn btn-primary btn-add">Tambah
+                            <a href="{{ route('multiadmin.create') }}" class="btn btn-primary btn-add">Tambah
                                 Data</a>
                         </div>
-                    @if (auth()->user()->level == 'Admin Aplikasi')
-                        <table class="table table-bordered mt-3">
-                            <thead class="table-light">
-                                <tr>
-                                    <th style="width: 50px;">No.</th>
-                                    <th>Nama Lengkap</th>
-                                    <th>Telepon</th>
-                                    <th>NIK</th>
-                                    <th>Alamat</th>
-                                    <th>Kelurahan</th>
-                                    <th style="width: 150px;">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @php
-                                    $no = 1;
-                                @endphp
-                                @foreach ($wajibRetribusi as $wajib)
+                        @if (auth()->user()->level == 'Admin Aplikasi')
+                            <table class="table table-bordered mt-3">
+                                <thead class="table-light">
                                     <tr>
-                                        <td>{{ $no++ }}</td>
-                                        <td>{{ $wajib->nama }}</td>
-                                        <td>{{ $wajib->no_hp }}</td>
-                                        <td>{{ $wajib->nik }}</td>
-                                        <td>{{ $wajib->alamat }}</td>
-                                        <td>{{ $wajib->kelurahan->nama_kelurahan }}</td>
-                                        <td>
-                                            <div class="d-flex">
-                                                <a href="{{ route('wajib-retribusi.edit', $wajib->id) }}"
-                                                    class="btn btn-primary btn-sm m-1">Ubah</a>
-                                                <form id="deleteForm{{ $wajib->id }}"
-                                                    action="{{ route('wajib-retribusi.destroy', $wajib->id) }}"
-                                                    method="POST" style="display:inline;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="button" class="btn btn-danger btn-sm m-1"
-                                                        onclick="deleteData({{ $wajib->id }})">Hapus</button>
-                                                </form>
-                                            </div>
-                                        </td>
+                                        <th style="width: 50px;">No.</th>
+                                        <th>Nama Lengkap</th>
+                                        <th>Telepon</th>
+                                        <th>NIK</th>
+                                        <th>Alamat</th>
+                                        <th>Kelurahan</th>
+                                        <th style="width: 150px;">Aksi</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        <script>
-                            function deleteData(id) {
-                                Swal.fire({
-                                    title: 'Apakah Anda yakin?',
-                                    text: 'Data ini akan dihapus secara permanen!',
-                                    icon: 'warning',
-                                    showCancelButton: true,
-                                    confirmButtonColor: '#d33',
-                                    cancelButtonColor: '#3085d6',
-                                    confirmButtonText: 'Ya, hapus!',
-                                    cancelButtonText: 'Batal'
-                                }).then((result) => {
-                                    if (result.isConfirmed) {
-                                        document.getElementById('deleteForm' + id).submit();
-                                    }
-                                });
-                            }
-                        </script>
-                    @endif
+                                </thead>
+                                <tbody>
+                                    @php
+                                        $no = 1;
+                                    @endphp
+                                    @foreach ($wajibRetribusi as $wajib)
+                                        <tr>
+                                            <td>{{ $no++ }}</td>
+                                            <td>{{ $wajib->nama }}</td>
+                                            <td>{{ $wajib->no_hp }}</td>
+                                            <td>{{ $wajib->nik }}</td>
+                                            <td>{{ $wajib->alamat }}</td>
+                                            <td>{{ $wajib->kelurahan->nama_kelurahan }}</td>
+                                            <td>
+                                                <div class="d-flex">
+                                                    <a href="{{ route('wajib-retribusi.edit', $wajib->id) }}"
+                                                        class="btn btn-primary btn-sm m-1">Ubah</a>
+                                                    <form id="deleteForm{{ $wajib->id }}"
+                                                        action="{{ route('wajib-retribusi.destroy', $wajib->id) }}"
+                                                        method="POST" style="display:inline;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="button" class="btn btn-danger btn-sm m-1"
+                                                            onclick="deleteData({{ $wajib->id }})">Hapus</button>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            <script>
+                                function deleteData(id) {
+                                    Swal.fire({
+                                        title: 'Apakah Anda yakin?',
+                                        text: 'Data ini akan dihapus secara permanen!',
+                                        icon: 'warning',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#d33',
+                                        cancelButtonColor: '#3085d6',
+                                        confirmButtonText: 'Ya, hapus!',
+                                        cancelButtonText: 'Batal'
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            document.getElementById('deleteForm' + id).submit();
+                                        }
+                                    });
+                                }
+                            </script>
+                        @endif
                     </div>
                     <!-- ISI KONTEN -->
 

@@ -126,10 +126,10 @@ class MultiadminController extends Controller
                 Log::info('Data MsRekening berhasil ditambahkan', ['user_id' => $user->id, 'nama_akun' => $request->nama_akun]);
             } catch (\Exception $e) {
                 Log::error('Error saat menambahkan data MsRekening', ['error' => $e->getMessage(), 'user_id' => $user->id]);
-                return redirect()->route('multiadmin.index')->with('error', 'Gagal menambahkan data rekening.');
+                return redirect()->route('wajib-retribusi.index')->with('error', 'Gagal menambahkan data rekening.');
             }
         }
 
-        return redirect()->route('multiadmin.index')->with('success', 'Data berhasil ditambahkan!');
+        return redirect()->route('wajib-retribusi.index')->with('success', 'Data berhasil ditambahkan!');
     }
 }

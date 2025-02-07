@@ -44,22 +44,33 @@ route::post('/postlogin', [LoginController::class, 'postlogin'])->name('postlogi
 route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::resource('home', HomeController::class);
-    Route::resource('laporan', LaporanController::class);
-    Route::resource('carilaporan', CariController::class);
-    Route::resource('rekening', RekeningController::class);
-    Route::resource('wajib-retribusi', WajibController::class);
-    Route::resource('pembayaran-retribusi', PembayaranController::class);
-    Route::put('/update-status/{id}', [PembayaranController::class, 'updateStatus'])->name('konfirmasi-bayar.update-status');
+    
+    Route::group(['middleware' => ['ceklevel:Wajib Retribusi']], function () {
+        Route::resource('profil', ProfilController::class);
+        Route::resource('kapalku', KapalkuController::class);
+        Route::resource('konfirmasi', KonfirmasiController::class);
+        Route::post('/konfirmasi/confirm', [KonfirmasiController::class, 'confirm'])->name('konfirmasi.confirm');
+    });
+
+    Route::group(['middleware' => ['ceklevel:Admin Aplikasi']], function () {
+        Route::resource('home', HomeController::class);
+        Route::resource('rekening', RekeningController::class);
+        Route::resource('pembayaran-retribusi', PembayaranController::class);
+        Route::resource('wajib-retribusi', WajibController::class);
+        Route::put('/update-status/{id}', [PembayaranController::class, 'updateStatus'])->name('konfirmasi-bayar.update-status');
+        Route::resource('multiadmin', MultiadminController::class);
+    });
+
+    Route::group(['middleware' => ['ceklevel:Multiadmin']], function () {
+        
+    });
+
     Route::resource('kategori-retribusi', KategoriController::class);
     Route::resource('kapal-wajib-retribusi', KapalwajibController::class);
-    Route::resource('kapalku', KapalkuController::class);
-    Route::resource('konfirmasi', KonfirmasiController::class);
-    Route::post('/konfirmasi/confirm', [KonfirmasiController::class, 'confirm'])->name('konfirmasi.confirm');
-    Route::resource('profil', ProfilController::class);
+    Route::resource('laporan', LaporanController::class);
+    Route::resource('carilaporan', CariController::class);
     Route::resource('retribusi', RetribusiController::class);
     Route::resource('belum-retribusi', BelumRetribusiController::class);
-    Route::resource('multiadmin', MultiadminController::class);
 });
 
 Route::group(['middleware' => ['auth']], function () {

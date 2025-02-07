@@ -15,12 +15,13 @@ class WajibController extends Controller
 {
     public function index()
     {
-        // ambil data wajib retribusi yang punya user dengan level 'Wajib Retribusi'
         $wajibRetribusi = WajibRetribusi::whereHas('user', function ($query) {
             $query->where('level', 'Wajib Retribusi');
-        })->get();
+        })->where('status', '!=', 'B')->get();
+
         return view('fitur.wajibretribusi', compact('wajibRetribusi')); // kirim data ke view
     }
+
 
     public function edit($id)
     {
@@ -86,22 +87,24 @@ class WajibController extends Controller
         DB::beginTransaction();
         try {
             $wajib = WajibRetribusi::findOrFail($id);
-            $wajib->delete();
+            $wajib->status = 'B';
+            $wajib->save();
 
             DB::commit();
 
-            return redirect()->route('wajib-retribusi.index')->with('success', 'Data udah kebuang, bro.');
+            return redirect()->route('wajib-retribusi.index')->with('success', 'Data udah dinonaktifkan, bro.');
         } catch (\Exception $e) {
             DB::rollback();
             return redirect()->route('wajib-retribusi.index')->with('error', 'Eh, ada error waktu ngehapus datanya.');
         }
     }
 
+
     public function create()
     {
         $users = User::where('level', 'Wajib Retribusi')->get();
         $kelurahans = Kelurahan::all();
-        return view('fitur.Wajib-Retribusi.create', compact('users','kelurahans'));
+        return view('fitur.Wajib-Retribusi.create', compact('users', 'kelurahans'));
     }
 
     public function store(Request $request)

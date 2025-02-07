@@ -17,6 +17,9 @@ class KapalwajibController extends Controller
 
         if ($user->level === 'Wajib Retribusi') {
             $kapals = Kapal::with(['jenisKapal', 'user.wajibRetribusi', 'konfirmasiBayar'])
+                ->whereHas('user.wajibRetribusi', function ($query) {
+                    $query->where('status', '!=', 'B'); // hanya ambil yang statusnya bukan 'B'
+                })
                 ->where('id_user', $user->id)
                 ->where(function ($query) use ($search) {
                     $query->where('nama_kapal', 'like', "%$search%")
@@ -27,6 +30,9 @@ class KapalwajibController extends Controller
                 ->get();
         } else {
             $kapals = Kapal::with(['jenisKapal', 'user.wajibRetribusi', 'konfirmasiBayar'])
+                ->whereHas('user.wajibRetribusi', function ($query) {
+                    $query->where('status', '!=', 'B'); // filter wajib_retribusi yang statusnya bukan 'B'
+                })
                 ->where(function ($query) use ($search) {
                     $query->where('nama_kapal', 'like', "%$search%")
                         ->orWhereHas('jenisKapal', function ($query) use ($search) {
@@ -38,7 +44,6 @@ class KapalwajibController extends Controller
 
         return view('fitur.kapalwajibretribusi', compact('kapals'));
     }
-
 
 
     public function create()
