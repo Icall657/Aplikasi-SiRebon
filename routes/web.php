@@ -44,7 +44,7 @@ route::post('/postlogin', [LoginController::class, 'postlogin'])->name('postlogi
 route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::group(['middleware' => ['auth']], function () {
-    
+
     Route::group(['middleware' => ['ceklevel:Wajib Retribusi']], function () {
         Route::resource('profil', ProfilController::class);
         Route::resource('kapalku', KapalkuController::class);
@@ -59,18 +59,16 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('wajib-retribusi', WajibController::class);
         Route::put('/update-status/{id}', [PembayaranController::class, 'updateStatus'])->name('konfirmasi-bayar.update-status');
         Route::resource('multiadmin', MultiadminController::class);
+        Route::resource('retribusi', RetribusiController::class);
+        Route::resource('belum-retribusi', BelumRetribusiController::class);
     });
 
-    Route::group(['middleware' => ['ceklevel:Multiadmin']], function () {
-        
-    });
+    Route::group(['middleware' => ['ceklevel:Multiadmin']], function () {});
 
     Route::resource('kategori-retribusi', KategoriController::class);
     Route::resource('kapal-wajib-retribusi', KapalwajibController::class);
     Route::resource('laporan', LaporanController::class);
     Route::resource('carilaporan', CariController::class);
-    Route::resource('retribusi', RetribusiController::class);
-    Route::resource('belum-retribusi', BelumRetribusiController::class);
 });
 
 Route::group(['middleware' => ['auth']], function () {
@@ -125,21 +123,21 @@ Route::post('/reset-password', function (Request $request) {
         'password.regex' => 'Password harus mengandung setidaknya satu huruf besar, satu huruf kecil, satu angka, dan satu karakter spesial (@$!%*?&#).',
         'password.confirmed' => 'Konfirmasi password tidak cocok.',
     ]);
-    
+
     $status = Password::reset(
         $request->only('email', 'password', 'password_confirmation', 'token'),
         function (User $user, string $password) {
             $user->forceFill([
                 'password' => Hash::make($password)
             ])->setRememberToken(Str::random(60));
- 
+
             $user->save();
- 
+
             event(new PasswordReset($user));
         }
     );
- 
+
     return $status === Password::PASSWORD_RESET
-                ? redirect()->route('login')->with('status', __($status))
-                : back()->withErrors(['email' => [__($status)]]);
+        ? redirect()->route('login')->with('status', __($status))
+        : back()->withErrors(['email' => [__($status)]]);
 })->middleware('guest')->name('password.update');

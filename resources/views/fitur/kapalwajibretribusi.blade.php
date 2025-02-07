@@ -147,7 +147,7 @@
                         method="GET" action="{{ route('kapal-wajib-retribusi.index') }}">
                         <div class="input-group">
                             <input type="text" class="form-control bg-light border-0 small" name="search"
-                                placeholder="Cari nama kapal atau pemilik..." aria-label="Search" aria-describedby="basic-addon2"
+                                placeholder="Cari nama kapal..." aria-label="Search" aria-describedby="basic-addon2"
                                 value="{{ request('search') }}">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="submit">

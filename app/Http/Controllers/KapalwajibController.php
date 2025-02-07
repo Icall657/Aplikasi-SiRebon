@@ -48,11 +48,17 @@ class KapalwajibController extends Controller
 
     public function create()
     {
-        $users = User::where('level', 'Wajib Retribusi')->get();
+        $users = User::where('level', 'Wajib Retribusi')
+            ->whereHas('wajibRetribusi', function ($query) {
+                $query->where('status', 'A'); // filter hanya yang statusnya 'A'
+            })
+            ->get();
+
         $refJenisKapals = RefJenisKapal::all();
 
         return view('fitur.Kapal-WajibRetribusi.create', compact('users', 'refJenisKapals'));
     }
+
 
     public function store(Request $request)
     {

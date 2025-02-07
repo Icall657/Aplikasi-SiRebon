@@ -216,38 +216,60 @@
                                     <div class="card-header bg-primary text-white text-center">
                                         <h5 class="mb-0">Cari Laporan</h5>
                                     </div>
-                                    <div class="card-body">
-                                        <form action="{{ route('laporan.index') }}" method="GET" autocomplete="off">
-                                            @csrf
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="tanggal_awal" class="font-weight-bold">Tanggal Awal</label>
-                                                        <input type="date" name="tanggal_awal" id="tanggal_awal" class="form-control rounded-pill" required>
+                                    @if (auth()->user()->level == 'Wajib Retribusi')
+                                        <div class="card-body">
+                                            <form action="{{ route('laporan.index') }}" method="GET"
+                                                autocomplete="off">
+                                                @csrf
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="tanggal_awal" class="font-weight-bold">Tanggal
+                                                                Awal</label>
+                                                            <input type="date" name="tanggal_awal"
+                                                                id="tanggal_awal" class="form-control rounded-pill"
+                                                                required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="tanggal_akhir"
+                                                                class="font-weight-bold">Tanggal Akhir</label>
+                                                            <input type="date" name="tanggal_akhir"
+                                                                id="tanggal_akhir" class="form-control rounded-pill"
+                                                                required>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="tanggal_akhir" class="font-weight-bold">Tanggal Akhir</label>
-                                                        <input type="date" name="tanggal_akhir" id="tanggal_akhir" class="form-control rounded-pill" required>
-                                                    </div>
+                                                <div class="text-center mt-4">
+                                                    <button type="submit"
+                                                        class="btn btn-primary btn-lg rounded-pill">
+                                                        <i class="fas fa-search"></i> Cari Laporan
+                                                    </button>
                                                 </div>
-                                            </div>
-                                            <div class="text-center mt-4">
-                                                <button type="submit" class="btn btn-primary btn-lg rounded-pill">
-                                                    <i class="fas fa-search"></i> Cari Laporan
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="card-footer text-muted text-center">
-                                        Pilih rentang tanggal untuk melihat laporan
-                                    </div>
+                                            </form>
+                                        </div>
+                                        <div class="card-footer text-muted text-center">
+                                            Pilih rentang tanggal untuk melihat laporan
+                                        </div>
+                                    @endif
+                                    @if (auth()->user()->level == 'Admin Aplikasi')
+                                        <div class="card-body text-center">
+                                            <a href="{{ route('retribusi.index') }}"
+                                                class="btn btn-secondary btn-lg rounded-pill">
+                                                <i class="fas fa-user"></i> Sudah Membayar Retribusi
+                                            </a>
+                                            <a href="{{ route('belum-retribusi.index') }}"
+                                                class="btn btn-secondary btn-lg rounded-pill ml-3">
+                                                <i class="fas fa-user-times"></i> Belum Membayar Retribusi
+                                            </a>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
+
 
 
                     <!-- Content Row -->
