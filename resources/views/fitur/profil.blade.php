@@ -325,28 +325,19 @@
                             disabled>Ganti Password</button>
                     </form>
                     <script>
-                        // fungsi buat ngubah tampilan password jadi keliatan atau disembunyiin
                         function togglePasswordVisibility(id, iconId) {
-                            // ambil elemen input password sesuai id yang dikasih
                             const passwordField = document.getElementById(id);
-                            // ambil elemen ikon buat mata sesuai id yang dikasih
                             const toggleIcon = document.getElementById(iconId);
 
-                            // cek tipe input, kalo "password" diubah jadi "text" biar keliatan
                             if (passwordField.type === 'password') {
-                                // kalo password diubah jadi text
                                 passwordField.type = 'text';
-                                // ubah ikon mata biasa jadi mata ketutup
                                 toggleIcon.classList.replace('fa-eye', 'fa-eye-slash');
                             } else {
-                                // kalo udah text, balikin lagi jadi password buat disembunyiin
                                 passwordField.type = 'password';
-                                // balikin ikon jadi mata biasa
                                 toggleIcon.classList.replace('fa-eye-slash', 'fa-eye');
                             }
                         }
 
-                        // ngasih fungsi toggle buat tiap ikon mata di input password
                         document.getElementById('toggleOldPassword').onclick = () => togglePasswordVisibility('old_password',
                             'toggleOldPassword');
                         document.getElementById('toggleNewPassword').onclick = () => togglePasswordVisibility('new_password',
@@ -354,44 +345,86 @@
                         document.getElementById('toggleConfirmPassword').onclick = () => togglePasswordVisibility('password_confirmation',
                             'toggleConfirmPassword');
 
-                        // ambil elemen-elemen input dan peringatan yang dipake
                         const newPasswordInput = document.getElementById('new_password');
                         const passwordWarning = document.getElementById('password-warning');
                         const confirmationInput = document.getElementById('password_confirmation');
                         const confirmationWarning = document.getElementById('confirmation-warning');
                         const submitBtn = document.getElementById('submit-btn');
 
-                        // event listener buat validasi password baru tiap kali user ngetik
                         newPasswordInput.addEventListener('input', validatePassword);
-                        // event listener buat cek kecocokan password tiap kali user ngetik di konfirmasi password
                         confirmationInput.addEventListener('input', checkPasswordMatch);
 
-                        // fungsi buat ngecek password baru sesuai syarat minimal (8 karakter, ada huruf besar, kecil, dan angka)
                         function validatePassword() {
                             const password = newPasswordInput.value;
 
-                            // cek password pake regex, harus ada huruf besar, kecil, angka, dan minimal 8 karakter
                             const isValidPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(password);
 
-                            // kalo password bener, warning disembunyiin, kalo salah ditampilin
                             passwordWarning.style.display = isValidPassword ? 'none' : 'block';
 
-                            // panggil fungsi buat cek apakah password sama dengan konfirmasi
                             checkPasswordMatch();
                         }
 
-                        // fungsi buat ngecek password baru sama konfirmasi password cocok atau nggak
                         function checkPasswordMatch() {
-                            // cek apakah password baru sama konfirmasi password cocok
                             const isPasswordMatch = newPasswordInput.value === confirmationInput.value;
 
-                            // kalo nggak cocok, tampilin warning, kalo cocok disembunyiin
                             confirmationWarning.style.display = isPasswordMatch ? 'none' : 'block';
 
-                            // tombol submit aktif cuma kalo password bener dan cocok sama konfirmasi
                             submitBtn.disabled = !(isPasswordMatch && /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(newPasswordInput.value));
                         }
                     </script>
+                    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function () {
+                            @if(session('success'))
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Berhasil!',
+                                    text: "{{ session('success') }}",
+                                });
+                            @elseif(session('error'))
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: "{{ session('error') }}",
+                                });
+                            @endif
+                        });
+                    
+                        document.querySelector("form[action*='profil.update']").addEventListener("submit", function (event) {
+                            event.preventDefault();
+                            Swal.fire({
+                                title: 'Apakah kamu yakin?',
+                                text: "Data yang diubah akan disimpan!",
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Ya, simpan!'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    this.submit();
+                                }
+                            });
+                        });
+                    
+                        document.querySelector("form[action*='gantiPassword']").addEventListener("submit", function (event) {
+                            event.preventDefault();
+                            Swal.fire({
+                                title: 'Konfirmasi Ganti Password',
+                                text: "Pastikan kamu mengingat password baru!",
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Ya, ganti!'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    this.submit();
+                                }
+                            });
+                        });
+                    </script>                    
                 </div>
                 <br>
                 <!-- /.container-fluid -->

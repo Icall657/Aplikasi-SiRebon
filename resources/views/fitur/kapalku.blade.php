@@ -143,20 +143,6 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <form action="{{ route('kapalku.index') }}" method="GET"
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" name="search" value="{{ request('search') }}"
-                                class="form-control bg-light border-0 small"
-                                placeholder="Cari nama kapal atau pemilik..." aria-label="Search"
-                                aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="submit">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
 
 
                     <!-- Topbar Navbar -->
@@ -217,7 +203,21 @@
                 <div class="container-fluid">
 
                     <!-- Content Row -->
-                    <div class="row">
+
+                    <div class="d-flex justify-content-between align-items-center flex-wrap mb-3">
+                        <form class="form-inline" method="GET" action="{{ route('kapalku.index') }}">
+                            <div class="input-group bg-white p-1 rounded-lg shadow-sm">
+                                <input type="text" class="form-control bg-white border border-gray-300 small"
+                                    name="search" placeholder="Cari nama kapal..." aria-label="Search"
+                                    aria-describedby="basic-addon2" value="{{ request('search') }}">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit">
+                                        <i class="fas fa-search fa-sm"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
                         <div class="table-container">
                             <div class="d-flex justify-content-between align-items-center">
                                 <a href="{{ route('kapalku.create') }}" class="btn btn-primary btn-add">Tambah
@@ -254,6 +254,19 @@
                             @endforelse
                         </tbody>
                     </table>
+                    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                    <script>
+                        @if (session('success'))
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Sukses!',
+                                text: '{{ session('success') }}',
+                                showConfirmButton: false,
+                                timer: 2000
+                            });
+                        @endif
+                    </script>
+
 
 
                 </div>

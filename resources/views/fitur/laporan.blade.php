@@ -210,8 +210,16 @@
                     <!-- Content Row -->
 
                     <div class="container mt-5">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div>
+                                <button class="btn btn-success ms-2" onclick="printTable()">
+                                    <i class="fa fa-print"></i> Print
+                                </button>
+                            </div>
+                        </div>
+
                         <div class="table-container">
-                            <table class="table table-bordered table-striped">
+                            <table id="laporanTable" class="table table-bordered table-striped">
                                 <thead class="table-light">
                                     <tr>
                                         <th style="width: 50px;" class="text-center">No.</th>
@@ -226,10 +234,14 @@
                                     @forelse ($laporan as $index => $data)
                                         <tr>
                                             <td class="text-center">{{ $index + 1 }}</td>
-                                            <td class="text-center">{{ $data->user->wajibRetribusi->nama ?? 'Nama Tidak Ditemukan' }}</td>
-                                            <td class="text-center">{{ \Carbon\Carbon::parse($data->tgl_bayar)->format('d-m-Y') }}</td>
-                                            <td class="text-center">Rp. {{ number_format($data->nominal, 0, ',', '.') }}</td>
-                                            <td class="text-center">{{ $data->refBank->nama_bank ?? 'Bank Tidak Ditemukan' }}</td>
+                                            <td class="text-center">
+                                                {{ $data->user->wajibRetribusi->nama ?? 'Nama Tidak Ditemukan' }}</td>
+                                            <td class="text-center">
+                                                {{ \Carbon\Carbon::parse($data->tgl_bayar)->format('d-m-Y') }}</td>
+                                            <td class="text-center">Rp.
+                                                {{ number_format($data->nominal, 0, ',', '.') }}</td>
+                                            <td class="text-center">
+                                                {{ $data->refBank->nama_bank ?? 'Bank Tidak Ditemukan' }}</td>
                                             <td class="text-center">
                                                 @if ($data->status == 'P')
                                                     <span>Pending</span>
@@ -244,16 +256,34 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="6" class="text-center">Data tidak ditemukan untuk rentang tanggal yang dipilih.</td>
+                                            <td colspan="6" class="text-center">Data tidak ditemukan untuk rentang
+                                                tanggal yang dipilih.</td>
                                         </tr>
                                     @endforelse
                                 </tbody>
                             </table>
+                            <a href="{{ route('carilaporan.index') }}" class="btn btn-secondary">
+                                <i class="fa fa-arrow-left"></i> Kembali
+                            </a>
                         </div>
                     </div>
-                    
-                    
-                    
+
+                    <script>
+                        function printTable() {
+                            var printContent = document.getElementById('laporanTable').outerHTML;
+                            var originalContent = document.body.innerHTML;
+
+                            document.body.innerHTML = `<html><head><title>Cetak Laporan</title></head><body>${printContent}</body></html>`;
+                            window.print();
+                            document.body.innerHTML = originalContent;
+                            location.reload();
+                        }
+                    </script>
+
+
+
+
+
 
 
                     <!-- Content Row -->

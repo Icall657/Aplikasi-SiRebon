@@ -23,19 +23,16 @@ class LoginController extends Controller
                 if ($user->wajibRetribusi && $user->wajibRetribusi->status !== 'A') {
                     return redirect()->back()->with('error', 'Akun anda sudah tidak aktif.');
                 }
-                return redirect()->route('profil.index')->with('success', 'Selamat datang di halaman profil Anda!');
+                return redirect()->route('profil.index');
             } elseif ($user->level === 'Admin Aplikasi') {
-                return redirect()->route('home.index')->with('success', 'Selamat datang, Admin!');
+                return redirect()->route('home.index');
             } elseif ($user->level === 'Multiadmin') {
-                return redirect()->route('multiadmin.index')->with('success', 'Selamat datang di halaman Multiadmin!');
+                return redirect()->route('multiadmin.index');
             }
         }
 
         return redirect()->back()->with('error', 'Username atau password salah!');
     }
-
-
-
 
     public function logout()
     {

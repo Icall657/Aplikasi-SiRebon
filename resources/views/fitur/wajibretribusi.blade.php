@@ -228,7 +228,7 @@
                         @if (auth()->user()->level == 'Admin Aplikasi')
                             <table class="table table-bordered mt-3">
                                 <thead class="table-light">
-                                    <tr>
+                                    <tr class="text-center">
                                         <th style="width: 50px;">No.</th>
                                         <th>Nama Lengkap</th>
                                         <th>Telepon</th>
@@ -243,7 +243,7 @@
                                         $no = 1;
                                     @endphp
                                     @foreach ($wajibRetribusi as $wajib)
-                                        <tr>
+                                        <tr class="text-center">
                                             <td>{{ $no++ }}</td>
                                             <td>{{ $wajib->nama }}</td>
                                             <td>{{ $wajib->no_hp }}</td>
@@ -253,14 +253,14 @@
                                             <td>
                                                 <div class="d-flex">
                                                     <a href="{{ route('wajib-retribusi.edit', $wajib->id) }}"
-                                                        class="btn btn-primary btn-sm m-1">Ubah</a>
+                                                        class="btn btn-primary btn-sm m-1"><i class="fas fa-edit"></i></a>
                                                     <form id="deleteForm{{ $wajib->id }}"
                                                         action="{{ route('wajib-retribusi.destroy', $wajib->id) }}"
                                                         method="POST" style="display:inline;">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="button" class="btn btn-danger btn-sm m-1"
-                                                            onclick="deleteData({{ $wajib->id }})">Hapus</button>
+                                                            onclick="deleteData({{ $wajib->id }})"><i class="fas fa-trash-alt"></i></button>
                                                     </form>
                                                 </div>
                                             </td>
@@ -288,6 +288,18 @@
                             </script>
                         @endif
                     </div>
+                    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                    <script>
+                        @if (session('success'))
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Sukses!',
+                                text: '{{ session('success') }}',
+                                showConfirmButton: false,
+                                timer: 2000
+                            });
+                        @endif
+                    </script>
                     <!-- ISI KONTEN -->
 
                     <!-- Content Row -->

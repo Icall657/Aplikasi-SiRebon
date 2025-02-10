@@ -48,7 +48,7 @@
                         <i class="fa fa-home"></i>
                         <span>beranda</span></a>
                 </li>
-                
+
                 <hr class="sidebar-divider my-0">
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ route('rekening.index') }}">
@@ -245,19 +245,27 @@
                                         <td scope="col" class="text-center">{{ $data->nama_akun }}</td>
                                         <td scope="col" class="text-center">{{ $data->no_rekening }}</td>
                                         <td scope="col" class="text-center">
-                                            <a href="{{ route('rekening.edit', $data->id) }}" class="btn btn-primary btn-sm m-1">Ubah</a>
-                        
-                                            <form id="deleteForm{{ $data->id }}" action="{{ route('rekening.destroy', $data->id) }}" method="POST" style="display:inline;">
+                                            <a href="{{ route('rekening.edit', $data->id) }}"
+                                                class="btn btn-primary btn-sm m-1">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+
+                                            <form id="deleteForm{{ $data->id }}"
+                                                action="{{ route('rekening.destroy', $data->id) }}" method="POST"
+                                                style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="button" class="btn btn-danger btn-sm m-1" onclick="deleteData({{ $data->id }})">Hapus</button>
+                                                <button type="button" class="btn btn-danger btn-sm m-1"
+                                                    onclick="deleteData({{ $data->id }})">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
                                             </form>
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
-                        
+
                         <script>
                             function deleteData(id) {
                                 Swal.fire({
@@ -276,8 +284,20 @@
                                 });
                             }
                         </script>
-                        
-                        
+                        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                        <script>
+                            @if (session('success'))
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Sukses!',
+                                    text: '{{ session('success') }}',
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                });
+                            @endif
+                        </script>
+
+
                     </div>
                     <!-- Content Row -->
 

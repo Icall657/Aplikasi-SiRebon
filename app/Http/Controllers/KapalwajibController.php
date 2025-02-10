@@ -110,11 +110,16 @@ class KapalwajibController extends Controller
 
     public function destroy($id)
     {
-        $data = Kapal::findOrFail($id);
-        $data->delete();
+        $kapal = Kapal::findOrFail($id);
 
+        if ($kapal->konfirmasiBayar()->exists()) {
+            return redirect()->route('kapal-wajib-retribusi.index')->with('error', 'Kapal ini sudah memiliki konfirmasi pembayaran dan tidak bisa dihapus.');
+        }
+
+        $kapal->delete();
         return redirect()->route('kapal-wajib-retribusi.index')->with('success', 'Data berhasil dihapus.');
     }
+
 
     public function edit($id)
     {

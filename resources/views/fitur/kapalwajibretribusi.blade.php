@@ -143,19 +143,6 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
-                        method="GET" action="{{ route('kapal-wajib-retribusi.index') }}">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" name="search"
-                                placeholder="Cari nama kapal..." aria-label="Search" aria-describedby="basic-addon2"
-                                value="{{ request('search') }}">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="submit">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
 
 
                     <!-- Topbar Navbar -->
@@ -224,110 +211,157 @@
                     <!-- Content Row -->
 
                     <!-- ISI KONTEN -->
-                    <div class="table-container">
-                        @if (auth()->user()->level == 'Admin Aplikasi')
-                            <div class="d-flex justify-content-between align-items-center">
-                                <a href="{{ route('kapal-wajib-retribusi.create') }}"
-                                    class="btn btn-primary btn-add">Tambah Data</a>
+                    <!-- Search Bar -->
+                    <div class="d-flex justify-content-between align-items-center flex-wrap mb-3">
+                        <form class="form-inline" method="GET"
+                            action="{{ route('kapal-wajib-retribusi.index') }}">
+                            <div class="input-group bg-white p-1 rounded-lg shadow-sm">
+                                <input type="text" class="form-control bg-white border border-gray-300 small"
+                                    name="search" placeholder="Cari nama kapal..." aria-label="Search"
+                                    aria-describedby="basic-addon2" value="{{ request('search') }}">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit">
+                                        <i class="fas fa-search fa-sm"></i>
+                                    </button>
+                                </div>
                             </div>
+                        </form>
+
+                        @if (auth()->user()->level == 'Admin Aplikasi')
+                            <a href="{{ route('kapal-wajib-retribusi.create') }}" class="btn btn-primary">Tambah
+                                Data</a>
                         @endif
-                        <table class="table table-bordered mt-3">
-                            <thead class="table-light">
+                    </div>
+
+                    <!-- Table -->
+                    <table class="table table-bordered">
+                        <thead class="table-light">
+                            <tr>
+                                <th class="text-center">No.</th>
+                                @if (auth()->user()->level == 'Admin Aplikasi')
+                                    <th class="text-center">Nama Pemilik</th>
+                                @endif
+                                <th class="text-center">Nama Kapal</th>
+                                @if (auth()->user()->level == 'Wajib Retribusi')
+                                    <th class="text-center">Nilai Retribusi</th>
+                                    <th class="text-center">Tanggal Pembayaran</th>
+                                    <th class="text-center">Status</th>
+                                @endif
+                                @if (auth()->user()->level == 'Admin Aplikasi')
+                                    <th class="text-center">Jenis Kapal</th>
+                                    <th class="text-center">Ukuran</th>
+                                    <th class="text-center" style="width: 150px;">Aksi</th>
+                                @endif
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($kapals as $key => $kapal)
                                 <tr>
-                                    <th class="text-center" style="width: 50px;">No.</th>
+                                    <td class="text-center">{{ $key + 1 }}</td>
                                     @if (auth()->user()->level == 'Admin Aplikasi')
-                                        <th class="text-center">Nama Pemilik</th>
+                                        <td class="text-center">
+                                            {{ $kapal->user->wajibRetribusi->nama ?? 'Tidak ada pemilik' }}</td>
                                     @endif
-                                    <th class="text-center">Nama Kapal</th>
+                                    <td class="text-center">{{ $kapal->nama_kapal }}</td>
                                     @if (auth()->user()->level == 'Wajib Retribusi')
-                                        <th class="text-center">Nilai Retribusi</th>
-                                        <th class="text-center">Tanggal Pembayaran</th>
-                                        <th class="text-center">Status</th>
+                                        <td class="text-center">Rp
+                                            {{ number_format($kapal->jenisKapal->biaya_retribusi ?? 0, 0, ',', '.') }}
+                                        </td>
+                                        <td class="text-center">{{ $kapal->created_at->format('d F Y') }}</td>
+                                        <td class="text-center">
+                                            @if ($kapal->konfirmasiBayar)
+                                                @if ($kapal->konfirmasiBayar->status == 'P')
+                                                    Pembayaran Sedang Diproses
+                                                @elseif ($kapal->konfirmasiBayar->status == 'Y')
+                                                    Sudah Membayar Retribusi
+                                                @elseif ($kapal->konfirmasiBayar->status == 'N')
+                                                    Pembayaran Tidak Disetujui
+                                                @else
+                                                    Tidak Ada Status
+                                                @endif
+                                            @else
+                                                Belum membayar Retribusi
+                                            @endif
+                                        </td>
                                     @endif
                                     @if (auth()->user()->level == 'Admin Aplikasi')
-                                        <th class="text-center">Jenis Kapal</th>
-                                        <th class="text-center">Ukuran</th>
-                                        <th class="text-center" style="width: 150px;">Aksi</th>
+                                        <td class="text-center">{{ $kapal->jenisKapal->jenis_kapal ?? '-' }}</td>
+                                        <td class="text-center">{{ $kapal->ukuran ?? '-' }}</td>
+                                        <td class="text-center">
+                                            <a href="{{ route('kapal-wajib-retribusi.edit', $kapal->id) }}"
+                                                class="btn btn-sm btn-primary">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <form action="{{ route('kapal-wajib-retribusi.destroy', $kapal->id) }}"
+                                                method="POST" class="d-inline form-delete">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-danger">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
+                                            </form>
+                                        </td>
                                     @endif
                                 </tr>
-                            </thead>
-                            <tbody>
-                                @forelse ($kapals as $key => $kapal)
-                                    <tr>
-                                        <td class="text-center">{{ $key + 1 }}</td>
-                                        @if (auth()->user()->level == 'Admin Aplikasi')
-                                            <td class="text-center">
-                                                {{ $kapal->user->wajibRetribusi->nama ?? 'Tidak ada pemilik' }}</td>
-                                        @endif
-                                        <td class="text-center">{{ $kapal->nama_kapal }}</td>
-                                        @if (auth()->user()->level == 'Wajib Retribusi')
-                                            <td class="text-center">Rp
-                                                {{ number_format($kapal->jenisKapal->biaya_retribusi ?? 0, 0, ',', '.') }}
-                                            </td>
-                                            <td class="text-center">{{ $kapal->created_at->format('d F Y') }}</td>
-                                            <td class="text-center">
-                                                @if ($kapal->konfirmasiBayar)
-                                                    @if ($kapal->konfirmasiBayar->status == 'P')
-                                                        Pembayaran Sedang Diproses
-                                                    @elseif ($kapal->konfirmasiBayar->status == 'Y')
-                                                        Sudah Membayar Retribusi
-                                                    @elseif ($kapal->konfirmasiBayar->status == 'N')
-                                                        Pembayaran Tidak Disetujui
-                                                    @else
-                                                        Tidak Ada Status
-                                                    @endif
-                                                @else
-                                                    Belum membayar Retribusi
-                                                @endif
-                                            </td>
-                                        @endif
-                                        @if (auth()->user()->level == 'Admin Aplikasi')
-                                            <td class="text-center">
-                                                {{ $kapal->jenisKapal->jenis_kapal ?? 'Jenis kapal tidak ditemukan' }}
-                                            </td>
-                                            <td class="text-center">{{ $kapal->ukuran }}</td>
-                                            <td class="text-center">
-                                                <a href="{{ route('kapal-wajib-retribusi.edit', $kapal->id) }}"
-                                                    class="btn btn-primary btn-sm">Ubah</a>
-                                                <form id="deleteForm{{ $kapal->id }}"
-                                                    action="{{ route('kapal-wajib-retribusi.destroy', $kapal->id) }}"
-                                                    method="POST" style="display:inline;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="button" class="btn btn-danger btn-sm"
-                                                        onclick="deleteData({{ $kapal->id }})">Hapus</button>
-                                                </form>
-                                            </td>
-                                        @endif
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="7" class="text-center">Tidak ada data tersedia.</td>
-                                    </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
-                        <script>
-                            function deleteData(id) {
-                                Swal.fire({
-                                    title: 'Apakah Anda yakin?',
-                                    text: 'Data ini akan dihapus secara permanen!',
-                                    icon: 'warning',
-                                    showCancelButton: true,
-                                    confirmButtonColor: '#d33',
-                                    cancelButtonColor: '#3085d6',
-                                    confirmButtonText: 'Ya, hapus!',
-                                    cancelButtonText: 'Batal'
-                                }).then((result) => {
-                                    if (result.isConfirmed) {
-                                        // Submit form jika konfirmasi diterima
-                                        document.getElementById('deleteForm' + id).submit();
-                                    }
-                                });
-                            }
-                        </script>
+                            @empty
+                                <tr>
+                                    <td colspan="9" class="text-center">Data tidak ditemukan</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
 
-                    </div>
+                    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            document.querySelectorAll(".form-delete").forEach(form => {
+                                form.addEventListener("submit", function(event) {
+                                    event.preventDefault();
+
+                                    Swal.fire({
+                                        title: "Yakin hapus data ini?",
+                                        text: "Data yang dihapus tidak bisa dikembalikan!",
+                                        icon: "warning",
+                                        showCancelButton: true,
+                                        confirmButtonColor: "#d33",
+                                        cancelButtonColor: "#3085d6",
+                                        confirmButtonText: "Ya, hapus!",
+                                        cancelButtonText: "Batal"
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            form.submit();
+                                        }
+                                    });
+                                });
+                            });
+                        });
+
+                        @if (session('error'))
+                            <
+                            script
+                            script
+                            script >
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: "{{ session('error') }}",
+                                });
+                    </>
+                    @endif
+
+                    @if (session('success'))
+                        <script>
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Sukses!',
+                                text: "{{ session('success') }}",
+                            });
+                        </script>
+                    @endif
+                    </script>
+
+
+
 
                     <!-- Content Row -->
 

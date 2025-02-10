@@ -27,29 +27,38 @@
                 </thead>
                 <tbody>
                     @foreach ($belumBayar as $data)
-                        <tr class="text-center text-lg">
-                            <td class="border px-6 py-3">{{ $data->wajibRetribusi->nama }}</td>
-                            <td class="border px-6 py-3">
-                                {{ $data->kapals->first()->nama_kapal ?? '-' }}
-                            </td>                            
-                            <td class="border px-6 py-3">{{ $data->wajibRetribusi->no_hp }}</td>
-                            <td class="border px-6 py-3">{{ $data->wajibRetribusi->alamat }}</td>
-                            <td class="border px-6 py-3">
-                                @if ($data->wajibRetribusi->status === 'A')
-                                    Aktif
-                                @elseif ($data->wajibRetribusi->status === 'B')
-                                    Tidak Aktif
-                                @else
-                                    {{ $data->wajibRetribusi->status }}
-                                @endif
-                            </td>                                                        
-                            <td class="border px-6 py-3">
-                                <button onclick="sendReminder('{{ $data->wajibRetribusi->no_hp }}')"
-                                    class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition duration-200 ease-in-out shadow-md">
-                                    <i class="fas fa-bell"></i> Kirim Pengingat
-                                </button>
-                            </td>
-                        </tr>
+                        @foreach ($data->kapals as $kapal)
+                            @php
+                                $sudahBayar = DB::table('konfirmasi_bayar')
+                                    ->where('id_kapal', $kapal->id)
+                                    ->where('status', 'Y')
+                                    ->exists();
+                            @endphp
+
+                            @if (!$sudahBayar)
+                                <tr class="text-center text-lg">
+                                    <td class="border px-6 py-3">{{ $data->wajibRetribusi->nama }}</td>
+                                    <td class="border px-6 py-3">{{ $kapal->nama_kapal }}</td>
+                                    <td class="border px-6 py-3">{{ $data->wajibRetribusi->no_hp }}</td>
+                                    <td class="border px-6 py-3">{{ $data->wajibRetribusi->alamat }}</td>
+                                    <td class="border px-6 py-3">
+                                        @if ($data->wajibRetribusi->status === 'A')
+                                            Aktif
+                                        @elseif ($data->wajibRetribusi->status === 'B')
+                                            Tidak Aktif
+                                        @else
+                                            {{ $data->wajibRetribusi->status }}
+                                        @endif
+                                    </td>
+                                    <td class="border px-6 py-3">
+                                        <button onclick="sendReminder('{{ $data->wajibRetribusi->no_hp }}')"
+                                            class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition duration-200 ease-in-out shadow-md">
+                                            <i class="fas fa-bell"></i> Kirim Pengingat
+                                        </button>
+                                    </td>
+                                </tr>
+                            @endif
+                        @endforeach
                     @endforeach
                 </tbody>
             </table>
