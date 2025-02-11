@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Laporan Belum Membayar Retribusi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -51,9 +52,9 @@
                                         @endif
                                     </td>
                                     <td class="border px-6 py-3">
-                                        <button onclick="sendReminder('{{ $data->wajibRetribusi->no_hp }}')"
-                                            class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition duration-200 ease-in-out shadow-md">
-                                            <i class="fas fa-bell"></i> Kirim Pengingat
+                                        <button onclick="sendEmailReminder('{{ $data->id }}')"
+                                            class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-200 ease-in-out shadow-md">
+                                            <i class="fas fa-bell"></i>
                                         </button>
                                     </td>
                                 </tr>
@@ -70,7 +71,27 @@
             </a>
         </div>
     </div>
-
+    <script>
+        function sendEmailReminder(userId) {
+            fetch("{{ route('send.email.reminder') }}", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                    },
+                    body: JSON.stringify({
+                        user_id: userId
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    Swal.fire("Sukses!", "Pengingat email berhasil dikirim!", "success");
+                })
+                .catch(error => {
+                    Swal.fire("Gagal!", "Terjadi kesalahan saat mengirim pengingat!", "error");
+                });
+        }
+    </script>
     <script>
         function sendReminder(phone) {
             Swal.fire({

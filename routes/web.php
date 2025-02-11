@@ -16,6 +16,7 @@ use App\Http\Controllers\KapalkuController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\RekeningController;
+use App\Http\Controllers\ReminderController;
 use App\Http\Controllers\RetribusiController;
 use App\Http\Controllers\KapalwajibController;
 use App\Http\Controllers\KonfirmasiController;
@@ -61,6 +62,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('multiadmin', MultiadminController::class);
         Route::resource('retribusi', RetribusiController::class);
         Route::resource('belum-retribusi', BelumRetribusiController::class);
+        Route::post('/send-email-reminder', [ReminderController::class, 'sendEmailReminder'])->name('send.email.reminder');
     });
 
     Route::group(['middleware' => ['ceklevel:Multiadmin']], function () {});

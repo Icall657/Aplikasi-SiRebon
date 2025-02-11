@@ -216,6 +216,7 @@
                                     <div class="card-header bg-primary text-white text-center">
                                         <h5 class="mb-0">Cari Laporan</h5>
                                     </div>
+
                                     @if (auth()->user()->level == 'Wajib Retribusi')
                                         <div class="card-body">
                                             <form action="{{ route('laporan.index') }}" method="GET"
@@ -253,22 +254,52 @@
                                             Pilih rentang tanggal untuk melihat laporan
                                         </div>
                                     @endif
+
                                     @if (auth()->user()->level == 'Admin Aplikasi')
-                                        <div class="card-body text-center">
-                                            <a href="{{ route('retribusi.index') }}"
-                                                class="btn btn-secondary btn-lg rounded-pill">
-                                                <i class="fas fa-user"></i> Sudah Membayar Retribusi
-                                            </a>
-                                            <a href="{{ route('belum-retribusi.index') }}"
-                                                class="btn btn-secondary btn-lg rounded-pill ml-3">
-                                                <i class="fas fa-user-times"></i> Belum Membayar Retribusi
-                                            </a>
+                                        <div class="card-body">
+                                            <div class="text-muted text-center">
+                                                Pilih untuk melihat laporan
+                                            </div>
+                                            <div class="text-center mt-4">
+                                                <a href="{{ route('retribusi.index') }}"
+                                                    class="btn btn-secondary btn-lg rounded-pill">
+                                                    <i class="fas fa-user"></i> Sudah Membayar Retribusi
+                                                </a>
+                                                <a href="{{ route('belum-retribusi.index') }}"
+                                                    class="btn btn-secondary btn-lg rounded-pill ml-3">
+                                                    <i class="fas fa-user-times"></i> Belum Membayar Retribusi
+                                                </a>
+                                            </div>
+
+                                            <div class="card mt-4">
+                                                <div class="card-header bg-warning text-dark">
+                                                    <h5><i class="fas fa-bell"></i> Notifikasi Pembayaran Terbaru</h5>
+                                                </div>
+                                                <ul class="list-group list-group-flush">
+                                                    @foreach ($pembayaranTerbaru as $bayar)
+                                                        <li
+                                                            class="list-group-item d-flex justify-content-between align-items-center">
+                                                            <div>
+                                                                <i class="fas fa-check-circle text-success"></i>
+                                                                <span
+                                                                    class="font-weight-bold">{{ $bayar->user->username }}</span>
+                                                                telah melakukan pembayaran untuk kapal
+                                                                <span
+                                                                    class="font-weight-bold">{{ $bayar->kapal->nama_kapal }}</span>
+                                                            </div>
+                                                            <small
+                                                                class="text-muted">{{ $bayar->created_at->diffForHumans() }}</small>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
                                         </div>
                                     @endif
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <br>
 
 
 

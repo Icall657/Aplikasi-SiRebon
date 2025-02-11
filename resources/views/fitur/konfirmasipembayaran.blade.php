@@ -228,11 +228,13 @@
 
                         @if (!session('success') && !$errors->any())
                             <div class="alert alert-secondary">
-                                <strong>Informasi:</strong> Silakan transfer ke rekening <strong>172639482736</strong>
-                                dan
-                                unggah bukti screenshot pembayaran Anda.
+                                <strong>Informasi:</strong> Silahkan Transfer ke <strong>172639482736</strong> atau <a
+                                    href="#" id="scanQR" class="text-primary font-weight-bold">Scan QR</a>
+                                dan unggah bukti screenshot pembayaran Anda.
                             </div>
                         @endif
+
+
 
                         <div class="form-group">
                             <label for="id_kapal">Nama Kapal</label>
@@ -264,6 +266,24 @@
                                     value="0">
                             </div>
                         </div>
+                        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function() {
+                                document.getElementById("scanQR").addEventListener("click", function(event) {
+                                    event.preventDefault();
+                                    Swal.fire({
+                                        title: 'Scan QR Code untuk Pembayaran',
+                                        text: 'Gunakan aplikasi e-banking atau e-wallet untuk scan kode ini.',
+                                        imageUrl: '{{ asset('img/qrcode.jpg') }}',
+                                        imageWidth: 240,
+                                        imageHeight: 300,
+                                        imageAlt: 'QR Code Pembayaran',
+                                        confirmButtonText: 'Oke, Saya Mengerti',
+                                        confirmButtonColor: '#3085d6',
+                                    });
+                                });
+                            });
+                        </script>
 
                         <script>
                             function updateNominal() {
