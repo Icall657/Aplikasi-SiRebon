@@ -335,18 +335,16 @@
                                 });
                             });
                         });
+                    </script>
 
-                        @if (session('error'))
-                            <
-                            script
-                            script
-                            script >
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Oops...',
-                                    text: "{{ session('error') }}",
-                                });
-                    </>
+                    @if (session('error'))
+                        <script>
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: "{{ session('error') }}",
+                            });
+                        </script>
                     @endif
 
                     @if (session('success'))
@@ -358,7 +356,7 @@
                             });
                         </script>
                     @endif
-                    </script>
+
 
 
 

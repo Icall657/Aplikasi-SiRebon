@@ -8,15 +8,21 @@ use Illuminate\Http\Request;
 
 class RekeningController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // ambil semua data rekening yang terkait dengan wajib retribusi yang masih aktif
+        $search = $request->input('search');
+
         $rekening = MsRekening::whereHas('user.wajibRetribusi', function ($query) {
             $query->where('status', '!=', 'B');
-        })->get();
+        })
+            ->when($search, function ($query) use ($search) {
+                $query->where('nama_akun', 'like', "%$search%");
+            })
+            ->get();
 
         return view('fitur.rekeningpembayaran', compact('rekening'));
     }
+
 
 
     public function create()

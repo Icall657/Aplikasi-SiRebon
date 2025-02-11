@@ -284,7 +284,6 @@
                                 });
                             });
                         </script>
-
                         <script>
                             function updateNominal() {
                                 const kapalSelect = document.getElementById('id_kapal');

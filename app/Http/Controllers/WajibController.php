@@ -13,21 +13,29 @@ use Illuminate\Support\Facades\Hash;
 
 class WajibController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request->input('search');
+
         $wajibRetribusi = WajibRetribusi::whereHas('user', function ($query) {
             $query->where('level', 'Wajib Retribusi');
-        })->where('status', '!=', 'B')->get();
+        })
+            ->where('status', '!=', 'B')
+            ->when($search, function ($query) use ($search) {
+                $query->where('nama', 'like', "%$search%");
+            })
+            ->get();
 
-        return view('fitur.wajibretribusi', compact('wajibRetribusi')); // kirim data ke view
+        return view('fitur.wajibretribusi', compact('wajibRetribusi'));
     }
+
 
 
     public function edit($id)
     {
         $wajib = WajibRetribusi::findOrFail($id);
         $kelurahans = Kelurahan::all();
-        return view('fitur.Wajib-Retribusi.edit', compact('wajib', 'kelurahans')); // tampilkan halaman edit
+        return view('fitur.Wajib-Retribusi.edit', compact('wajib', 'kelurahans'));
     }
 
     public function update(Request $request, $id)
@@ -92,7 +100,7 @@ class WajibController extends Controller
 
             DB::commit();
 
-            return redirect()->route('wajib-retribusi.index')->with('success', 'Data udah dinonaktifkan, bro.');
+            return redirect()->route('wajib-retribusi.index')->with('success', 'Data Wajib Retribusi berhasil dihapus');
         } catch (\Exception $e) {
             DB::rollback();
             return redirect()->route('wajib-retribusi.index')->with('error', 'Eh, ada error waktu ngehapus datanya.');

@@ -17,8 +17,9 @@
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
-    <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+
 
 </head>
 
@@ -272,26 +273,44 @@
                                             </div>
 
                                             <div class="card mt-4">
-                                                <div class="card-header bg-warning text-dark">
-                                                    <h5><i class="fas fa-bell"></i> Notifikasi Pembayaran Terbaru</h5>
+                                                <div
+                                                    class="card-header bg-warning text-dark d-flex justify-content-between align-items-center">
+                                                    <h5 class="mb-0"><i class="fas fa-bell"></i> Notifikasi
+                                                        Pembayaran Terbaru</h5>
+                                                    <button class="btn btn-sm" type="button"
+                                                        data-bs-toggle="collapse" data-bs-target="#notifikasiList"
+                                                        aria-expanded="false" aria-controls="notifikasiList"
+                                                        onclick="toggleIcon(this)">
+                                                        <i class="fas fa-chevron-down"></i>
+                                                    </button>
                                                 </div>
-                                                <ul class="list-group list-group-flush">
-                                                    @foreach ($pembayaranTerbaru as $bayar)
-                                                        <li
-                                                            class="list-group-item d-flex justify-content-between align-items-center">
-                                                            <div>
-                                                                <i class="fas fa-check-circle text-success"></i>
-                                                                <span
-                                                                    class="font-weight-bold">{{ $bayar->user->username }}</span>
-                                                                telah melakukan pembayaran untuk kapal
-                                                                <span
-                                                                    class="font-weight-bold">{{ $bayar->kapal->nama_kapal }}</span>
-                                                            </div>
-                                                            <small
-                                                                class="text-muted">{{ $bayar->created_at->diffForHumans() }}</small>
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
+                                                <div class="collapse" id="notifikasiList">
+                                                    <ul class="list-group list-group-flush">
+                                                        @foreach ($pembayaranTerbaru as $bayar)
+                                                            <li
+                                                                class="list-group-item d-flex justify-content-between align-items-center">
+                                                                <div>
+                                                                    <i class="fas fa-check-circle text-success"></i>
+                                                                    <span
+                                                                        class="font-weight-bold">{{ $bayar->user->username }}</span>
+                                                                    telah melakukan pembayaran untuk kapal
+                                                                    <span
+                                                                        class="font-weight-bold">{{ $bayar->kapal->nama_kapal }}</span>
+                                                                </div>
+                                                                <small
+                                                                    class="text-muted">{{ $bayar->created_at->diffForHumans() }}</small>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+
+                                                <script>
+                                                    function toggleIcon(button) {
+                                                        let icon = button.querySelector("i");
+                                                        icon.classList.toggle("fa-chevron-down");
+                                                        icon.classList.toggle("fa-chevron-up");
+                                                    }
+                                                </script>
                                             </div>
                                         </div>
                                     @endif
@@ -369,6 +388,9 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 
 </body>
 

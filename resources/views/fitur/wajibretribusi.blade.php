@@ -48,7 +48,7 @@
                         <i class="fa fa-home"></i>
                         <span>beranda</span></a>
                 </li>
-                
+
                 <hr class="sidebar-divider my-0">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('rekening.index') }}">
@@ -143,18 +143,6 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small"
-                                placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -211,7 +199,7 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
+                <div class="container-fluid min-vh-100 d-flex flex-column">
 
                     <!-- Content Row -->
                     <div class="row">
@@ -221,154 +209,173 @@
 
                     <!-- Content Row -->
                     <div class="table-container">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <a href="{{ route('multiadmin.create') }}" class="btn btn-primary btn-add">Tambah
-                                Data</a>
-                        </div>
-                        @if (auth()->user()->level == 'Admin Aplikasi')
-                            <table class="table table-bordered mt-3">
-                                <thead class="table-light">
-                                    <tr class="text-center">
-                                        <th style="width: 50px;">No.</th>
-                                        <th>Nama Lengkap</th>
-                                        <th>Telepon</th>
-                                        <th>NIK</th>
-                                        <th>Alamat</th>
-                                        <th>Kelurahan</th>
-                                        <th style="width: 150px;">Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @php
-                                        $no = 1;
-                                    @endphp
-                                    @foreach ($wajibRetribusi as $wajib)
+                        <div class="table-container">
+                            <div class="d-flex justify-content-between align-items-center flex-wrap mb-3">
+                                <form class="form-inline" method="GET" action="{{ route('wajib-retribusi.index') }}">
+                                    <div class="input-group bg-white p-1 rounded-lg shadow-sm">
+                                        <input type="text"
+                                            class="form-control bg-white border border-gray-300 small" name="search"
+                                            placeholder="Cari nama..." aria-label="Search"
+                                            aria-describedby="basic-addon2" value="{{ request('search') }}">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="submit">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+
+                                @if (auth()->user()->level == 'Admin Aplikasi')
+                                    <a href="{{ route('multiadmin.create') }}" class="btn btn-primary">Tambah
+                                        Data</a>
+                                @endif
+                            </div>
+                            @if (auth()->user()->level == 'Admin Aplikasi')
+                                <table class="table table-bordered mt-3">
+                                    <thead class="table-light">
                                         <tr class="text-center">
-                                            <td>{{ $no++ }}</td>
-                                            <td>{{ $wajib->nama }}</td>
-                                            <td>{{ $wajib->no_hp }}</td>
-                                            <td>{{ $wajib->nik }}</td>
-                                            <td>{{ $wajib->alamat }}</td>
-                                            <td>{{ $wajib->kelurahan->nama_kelurahan }}</td>
-                                            <td>
-                                                <div class="d-flex">
-                                                    <a href="{{ route('wajib-retribusi.edit', $wajib->id) }}"
-                                                        class="btn btn-primary btn-sm m-1"><i class="fas fa-edit"></i></a>
-                                                    <form id="deleteForm{{ $wajib->id }}"
-                                                        action="{{ route('wajib-retribusi.destroy', $wajib->id) }}"
-                                                        method="POST" style="display:inline;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="button" class="btn btn-danger btn-sm m-1"
-                                                            onclick="deleteData({{ $wajib->id }})"><i class="fas fa-trash-alt"></i></button>
-                                                    </form>
-                                                </div>
-                                            </td>
+                                            <th style="width: 50px;">No.</th>
+                                            <th>Nama Lengkap</th>
+                                            <th>Telepon</th>
+                                            <th>NIK</th>
+                                            <th>Alamat</th>
+                                            <th>Kelurahan</th>
+                                            <th style="width: 150px;">Aksi</th>
                                         </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                            <script>
-                                function deleteData(id) {
-                                    Swal.fire({
-                                        title: 'Apakah Anda yakin?',
-                                        text: 'Data ini akan dihapus secara permanen!',
-                                        icon: 'warning',
-                                        showCancelButton: true,
-                                        confirmButtonColor: '#d33',
-                                        cancelButtonColor: '#3085d6',
-                                        confirmButtonText: 'Ya, hapus!',
-                                        cancelButtonText: 'Batal'
-                                    }).then((result) => {
-                                        if (result.isConfirmed) {
-                                            document.getElementById('deleteForm' + id).submit();
-                                        }
-                                    });
-                                }
-                            </script>
-                        @endif
-                    </div>
-                    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-                    <script>
-                        @if (session('success'))
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Sukses!',
-                                text: '{{ session('success') }}',
-                                showConfirmButton: false,
-                                timer: 2000
-                            });
-                        @endif
-                    </script>
-                    <!-- ISI KONTEN -->
+                                    </thead>
+                                    <tbody>
+                                        @php
+                                            $no = 1;
+                                        @endphp
+                                        @foreach ($wajibRetribusi as $wajib)
+                                            <tr class="text-center">
+                                                <td>{{ $no++ }}</td>
+                                                <td>{{ $wajib->nama }}</td>
+                                                <td>{{ $wajib->no_hp }}</td>
+                                                <td>{{ $wajib->nik }}</td>
+                                                <td>{{ $wajib->alamat }}</td>
+                                                <td>{{ $wajib->kelurahan->nama_kelurahan }}</td>
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <a href="{{ route('wajib-retribusi.edit', $wajib->id) }}"
+                                                            class="btn btn-primary btn-sm m-1"><i
+                                                                class="fas fa-edit"></i></a>
+                                                        <form id="deleteForm{{ $wajib->id }}"
+                                                            action="{{ route('wajib-retribusi.destroy', $wajib->id) }}"
+                                                            method="POST" style="display:inline;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="button" class="btn btn-danger btn-sm m-1"
+                                                                onclick="deleteData({{ $wajib->id }})"><i
+                                                                    class="fas fa-trash-alt"></i></button>
+                                                        </form>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                                <script>
+                                    function deleteData(id) {
+                                        Swal.fire({
+                                            title: 'Apakah Anda yakin?',
+                                            text: 'Data ini akan dihapus secara permanen!',
+                                            icon: 'warning',
+                                            showCancelButton: true,
+                                            confirmButtonColor: '#d33',
+                                            cancelButtonColor: '#3085d6',
+                                            confirmButtonText: 'Ya, hapus!',
+                                            cancelButtonText: 'Batal'
+                                        }).then((result) => {
+                                            if (result.isConfirmed) {
+                                                document.getElementById('deleteForm' + id).submit();
+                                            }
+                                        });
+                                    }
+                                </script>
+                            @endif
+                        </div>
+                        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                        <script>
+                            @if (session('success'))
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Sukses!',
+                                    text: '{{ session('success') }}',
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                });
+                            @endif
+                        </script>
+                        <!-- ISI KONTEN -->
 
-                    <!-- Content Row -->
+                        <!-- Content Row -->
+
+                    </div>
+                    <!-- /.container-fluid -->
 
                 </div>
-                <!-- /.container-fluid -->
+                <!-- End of Main Content -->
+
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>2024 &copy; SiRepal. Dinas Komunikasi, Informatika & Statistik.</span>
+                        </div>
+                    </div>
+                </footer>
+                <!-- End of Footer -->
 
             </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>2024 &copy; SiRepal. Dinas Komunikasi, Informatika & Statistik.</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
+            <!-- End of Content Wrapper -->
 
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Page Wrapper -->
 
-    </div>
-    <!-- End of Page Wrapper -->
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Anda Yakin?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Klik "Logout" Jika Anda Yakin Ingin Keluar</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="{{ route('logout') }}">Logout</a>
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Anda Yakin?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Klik "Logout" Jika Anda Yakin Ingin Keluar</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="{{ route('logout') }}">Logout</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Bootstrap core JavaScript-->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+        <!-- Core plugin JavaScript-->
+        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+        <!-- Custom scripts for all pages-->
+        <script src="js/sb-admin-2.min.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
+        <!-- Page level plugins -->
+        <script src="vendor/chart.js/Chart.min.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
+        <!-- Page level custom scripts -->
+        <script src="js/demo/chart-area-demo.js"></script>
+        <script src="js/demo/chart-pie-demo.js"></script>
 
 </body>
 

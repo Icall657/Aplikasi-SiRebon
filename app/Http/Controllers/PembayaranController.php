@@ -8,11 +8,21 @@ use App\Models\KonfirmasiBayar;
 
 class PembayaranController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $konfirmasiBayar = KonfirmasiBayar::with(['user', 'msRekening', 'refBank'])->get();
+        $search = $request->input('search');
+
+        $konfirmasiBayar = KonfirmasiBayar::with(['user', 'msRekening', 'refBank'])
+            ->when($search, function ($query) use ($search) {
+                $query->whereHas('msRekening', function ($q) use ($search) {
+                    $q->where('nama_akun', 'like', '%' . $search . '%');
+                });
+            })
+            ->get();
+
         return view('fitur.pembayaranretribusi', compact('konfirmasiBayar'));
     }
+
     public function updateStatus(Request $request, $id)
     {
         $validatedStatus = $request->validate([

@@ -143,18 +143,7 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small"
-                                placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -223,8 +212,25 @@
 
                     <!-- ISI KONTEN -->
                     <div class="table-container">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <a href="{{ route('rekening.create') }}" class="btn btn-primary btn-add">Tambah Data</a>
+                        <div class="d-flex justify-content-between align-items-center flex-wrap mb-3">
+                            <form class="form-inline" method="GET"
+                                action="{{ route('rekening.index') }}">
+                                <div class="input-group bg-white p-1 rounded-lg shadow-sm">
+                                    <input type="text" class="form-control bg-white border border-gray-300 small"
+                                        name="search" placeholder="Cari nama pemilik..." aria-label="Search"
+                                        aria-describedby="basic-addon2" value="{{ request('search') }}">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="submit">
+                                            <i class="fas fa-search fa-sm"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+
+                            @if (auth()->user()->level == 'Admin Aplikasi')
+                                <a href="{{ route('rekening.create') }}" class="btn btn-primary">Tambah
+                                    Data</a>
+                            @endif
                         </div>
 
                         <table class="table table-bordered mt-3">
