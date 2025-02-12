@@ -96,13 +96,6 @@
             @endif
             <hr class="sidebar-divider">
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('kategori-retribusi.index') }}">
-                    <i class="fa fa-bars"></i>
-                    <span>Kategori Retribusi</span></a>
-            </li>
-
-            <hr class="sidebar-divider">
-            <li class="nav-item">
                 <a class="nav-link" href="{{ route('kapal-wajib-retribusi.index') }}">
                     <i class="fa fa-exclamation-circle"></i>
                     <span>Kapal Wajib Retribusi</span></a>
@@ -329,7 +322,8 @@
                                 @foreach ($msRekenings as $rekening)
                                     <option value="{{ $rekening->id }}"
                                         {{ old('id_ms_rekening') == $rekening->id ? 'selected' : '' }}>
-                                        {{ $rekening->no_rekening }} ({{ $rekening->nama_akun }})
+                                        {{ $rekening->no_rekening }} ({{ $rekening->nama_akun }}) -
+                                        {{ $rekening->refBank->nama_bank }}
                                     </option>
                                 @endforeach
                             </select>
@@ -341,12 +335,48 @@
 
                         <div class="form-group">
                             <label for="file_bukti">Bukti Pembayaran</label>
-                            <input type="file" name="file_bukti" id="file_bukti" class="form-control"
-                                accept="image/*" required>
+                            <div class="d-flex align-items-center">
+                                <input type="file" name="file_bukti" id="file_bukti" class="form-control"
+                                    accept="image/*" required onchange="previewImage(event)">
+                                <button type="button" class="btn btn-danger btn-sm ml-2 d-none" id="resetFile"
+                                    onclick="resetFileInput()">X</button>
+                            </div>
                             @if ($errors->has('file_bukti'))
                                 <small class="text-danger">{{ $errors->first('file_bukti') }}</small>
                             @endif
+                            <br>
+                            <img id="preview" src="#" alt="Preview Gambar"
+                                class="img-thumbnail mt-2 d-none" style="max-width: 200px;">
                         </div>
+
+                        <script>
+                            function previewImage(event) {
+                                let preview = document.getElementById('preview');
+                                let file = event.target.files[0];
+                                let resetBtn = document.getElementById('resetFile');
+
+                                if (file) {
+                                    let reader = new FileReader();
+                                    reader.onload = function() {
+                                        preview.src = reader.result;
+                                        preview.classList.remove('d-none');
+                                        resetBtn.classList.remove('d-none');
+                                    }
+                                    reader.readAsDataURL(file);
+                                }
+                            }
+
+                            function resetFileInput() {
+                                let fileInput = document.getElementById('file_bukti');
+                                let preview = document.getElementById('preview');
+                                let resetBtn = document.getElementById('resetFile');
+
+                                fileInput.value = "";
+                                preview.classList.add('d-none');
+                                resetBtn.classList.add('d-none');
+                            }
+                        </script>
+
 
                         <button type="submit" class="btn btn-primary">Kirim</button>
                     </form>

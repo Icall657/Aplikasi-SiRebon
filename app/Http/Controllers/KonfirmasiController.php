@@ -14,7 +14,7 @@ class KonfirmasiController extends Controller
     {
         $userId = auth()->id();
         $banks = RefBank::all();
-        $msRekenings = MsRekening::where('id_user', $userId)->get();
+        $msRekenings = MsRekening::where('id_user', $userId)->with('refBank')->get();
         $kapals = Kapal::with('jenisKapal')->where('id_user', $userId)->get();
 
         return view('fitur.konfirmasipembayaran', compact('banks', 'msRekenings', 'kapals'));

@@ -23,7 +23,7 @@ class ProfilController extends Controller
         $messages = [
             'username.required' => 'Username wajib diisi.',
             'username.string' => 'Username harus berupa teks.',
-            'username.max' => 'Username maksimal 255 karakter.',
+            'username.max' => 'Username maksimal 11 karakter.',
             'nik.required' => 'NIK wajib diisi.',
             'nik.string' => 'NIK harus berupa teks.',
             'nik.max' => 'NIK maksimal 16 karakter.',
@@ -42,7 +42,7 @@ class ProfilController extends Controller
         ];
 
         $request->validate([
-            'username' => 'required|string|max:255',
+            'username' => 'required|string|max:11',
             'nik' => 'required|string|max:16|regex:/^[0-9]+$/',
             'namaLengkap' => 'required|string|max:255|regex:/^[a-zA-Z\s]+$/',
             'telepon' => 'required|string|max:16|regex:/^[0-9]+$/',

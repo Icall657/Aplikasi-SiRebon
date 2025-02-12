@@ -97,13 +97,6 @@
             @endif
             <hr class="sidebar-divider">
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('kategori-retribusi.index') }}">
-                    <i class="fa fa-bars"></i>
-                    <span>Kategori Retribusi</span></a>
-            </li>
-
-            <hr class="sidebar-divider">
-            <li class="nav-item">
                 <a class="nav-link" href="{{ route('kapal-wajib-retribusi.index') }}">
                     <i class="fa fa-exclamation-circle"></i>
                     <span>Kapal Wajib Retribusi</span></a>

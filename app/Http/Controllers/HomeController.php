@@ -13,26 +13,31 @@ class HomeController extends Controller
     {
         $jumlahBelumBayar = User::where('level', 'Wajib Retribusi')
             ->whereHas('wajibRetribusi', function ($query) {
-                $query->where('status', '!=', 'B'); // filter wajib retribusi yang masih aktif
+                $query->where('status', '!=', 'B'); // hanya hitung user aktif
             })
-            ->whereNotIn('id', function ($query) {
-                $query->select('id_user')
-                    ->from('konfirmasi_bayar')
-                    ->where('status', 'Y');
-            })
-            ->distinct('id') // menghindari duplikasi jika ada
-            ->count('id');
-
-        $jumlahSudahBayar = KonfirmasiBayar::where('status', 'Y')
-            ->distinct('id_user')
-            ->whereHas('user.wajibRetribusi', function ($query) {
-                $query->where('status', '!=', 'B'); // pastikan hanya hitung user yang aktif
+            ->whereHas('kapals', function ($query) {
+                $query->whereDoesntHave('konfirmasiBayar', function ($subQuery) {
+                    $subQuery->where('status', 'Y');
+                });
             })
             ->count();
 
+
+        $jumlahSudahBayar = User::where('level', 'Wajib Retribusi')
+            ->whereHas('wajibRetribusi', function ($query) {
+                $query->where('status', '!=', 'B');
+            })
+            ->whereDoesntHave('kapals', function ($query) {
+                $query->whereDoesntHave('konfirmasiBayar', function ($subQuery) {
+                    $subQuery->where('status', 'Y');
+                });
+            })
+            ->count();
+
+
         $jumlahPemasukan = KonfirmasiBayar::where('status', 'Y')
             ->whereHas('user.wajibRetribusi', function ($query) {
-                $query->where('status', '!=', 'B'); // hanya hitung pembayaran user aktif
+                $query->where('status', '!=', 'B');
             })
             ->sum('nominal');
 
