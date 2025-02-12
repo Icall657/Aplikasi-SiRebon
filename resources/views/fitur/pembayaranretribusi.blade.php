@@ -143,7 +143,7 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    
+
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
@@ -209,19 +209,28 @@
 
                     <!-- Content Row -->
                     <div class="container">
-                        <form class="form-inline mb-3" method="GET"
-                            action="{{ route('pembayaran-retribusi.index') }}">
-                            <div class="input-group bg-white p-1 rounded-lg shadow-sm">
-                                <input type="text" class="form-control bg-white border border-gray-300 small"
-                                    name="search" placeholder="Cari nama..." aria-label="Search"
-                                    aria-describedby="basic-addon2" value="{{ request('search') }}">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="submit">
-                                        <i class="fas fa-search fa-sm"></i>
-                                    </button>
+                        <div class="d-flex justify-content-between mb-3">
+                            <form method="GET" action="{{ route('pembayaran-retribusi.index') }}" class="d-flex">
+                                <div class="input-group bg-white p-1 rounded-lg shadow-sm">
+                                    <input type="text" class="form-control bg-white border border-gray-300 small"
+                                        name="search" placeholder="Cari nama..." aria-label="Search"
+                                        aria-describedby="basic-addon2" value="{{ request('search') }}">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="submit">
+                                            <i class="fas fa-search fa-sm"></i>
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                            <form id="resetForm" action="{{ route('pembayaran-retribusi.reset') }}" method="POST"
+                                class="mt-2">
+                                @csrf
+                                @method('DELETE')
+                                <button type="button" class="btn btn-danger" id="resetButton">
+                                    <i class="fas fa-trash"></i> Reset Semua Data
+                                </button>
+                            </form>
+                        </div>
                         <table class="table table-bordered text-center">
                             <thead class="table-light">
                                 <tr>
@@ -285,8 +294,37 @@
                                 @endif
                             </tbody>
                         </table>
-
                     </div>
+                    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                    <script>
+                        document.getElementById('resetButton').addEventListener('click', function() {
+                            Swal.fire({
+                                title: 'Apakah kamu yakin?',
+                                text: 'Semua data akan dihapus dan tidak bisa dikembalikan!',
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#d33',
+                                cancelButtonColor: '#3085d6',
+                                confirmButtonText: 'Ya, hapus!',
+                                cancelButtonText: 'Batal'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    document.getElementById('resetForm').submit();
+                                }
+                            });
+                        });
+
+                        @if (session('success'))
+                            Swal.fire({
+                                title: 'Berhasil!',
+                                text: "{{ session('success') }}",
+                                icon: 'success',
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'OK'
+                            });
+                        @endif
+                    </script>
+
 
 
 

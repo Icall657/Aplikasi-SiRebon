@@ -59,6 +59,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('pembayaran-retribusi', PembayaranController::class);
         Route::resource('wajib-retribusi', WajibController::class);
         Route::put('/update-status/{id}', [PembayaranController::class, 'updateStatus'])->name('konfirmasi-bayar.update-status');
+        Route::post('/pembayaran-retribusi/reset', [PembayaranController::class, 'destroy'])->name('pembayaran-retribusi.reset');
         Route::resource('multiadmin', MultiadminController::class);
         Route::resource('retribusi', RetribusiController::class);
         Route::resource('belum-retribusi', BelumRetribusiController::class);

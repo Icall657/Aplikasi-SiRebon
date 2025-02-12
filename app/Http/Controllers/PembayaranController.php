@@ -38,4 +38,15 @@ class PembayaranController extends Controller
 
         return redirect()->back()->with('success', 'Status berhasil diperbarui.');
     }
+
+    public function destroy()
+    {
+        if (auth()->user()->level !== 'Admin Aplikasi') {
+            return redirect()->back()->with('error', 'Kamu tidak memiliki izin untuk melakukan ini!');
+        }
+
+        KonfirmasiBayar::truncate();
+
+        return redirect()->back()->with('success', 'Semua data berhasil dihapus!');
+    }
 }

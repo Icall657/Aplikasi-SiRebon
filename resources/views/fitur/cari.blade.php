@@ -284,34 +284,42 @@
                                                         <i class="fas fa-chevron-down"></i>
                                                     </button>
                                                 </div>
+
                                                 <div class="collapse" id="notifikasiList">
                                                     <ul class="list-group list-group-flush">
-                                                        @foreach ($pembayaranTerbaru as $bayar)
-                                                            <li
-                                                                class="list-group-item d-flex justify-content-between align-items-center">
-                                                                <div>
-                                                                    <i class="fas fa-check-circle text-success"></i>
-                                                                    <span
-                                                                        class="font-weight-bold">{{ $bayar->user->username }}</span>
-                                                                    telah melakukan pembayaran untuk kapal
-                                                                    <span
-                                                                        class="font-weight-bold">{{ $bayar->kapal->nama_kapal }}</span>
-                                                                </div>
-                                                                <small
-                                                                    class="text-muted">{{ $bayar->created_at->diffForHumans() }}</small>
+                                                        @if ($pembayaranTerbaru->isEmpty())
+                                                            <li class="list-group-item text-center text-muted">
+                                                                Belum ada pembayaran.
                                                             </li>
-                                                        @endforeach
+                                                        @else
+                                                            @foreach ($pembayaranTerbaru as $bayar)
+                                                                <li
+                                                                    class="list-group-item d-flex justify-content-between align-items-center">
+                                                                    <div>
+                                                                        <i
+                                                                            class="fas fa-check-circle text-success"></i>
+                                                                        <span
+                                                                            class="font-weight-bold">{{ $bayar->user->username }}</span>
+                                                                        telah melakukan pembayaran untuk kapal
+                                                                        <span
+                                                                            class="font-weight-bold">{{ $bayar->kapal->nama_kapal }}</span>
+                                                                    </div>
+                                                                    <small
+                                                                        class="text-muted">{{ $bayar->created_at->diffForHumans() }}</small>
+                                                                </li>
+                                                            @endforeach
+                                                        @endif
                                                     </ul>
                                                 </div>
-
-                                                <script>
-                                                    function toggleIcon(button) {
-                                                        let icon = button.querySelector("i");
-                                                        icon.classList.toggle("fa-chevron-down");
-                                                        icon.classList.toggle("fa-chevron-up");
-                                                    }
-                                                </script>
                                             </div>
+
+                                            <script>
+                                                function toggleIcon(button) {
+                                                    let icon = button.querySelector("i");
+                                                    icon.classList.toggle("fa-chevron-down");
+                                                    icon.classList.toggle("fa-chevron-up");
+                                                }
+                                            </script>
                                         </div>
                                     @endif
                                 </div>
