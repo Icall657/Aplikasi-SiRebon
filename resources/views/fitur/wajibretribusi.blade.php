@@ -204,7 +204,8 @@
                     <div class="table-container">
                         <div class="table-container">
                             <div class="d-flex justify-content-between align-items-center flex-wrap mb-3">
-                                <form class="form-inline" method="GET" action="{{ route('wajib-retribusi.index') }}">
+                                <form class="form-inline" method="GET"
+                                    action="{{ route('wajib-retribusi.index') }}">
                                     <div class="input-group bg-white p-1 rounded-lg shadow-sm">
                                         <input type="text"
                                             class="form-control bg-white border border-gray-300 small" name="search"
@@ -220,7 +221,7 @@
 
                                 @if (auth()->user()->level == 'Admin Aplikasi')
                                     <a href="{{ route('multiadmin.create') }}" class="btn btn-primary">Tambah
-                                        Data</a>
+                                        Wajib Retribusi</a>
                                 @endif
                             </div>
                             @if (auth()->user()->level == 'Admin Aplikasi')
@@ -268,6 +269,11 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+                                @if ($wajibRetribusi->total() > 5)
+                                    <div class="d-flex justify-content-center mt-3">
+                                        {{ $wajibRetribusi->links('pagination::bootstrap-4') }}
+                                    </div>
+                                @endif
                                 <script>
                                     function deleteData(id) {
                                         Swal.fire({
@@ -307,20 +313,20 @@
                     </div>
                     <!-- /.container-fluid -->
 
+                    <!-- End of Main Content -->
+
+                    <!-- Footer -->
                 </div>
-                <!-- End of Main Content -->
-
-                <!-- Footer -->
-                <footer class="sticky-footer bg-white">
-                    <div class="container my-auto">
-                        <div class="copyright text-center my-auto">
-                            <span>2024 &copy; SiRepal. Dinas Komunikasi, Informatika & Statistik.</span>
-                        </div>
-                    </div>
-                </footer>
-                <!-- End of Footer -->
-
             </div>
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>2024 &copy; SiRepal. Dinas Komunikasi, Informatika & Statistik.</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
             <!-- End of Content Wrapper -->
 
         </div>

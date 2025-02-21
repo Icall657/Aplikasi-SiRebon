@@ -15,7 +15,7 @@ class CariController extends Controller
             'totalUsers' => User::count(),
             'sudahBayar' => KonfirmasiBayar::where('status', 'Y')->count(),
             'belumBayar' => Kapal::doesntHave('konfirmasiBayar')->count(),
-            'pembayaranTerbaru' => KonfirmasiBayar::where('status', 'Y')->latest()->take(5)->get(),
+            'pembayaranTerbaru' => KonfirmasiBayar::where('status', 'P')->latest()->take(5)->get(),
         ]);
     }
 }

@@ -136,7 +136,7 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    
+
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -206,8 +206,7 @@
                     <!-- ISI KONTEN -->
                     <div class="table-container">
                         <div class="d-flex justify-content-between align-items-center flex-wrap mb-3">
-                            <form class="form-inline" method="GET"
-                                action="{{ route('rekening.index') }}">
+                            <form class="form-inline" method="GET" action="{{ route('rekening.index') }}">
                                 <div class="input-group bg-white p-1 rounded-lg shadow-sm">
                                     <input type="text" class="form-control bg-white border border-gray-300 small"
                                         name="search" placeholder="Cari nama pemilik..." aria-label="Search"
@@ -239,7 +238,8 @@
                             <tbody>
                                 @foreach ($rekening as $index => $data)
                                     <tr>
-                                        <td scope="col" class="text-center">{{ $index + 1 }}</td>
+                                        <td scope="col" class="text-center">{{ $rekening->firstItem() + $index }}
+                                        </td>
                                         <td scope="col" class="text-center">{{ $data->refBank->nama_bank }}</td>
                                         <td scope="col" class="text-center">{{ $data->nama_akun }}</td>
                                         <td scope="col" class="text-center">{{ $data->no_rekening }}</td>
@@ -248,7 +248,6 @@
                                                 class="btn btn-primary btn-sm m-1">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-
                                             <form id="deleteForm{{ $data->id }}"
                                                 action="{{ route('rekening.destroy', $data->id) }}" method="POST"
                                                 style="display:inline;">
@@ -264,6 +263,13 @@
                                 @endforeach
                             </tbody>
                         </table>
+
+                        @if ($rekening->total() > 5)
+                            <div class="d-flex justify-content-center mt-3">
+                                {{ $rekening->links('pagination::bootstrap-4') }}
+                            </div>
+                        @endif
+
 
                         <script>
                             function deleteData(id) {

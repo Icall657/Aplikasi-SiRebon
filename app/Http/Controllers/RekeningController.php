@@ -18,10 +18,11 @@ class RekeningController extends Controller
             ->when($search, function ($query) use ($search) {
                 $query->where('nama_akun', 'like', "%$search%");
             })
-            ->get();
+            ->paginate(5);
 
         return view('fitur.rekeningpembayaran', compact('rekening'));
     }
+
 
 
 

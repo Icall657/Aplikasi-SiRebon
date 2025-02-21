@@ -24,7 +24,7 @@ class WajibController extends Controller
             ->when($search, function ($query) use ($search) {
                 $query->where('nama', 'like', "%$search%");
             })
-            ->get();
+            ->paginate(5);
 
         return view('fitur.wajibretribusi', compact('wajibRetribusi'));
     }

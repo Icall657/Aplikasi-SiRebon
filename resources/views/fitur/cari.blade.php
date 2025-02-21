@@ -213,6 +213,11 @@
 
                                     @if (auth()->user()->level == 'Wajib Retribusi')
                                         <div class="card-body">
+                                            @if ($errors->any())
+                                                <div class="alert alert-danger text-danger">
+                                                    {{ $errors->first() }}
+                                                </div>
+                                            @endif
                                             <form action="{{ route('laporan.index') }}" method="GET"
                                                 autocomplete="off">
                                                 @csrf

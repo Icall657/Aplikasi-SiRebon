@@ -10,6 +10,13 @@ class LaporanController extends Controller
 {
     public function index(Request $request)
     {
+        $request->validate([
+            'tanggal_awal' => 'required|date',
+            'tanggal_akhir' => 'required|date|after_or_equal:tanggal_awal',
+        ], [
+            'tanggal_akhir.after_or_equal' => 'Tanggal Akhir tidak boleh lebih kecil dari Tanggal Awal!',
+        ]);
+
         $tanggal_awal = $request->input('tanggal_awal');
         $tanggal_akhir = $request->input('tanggal_akhir');
         $user = Auth::user();

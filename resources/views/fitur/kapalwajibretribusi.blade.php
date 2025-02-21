@@ -303,6 +303,11 @@
                             @endforelse
                         </tbody>
                     </table>
+                    @if ($kapals->total() > 5)
+                        <div class="d-flex justify-content-center mt-3">
+                            {{ $kapals->links('pagination::bootstrap-4') }}
+                        </div>
+                    @endif
 
                     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
                     <script>

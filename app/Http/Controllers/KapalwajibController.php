@@ -39,7 +39,7 @@ class KapalwajibController extends Controller
                             $query->where('jenis_kapal', 'like', "%$search%");
                         });
                 })
-                ->get();
+                ->paginate(5);
         }
 
         return view('fitur.kapalwajibretribusi', compact('kapals'));

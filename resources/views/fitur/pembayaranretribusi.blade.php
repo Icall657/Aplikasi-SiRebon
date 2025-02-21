@@ -246,7 +246,9 @@
                                         <td class="text-center">
                                             @if ($data->file_bukti)
                                                 <img src="{{ asset('storage/' . $data->file_bukti) }}"
-                                                    class="rounded img-fluid" style="max-width: 80px;">
+                                                    class="rounded img-fluid bukti-img"
+                                                    style="max-width: 80px; cursor: pointer;"
+                                                    onclick="showBukti('{{ asset('storage/' . $data->file_bukti) }}')">
                                             @else
                                                 <span>No Image Available</span>
                                             @endif
@@ -289,6 +291,16 @@
                         </table>
                     </div>
                     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                    <script>
+                        function showBukti(imageUrl) {
+                            Swal.fire({
+                                imageUrl: imageUrl,
+                                imageAlt: 'Bukti Pembayaran',
+                                showCloseButton: true,
+                                showConfirmButton: false,
+                            });
+                        }
+                    </script>                    
                     <script>
                         document.getElementById('resetButton').addEventListener('click', function() {
                             Swal.fire({

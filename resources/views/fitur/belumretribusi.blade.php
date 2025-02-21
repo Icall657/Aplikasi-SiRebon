@@ -20,8 +20,8 @@
                     <tr class="text-center text-lg">
                         <th class="border px-6 py-3">Nama Pemilik</th>
                         <th class="border px-6 py-3">Nama Kapal</th>
-                        <th class="border px-6 py-3">Nomor HP</th>
                         <th class="border px-6 py-3">Alamat</th>
+                        <th class="border px-6 py-3">Email</th>
                         <th class="border px-6 py-3">Status</th>
                         <th class="border px-6 py-3">Aksi</th>
                     </tr>
@@ -40,8 +40,8 @@
                                 <tr class="text-center text-lg">
                                     <td class="border px-6 py-3">{{ $data->wajibRetribusi->nama }}</td>
                                     <td class="border px-6 py-3">{{ $kapal->nama_kapal }}</td>
-                                    <td class="border px-6 py-3">{{ $data->wajibRetribusi->no_hp }}</td>
                                     <td class="border px-6 py-3">{{ $data->wajibRetribusi->alamat }}</td>
+                                    <td class="border px-6 py-3">{{ $data->email }}</td>
                                     <td class="border px-6 py-3">
                                         @if ($data->wajibRetribusi->status === 'A')
                                             Aktif
