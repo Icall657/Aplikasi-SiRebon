@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,9 +17,12 @@
 </head>
 <style>
     body {
-        background-color: #4E73DF;
+        background-image: url('laut.jpeg');
+        background-size: cover;
+        background-position: center;
     }
 </style>
+
 <body>
     <section class="vh-100">
         <div class="container py-5 h-100">
@@ -36,32 +40,40 @@
                                 <h3 class="mb-5"><strong>LOGIN SIREPAL</strong></h3>
 
                                 <div class="form-outline mb-4">
-                                  <div style="text-align: left;">
-                                      <label class="form-label">Username</label>
-                                  </div>
-                                  <div style="position: relative;" size="30">
-                                      <i class="fa fa-user" style="position: absolute; left: 10px; top: 10px; color: #888;"></i>
-                                      <input type="username" name="username" autocomplete="off" class="form-control form-control-lg" placeholder="Masukkan username" size="30" style="padding-left: 30px; height: 40px;" />
-                                  </div>
-                              </div>
-          
-                              <div class="form-outline mb-4">
-                                <div style="text-align: left;">
-                                    <label class="form-label">Password</label>
+                                    <div style="text-align: left;">
+                                        <label class="form-label">Username</label>
+                                    </div>
+                                    <div style="position: relative;" size="30">
+                                        <i class="fa fa-user"
+                                            style="position: absolute; left: 10px; top: 10px; color: #888;"></i>
+                                        <input type="username" name="username" autocomplete="off"
+                                            class="form-control form-control-lg" placeholder="Masukkan username"
+                                            size="30" style="padding-left: 30px; height: 40px;" />
+                                    </div>
                                 </div>
-                                <div style="position: relative;" size="30">
-                                    <i class="fa fa-lock" style="position: absolute; left: 10px; top: 10px; color: #888;"></i>
-                                    <input id="password" type="password" name="password" autocomplete="off" class="form-control form-control-lg" placeholder="Masukkan password" size="30" style="padding-left: 30px; height: 40px;" />
-                                    <i id="togglePassword" class="fa fa-eye" style="position: absolute; right: 10px; top: 10px; cursor: pointer; color: #888;"></i>
-                                </div>
-                            </div>
-                            <div class="mb-4" style="text-align: left;">
-                                <a href="{{route('forgot_password.index')}}" class="text-primary">Lupa password?</a>
-                            </div>
 
-                            <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
+                                <div class="form-outline mb-4">
+                                    <div style="text-align: left;">
+                                        <label class="form-label">Password</label>
+                                    </div>
+                                    <div style="position: relative;" size="30">
+                                        <i class="fa fa-lock"
+                                            style="position: absolute; left: 10px; top: 10px; color: #888;"></i>
+                                        <input id="password" type="password" name="password" autocomplete="off"
+                                            class="form-control form-control-lg" placeholder="Masukkan password"
+                                            size="30" style="padding-left: 30px; height: 40px;" />
+                                        <i id="togglePassword" class="fa fa-eye"
+                                            style="position: absolute; right: 10px; top: 10px; cursor: pointer; color: #888;"></i>
+                                    </div>
+                                </div>
+                                <div class="mb-4" style="text-align: left;">
+                                    <a href="{{ route('forgot_password.index') }}" class="text-primary">Lupa
+                                        password?</a>
+                                </div>
+
+                                <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
                             </form>
-                        
+
                         </div>
                     </div>
                 </div>
@@ -74,7 +86,7 @@
         const togglePassword = document.getElementById('togglePassword');
         const password = document.getElementById('password');
 
-        togglePassword.addEventListener('click', function () {
+        togglePassword.addEventListener('click', function() {
             const type = password.type === 'password' ? 'text' : 'password';
             password.type = type;
             this.classList.toggle('fa-eye');
@@ -83,7 +95,7 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        @if(session('error'))
+        @if (session('error'))
             Swal.fire({
                 title: 'Login Gagal!',
                 text: '{{ session('error') }}',

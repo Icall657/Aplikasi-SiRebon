@@ -245,12 +245,12 @@
                                         <td>{{ $data->msRekening?->no_rekening }}</td>
                                         <td class="text-center">
                                             @if ($data->file_bukti)
-                                                <img src="{{ asset('storage/' . $data->file_bukti) }}"
-                                                    class="rounded img-fluid bukti-img"
-                                                    style="max-width: 80px; cursor: pointer;"
+                                                <a href="javascript:void(0);"
                                                     onclick="showBukti('{{ asset('storage/' . $data->file_bukti) }}')">
+                                                    Lihat
+                                                </a>
                                             @else
-                                                <span>No Image Available</span>
+                                                <span class="text-muted">Tidak Ada Bukti</span>
                                             @endif
                                         </td>
                                         <td class="text-nowrap">
@@ -298,9 +298,11 @@
                                 imageAlt: 'Bukti Pembayaran',
                                 showCloseButton: true,
                                 showConfirmButton: false,
+                                width: 310,
+                                padding: '1px',
                             });
                         }
-                    </script>                    
+                    </script>
                     <script>
                         document.getElementById('resetButton').addEventListener('click', function() {
                             Swal.fire({

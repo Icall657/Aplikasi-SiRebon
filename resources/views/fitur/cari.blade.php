@@ -273,8 +273,18 @@
                                             <div class="card mt-4">
                                                 <div
                                                     class="card-header bg-warning text-dark d-flex justify-content-between align-items-center">
-                                                    <h5 class="mb-0"><i class="fas fa-bell"></i> Notifikasi
-                                                        Pembayaran Terbaru</h5>
+                                                    <h5 class="mb-0 d-flex align-items-center">
+                                                        <span class="position-relative me-2">
+                                                            <i class="fas fa-bell"></i>
+                                                            <span id="notifBadge"
+                                                                class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"
+                                                                style="display: none; width: 8px; height: 8px; transform: translate(-30%, -30%);">
+                                                            </span>
+                                                        </span>
+                                                        <span class="text-start">
+                                                            <span style="visibility: hidden;">L</span>Notifikasi Pembayaran Terbaru
+                                                        </span>
+                                                    </h5>                                                    
                                                     <button class="btn btn-sm" type="button"
                                                         data-bs-toggle="collapse" data-bs-target="#notifikasiList"
                                                         aria-expanded="false" aria-controls="notifikasiList"
@@ -310,6 +320,21 @@
                                                     </ul>
                                                 </div>
                                             </div>
+                                            <script>
+                                                document.addEventListener("DOMContentLoaded", function() {
+                                                    let notifBadge = document.getElementById("notifBadge");
+                                                    let notifList = document.getElementById("notifikasiList");
+                                                    let pembayaranCount = {{ $pembayaranTerbaru->count() }};
+
+                                                    if (pembayaranCount > 0) {
+                                                        notifBadge.style.display = "inline-block";
+                                                    }
+
+                                                    notifList.addEventListener("show.bs.collapse", function() {
+                                                        notifBadge.style.display = "none";
+                                                    });
+                                                });
+                                            </script>
 
                                             <script>
                                                 function toggleIcon(button) {

@@ -264,16 +264,20 @@
                                         <td class="text-center">
                                             @if ($kapal->konfirmasiBayar)
                                                 @if ($kapal->konfirmasiBayar->status == 'P')
-                                                    Pembayaran Sedang Diproses
+                                                    <span class="fw-bold text-warning"><i
+                                                            class="fas fa-hourglass-half"></i> Sedang Diproses</span>
                                                 @elseif ($kapal->konfirmasiBayar->status == 'Y')
-                                                    Sudah Membayar Retribusi
+                                                    <span class="fw-bold text-success"><i
+                                                            class="fas fa-check-circle"></i> Sudah Membayar</span>
                                                 @elseif ($kapal->konfirmasiBayar->status == 'N')
-                                                    Pembayaran Tidak Disetujui
+                                                    <span class="fw-bold text-danger"><i
+                                                            class="fas fa-times-circle"></i> Tidak Disetujui</span>
                                                 @else
-                                                    Tidak Ada Status
+                                                    <span class="fw-bold text-secondary">Tidak Ada Status</span>
                                                 @endif
                                             @else
-                                                Belum membayar Retribusi
+                                                <span class="fw-bold text-dark"><i
+                                                        class="fas fa-exclamation-circle"></i> Belum Membayar</span>
                                             @endif
                                         </td>
                                     @endif
