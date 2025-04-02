@@ -221,8 +221,12 @@
                         </form>
 
                         @if (auth()->user()->level == 'Admin Aplikasi')
-                            <a href="{{ route('kapal-wajib-retribusi.create') }}" class="btn btn-primary">Tambah
-                                Data</a>
+                            <div>
+                                <a href="{{ route('kapal-wajib-retribusi.create') }}" class="btn btn-primary">Tambah
+                                    Data</a>
+                                <a href="{{ route('ubah-format-retribusi.index') }}" class="btn btn-warning">Ubah Format
+                                    Biaya Retribusi</a>
+                            </div>
                         @endif
                     </div>
 
@@ -242,6 +246,7 @@
                                 @endif
                                 @if (auth()->user()->level == 'Admin Aplikasi')
                                     <th class="text-center">Jenis Kapal</th>
+                                    <th class="text-center">Biaya Retribusi</th>
                                     <th class="text-center">Ukuran</th>
                                     <th class="text-center" style="width: 150px;">Aksi</th>
                                 @endif
@@ -283,6 +288,9 @@
                                     @endif
                                     @if (auth()->user()->level == 'Admin Aplikasi')
                                         <td class="text-center">{{ $kapal->jenisKapal->jenis_kapal ?? '-' }}</td>
+                                        <td class="text-center">Rp
+                                            {{ number_format($kapal->jenisKapal->biaya_retribusi ?? 0, 0, ',', '.') }}
+                                        </td>
                                         <td class="text-center">{{ $kapal->ukuran ?? '-' }}</td>
                                         <td class="text-center">
                                             <a href="{{ route('kapal-wajib-retribusi.edit', $kapal->id) }}"

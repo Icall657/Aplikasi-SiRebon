@@ -20,4 +20,9 @@ class RefJenisKapal extends Model
     ];
 
     public $timestamps = false;
+
+    public function jenisKapal()
+    {
+        return $this->hasMany(Kapal::class, 'id_jenis_kapal');
+    }
 }

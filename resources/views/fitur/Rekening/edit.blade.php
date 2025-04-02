@@ -32,37 +32,51 @@
                         <hr>
                         <form action="{{ route('rekening.update', $data->id) }}" method="POST">
                             @csrf
-                            @method('PUT') <!-- menggunakan method PUT untuk update data -->
+                            @method('PUT')
+
                             <div class="form-group mb-3">
                                 <label for="id_ref_bank">Jenis Bank</label>
                                 <select name="id_ref_bank" id="id_ref_bank" class="form-control">
                                     @foreach ($refBanks as $bank)
-                                        <option value="{{ $bank->id }}" {{ $data->id_ref_bank == $bank->id ? 'selected' : '' }}>
+                                        <option value="{{ $bank->id }}"
+                                            {{ $data->id_ref_bank == $bank->id ? 'selected' : '' }}>
                                             {{ $bank->nama_bank }}
                                         </option>
                                     @endforeach
                                 </select>
+                                @error('id_ref_bank')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
-                    
+
                             <div class="form-group mb-3">
                                 <label for="nama_akun">Nama Pemilik</label>
-                                <input type="text" name="nama_akun" id="nama_akun" class="form-control" value="{{ $data->nama_akun }}" required>
+                                <input type="text" name="nama_akun" id="nama_akun" class="form-control"
+                                    value="{{ $data->nama_akun }}" required>
+                                @error('nama_akun')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
-                    
+
                             <div class="form-group mb-3">
                                 <label for="no_rekening">Nomor Rekening</label>
-                                <input type="text" name="no_rekening" id="no_rekening" class="form-control" value="{{ $data->no_rekening }}" required>
+                                <input type="text" name="no_rekening" id="no_rekening" class="form-control"
+                                    value="{{ $data->no_rekening }}" required>
+                                @error('no_rekening')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
-                    
+
                             <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                             <a href="{{ route('rekening.index') }}" class="btn btn-secondary">Batal</a>
                         </form>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>

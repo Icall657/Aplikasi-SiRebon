@@ -76,24 +76,42 @@ class RekeningController extends Controller
 
     public function update(Request $request, $id)
     {
-        // cari data rekening berdasarkan id
         $data = MsRekening::findOrFail($id);
 
-        // validasi input sebelum update
         $request->validate([
-            'id_ref_bank' => 'required|exists:ref_bank,id',
-            'nama_akun' => 'required|string|max:50',
-            'no_rekening' => 'required|string|max:50',
+            'id_ref_bank' => [
+                'required',
+                'exists:ref_bank,id'
+            ],
+            'nama_akun' => [
+                'required',
+                'string',
+                'max:50'
+            ],
+            'no_rekening' => [
+                'required',
+                'string',
+                'max:50',
+                'unique:ms_rekening,no_rekening,' . $id
+            ],
+        ], [
+            'id_ref_bank.required' => 'Bank harus dipilih.',
+            'id_ref_bank.exists' => 'Bank yang dipilih tidak valid.',
+            'nama_akun.required' => 'Nama akun wajib diisi.',
+            'nama_akun.string' => 'Nama akun harus berupa teks.',
+            'nama_akun.max' => 'Nama akun maksimal 50 karakter.',
+            'no_rekening.required' => 'Nomor rekening wajib diisi.',
+            'no_rekening.string' => 'Nomor rekening harus berupa teks.',
+            'no_rekening.max' => 'Nomor rekening maksimal 50 karakter.',
+            'no_rekening.unique' => 'Nomor rekening sudah terdaftar.',
         ]);
 
-        // update data rekening
         $data->update([
             'id_ref_bank' => $request->id_ref_bank,
             'nama_akun' => $request->nama_akun,
             'no_rekening' => $request->no_rekening,
         ]);
 
-        // balik ke halaman rekening dengan pesan sukses
         return redirect()->route('rekening.index')->with('success', 'Data rekening berhasil diperbarui.');
     }
 }

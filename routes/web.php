@@ -23,6 +23,7 @@ use App\Http\Controllers\KonfirmasiController;
 use App\Http\Controllers\MultiadminController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\LupaPaswordController;
+use App\Http\Controllers\RefJenisKapalController;
 use App\Http\Controllers\BelumRetribusiController;
 
 /*
@@ -61,10 +62,17 @@ Route::group(['middleware' => ['auth']], function () {
         Route::put('/update-status/{id}', [PembayaranController::class, 'updateStatus'])->name('konfirmasi-bayar.update-status');
         Route::post('/pembayaran-retribusi/reset', [PembayaranController::class, 'destroy'])->name('pembayaran-retribusi.reset');
         Route::resource('multiadmin', MultiadminController::class);
-        Route::resource('retribusi', RetribusiController::class);
-        Route::resource('belum-retribusi', BelumRetribusiController::class);
-        Route::post('/send-email-reminder', [ReminderController::class, 'sendEmailReminder'])->name('send.email.reminder');
+    
+        // Ubah Format Retribusi
+        Route::get('/ubah-format-retribusi', [RefJenisKapalController::class, 'editBiaya'])->name('ubah-format-retribusi.index');
+        Route::post('/ubah-format-retribusi/update', [RefJenisKapalController::class, 'updateBiaya'])->name('ubah-format-retribusi.update');
+        Route::get('/kapal-wajib-retribusi/check-relations/{id}', [KapalwajibController::class, 'checkRelations'])->name('kapal-wajib-retribusi.check-relations');
+    
+        // Kapal Wajib Retribusi
+        Route::post('/kapal-wajib-retribusi/tambah', [RefJenisKapalController::class, 'store'])->name('tambah-format-retribusi.store');
+        Route::post('/kapal-wajib-retribusi/ubah', [RefJenisKapalController::class, 'update'])->name('ubah-format-retribusi.update');
     });
+    
 
     Route::group(['middleware' => ['ceklevel:Multiadmin']], function () {});
 
