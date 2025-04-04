@@ -69,6 +69,15 @@
                         <i class="fa fa-dollar-sign"></i>
                         <span>Pembayaran Retribusi</span></a>
                 </li>
+
+                <hr class="sidebar-divider my-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('jenis-kapal.index') }}">
+                        <i class="fa fa-receipt"></i>
+                        <span>Manajemen Biaya Retribusi</span></a>
+                </li>
+
+                <hr class="sidebar-divider my-0">
             @endif
 
             <!-- Divider -->
@@ -93,8 +102,8 @@
                         <i class="fa fa-check-circle"></i>
                         <span>Konfirmasi Pembayaran Retribusi</span></a>
                 </li>
+                <hr class="sidebar-divider my-0">
             @endif
-            <hr class="sidebar-divider">
             <li class="nav-item active">
                 <a class="nav-link" href="{{ route('kategori-retribusi.index') }}">
                     <i class="fa fa-bars"></i>

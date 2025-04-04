@@ -58,19 +58,16 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('home', HomeController::class);
         Route::resource('rekening', RekeningController::class);
         Route::resource('pembayaran-retribusi', PembayaranController::class);
+        Route::resource('retribusi', RetribusiController::class);
+        Route::resource('belum-retribusi', BelumRetribusiController::class);
         Route::resource('wajib-retribusi', WajibController::class);
         Route::put('/update-status/{id}', [PembayaranController::class, 'updateStatus'])->name('konfirmasi-bayar.update-status');
         Route::post('/pembayaran-retribusi/reset', [PembayaranController::class, 'destroy'])->name('pembayaran-retribusi.reset');
         Route::resource('multiadmin', MultiadminController::class);
-    
-        // Ubah Format Retribusi
-        Route::get('/ubah-format-retribusi', [RefJenisKapalController::class, 'editBiaya'])->name('ubah-format-retribusi.index');
-        Route::post('/ubah-format-retribusi/update', [RefJenisKapalController::class, 'updateBiaya'])->name('ubah-format-retribusi.update');
-        Route::get('/kapal-wajib-retribusi/check-relations/{id}', [KapalwajibController::class, 'checkRelations'])->name('kapal-wajib-retribusi.check-relations');
-    
-        // Kapal Wajib Retribusi
-        Route::post('/kapal-wajib-retribusi/tambah', [RefJenisKapalController::class, 'store'])->name('tambah-format-retribusi.store');
-        Route::post('/kapal-wajib-retribusi/ubah', [RefJenisKapalController::class, 'update'])->name('ubah-format-retribusi.update');
+        Route::get('/jenis-kapal', [RefJenisKapalController::class, 'index'])->name('jenis-kapal.index');
+        Route::post('/jenis-kapal', [RefJenisKapalController::class, 'store'])->name('jenis-kapal.store');
+        Route::put('/jenis-kapal/{id}', [RefJenisKapalController::class, 'update'])->name('jenis-kapal.update');
+        Route::delete('/jenis-kapal/{id}', [RefJenisKapalController::class, 'destroy'])->name('jenis-kapal.destroy');
     });
     
 

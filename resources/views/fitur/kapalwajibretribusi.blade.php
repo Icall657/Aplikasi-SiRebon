@@ -69,6 +69,15 @@
                         <i class="fa fa-dollar-sign"></i>
                         <span>Pembayaran Retribusi</span></a>
                 </li>
+
+                <hr class="sidebar-divider my-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('jenis-kapal.index') }}">
+                        <i class="fa fa-receipt"></i>
+                        <span>Manajemen Biaya Retribusi</span></a>
+                </li>
+
+                <hr class="sidebar-divider my-0">
             @endif
 
             <!-- Divider -->
@@ -80,21 +89,22 @@
                         <span>Profil</span></a>
                 </li>
 
-                <hr class="sidebar-divider">
+                <hr class="sidebar-divider my-0">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('kapalku.index') }}">
                         <i class="fa fa-ship"></i>
                         <span>Kapalku</span></a>
                 </li>
 
-                <hr class="sidebar-divider">
+                <hr class="sidebar-divider my-0">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('konfirmasi.index') }}">
                         <i class="fa fa-check-circle"></i>
                         <span>Konfirmasi Pembayaran Retribusi</span></a>
                 </li>
+
+                <hr class="sidebar-divider my-0">
             @endif
-            <hr class="sidebar-divider">
             <li class="nav-item active">
                 <a class="nav-link" href="{{ route('kapal-wajib-retribusi.index') }}">
                     <i class="fa fa-exclamation-circle"></i>
@@ -224,7 +234,7 @@
                             <div>
                                 <a href="{{ route('kapal-wajib-retribusi.create') }}" class="btn btn-primary">Tambah
                                     Data</a>
-                                <a href="{{ route('ubah-format-retribusi.index') }}" class="btn btn-warning">Ubah Format
+                                <a href="#" class="btn btn-warning">Ubah Format
                                     Biaya Retribusi</a>
                             </div>
                         @endif
@@ -265,7 +275,13 @@
                                         <td class="text-center">Rp
                                             {{ number_format($kapal->jenisKapal->biaya_retribusi ?? 0, 0, ',', '.') }}
                                         </td>
-                                        <td class="text-center">{{ $kapal->created_at->format('d F Y') }}</td>
+                                        <td class="text-center">
+                                            @if ($kapal->konfirmasiBayar && $kapal->konfirmasiBayar->updated_at)
+                                                {{ $kapal->konfirmasiBayar->updated_at->format('d F Y') }}
+                                            @else
+                                                -
+                                            @endif
+                                        </td>
                                         <td class="text-center">
                                             @if ($kapal->konfirmasiBayar)
                                                 @if ($kapal->konfirmasiBayar->status == 'P')
